@@ -1,64 +1,57 @@
-<!-- <div class="modal fade" id="login-modal">
-    <div class="modal-dialog modal-dialog-centered" role="login">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title">Login</h5>
-                <button class="close" data-dismiss="modal">
-                    <span>&times;</span>
-                </button>
-            </div>
-            <div class="modal-body">
-                <form>
-                    <div class="row justify-content-around">
-                        <div class="custom-control custom-radio custom-control-inline">
-                            <input type="radio" class="custom-control-input" name="login-type" id="login-type1"
-                                value="user" checked>
-                            <label for="login-type1" class="custom-control-label"> User</label>
-                        </div>
-                        <div class="custom-control custom-radio custom-control-inline">
-                            <input type="radio" class="custom-control-input" name="login-type" id="login-type2"
-                                value="admin">
-                            <label for="login-type2" class="custom-control-label"> Admin</label>
-
-                        </div>
+<div class="modal-dialog modal-dialog-centered" role="login">
+    <div class="modal-content">
+        <div class="modal-header">
+            <h5 class="modal-title">Login</h5>
+            <button class="close" data-dismiss="modal">
+                <span>&times;</span>
+            </button>
+        </div>
+        <div class="modal-body">
+            <form [formGroup]="loginForm" (ngSubmit)="login()">
+                <!-- <div class="row justify-content-around">
+                    <div class="custom-control custom-radio custom-control-inline">
+                        <input type="radio" class="custom-control-input" name="login-type" id="login-type1" value="user"
+                            checked>
+                        <label for="login-type1" class="custom-control-label"> User</label>
                     </div>
-                    <div class="form-group mt-4">
-                        <label for="username">Username:</label>
-                        <div class="input-group">
-                            <div class="input-group-prepend">
-                                <span class="input-group-text">
-                                    <i class="fas fa-user"></i>
-                                </span>
-                            </div>
-                            <input type="text" name="username" id="username" class="form-control" required autofocus
-                                autocomplete>
-                            <div class="invalid-tooltip">
-                                Enter a valid username.
-                            </div>
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <label for="password">Password:</label>
-                        <div class="input-group">
-                            <div class="input-group-prepend">
-                                <span class="input-group-text"><i class="fas fa-key"></i></span>
-                            </div>
-                            <input type="password" name="password" id="password" class="form-control" required>
-                            <div class="invalid-tooltip">
-                                Enter a valid username.
-                            </div>
-                        </div>
+                    <div class="custom-control custom-radio custom-control-inline">
+                        <input type="radio" class="custom-control-input" name="login-type" id="login-type2"
+                            value="admin">
+                        <label for="login-type2" class="custom-control-label"> Admin</label>
 
                     </div>
-                    <div class="custom-control custom-checkbox">
-                        <input type="checkbox" name="remember-me" id="remember-me" class="custom-control-input">
-                        <label for="remember-me" class="custom-control-label">Remember me</label>
+                </div> -->
+                <div class="form-group mt-4">
+                    <label for="email">Email:</label>
+                    <div class="input-group">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text">
+                                <i class="fas fa-user"></i>
+                            </span>
+                        </div>
+                        <input type="text" name="email" id="email" class="form-control" autofocus
+                            autocomplete formControlName="email">
                     </div>
-                    <button type="submit" class="btn btn-primary btn-block mt-5">Login</button>
-                    <span class="row text-muted justify-content-center my-2"><small>New user?<a href="signup">
-                                Signup</a></small></span>
-                </form>
-            </div>
+                </div>
+                <div class="form-group">
+                    <label for="password">Password:</label>
+                    <div class="input-group">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text"><i class="fas fa-key"></i></span>
+                        </div>
+                        <input type="password" name="password" id="password" class="form-control" formControlName="password">
+                        
+                    </div>
+
+                </div>
+                <div class="custom-control custom-checkbox">
+                    <input type="checkbox" name="rememberMe" id="rememberMe" class="custom-control-input" formControlName="rememberMe">
+                    <label for="rememberMe" class="custom-control-label">Remember me</label>
+                </div>
+                <button type="submit" class="btn btn-primary btn-block mt-5">Login</button>
+                <span class="row text-muted justify-content-center my-2"><small>New user?<a href="signup">
+                            Signup</a></small></span>
+            </form>
         </div>
     </div>
-</div> -->
+</div>
