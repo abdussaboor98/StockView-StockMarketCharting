@@ -1,1 +1,65 @@
-<p>new-ipo works!</p>
+<main class="container-fluid">
+    <div class="display-4 text-center my-4">Update IPO</div>
+    <div class="row justify-content-center">
+        <div class="card col-md-6 col-sm-10 mx-auto shadow">
+            <div class="card-body">
+                <form [formGroup] = "newIPOForm" (ngSubmit)="onSubmit()">
+                    <div class="form-group">
+                        <label for="companyName" class="form-control-label">Name:</label>
+                        <div class="input-group">
+                            <input type="text" name="companyName" id="companyName" formControlName="companyName" class="form-control"
+                                placeholder="Enter company name..." required>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="sector">Select sector:</label>
+                        <div class="input-group">
+                            <select name="sector" id="sector" formCOntrolName="sector" class="custom-select" required>
+                                <option value="" selected disabled>Select sector...</option>
+                                <option value="">Opt 1</option>
+                                <option value="">Opt 2</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="price" class="form-control-label">Price per Share:</label>
+                        <div class="input-group">
+                            <input type="number" name="price" id="price" formControlName="price" class="form-control"
+                                placeholder="Enter price per share..." required>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="totShares" class="form-control-label">Total shares:</label>
+                        <div class="input-group">
+                            <input type="number" name="totShares" id="totShares" formControlName="totShares" class="form-control"
+                                placeholder="Enter total shares..." required>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="openDateTime" class="form-control-label">Opening Date/Time: </label>
+                        <div class="input-group">
+                            <input type="datetime-local" name="openDateTime" id="openDateTime" formControlName="openDateTime" class="form-control"
+                                placeholder="Enter the opening date and time..." required>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="remarks" class="form-control-label">Remarks:</label>
+                        <div class="input-group">
+                            <textarea type="text" name="remarks" id="remarks" formContrlName="remarks" class="form-control"></textarea>
+                        </div>
+                    </div>
+                    <div class="row justify-content-around">
+                        <div class="col-6">
+                            <button type="reset" class="btn btn-danger btn-block">Reset</button>
+                        </div>
+                        <div class="col-6">
+                            <button type="button" class="btn btn-secondary btn-block">Cancel</button>
+                        </div>
+                        <button type="submit" class="btn btn-primary btn-block m-3">Add</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</main>

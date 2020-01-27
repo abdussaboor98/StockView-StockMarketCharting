@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { FormGroup, FormControl } from '@angular/forms';
 
 @Component({
   selector: 'app-new-exchange',
@@ -7,9 +8,18 @@ import { Component, OnInit } from '@angular/core';
 })
 export class NewExchangeComponent implements OnInit {
 
+  newExchangeForm : FormGroup
   constructor() { }
 
   ngOnInit() {
+    this.newExchangeForm = new FormGroup({
+      exchangeName : new FormControl(null),
+      contactAddress : new FormControl(null),
+      remarks : new FormControl(null)
+    })
   }
 
+  onSubmit(){
+    console.log(this.newExchangeForm.value);
+  }
 }

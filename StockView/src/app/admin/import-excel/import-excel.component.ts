@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { FormGroup, FormControl } from '@angular/forms';
+import bsCustomFileInput from 'bs-custom-file-input';
 
 @Component({
   selector: 'app-import-excel',
@@ -7,9 +9,18 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ImportExcelComponent implements OnInit {
 
+  excelUploadForm : FormGroup;
   constructor() { }
 
   ngOnInit() {
+    bsCustomFileInput.init();
+    this.excelUploadForm = new FormGroup({
+      'excelFileUpload' : new FormControl('')
+    });
+  }
+
+  uploadData(){
+    console.log(this.excelUploadForm.value);
   }
 
 }
