@@ -6,16 +6,16 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>StockView</title>
-    <link rel="shortcut icon" href="./media/logo.png" type="image/x-icon">
-    <link rel="stylesheet" href="./css/bootstrap.min.css">
-    <link rel="stylesheet" href="./css/style.css">
+    <link rel="shortcut icon" [routerLink]="./media/logo.png" type="image/x-icon">
+    <link rel="stylesheet" [routerLink]="./css/bootstrap.min.css">
+    <link rel="stylesheet" [routerLink]="./css/style.css">
     <script src="https://kit.fontawesome.com/0dace940b2.js" crossorigin="anonymous"></script>
 </head>
 
 <body>
     <header>
         <nav class="navbar navbar-expand-md navbar-dark bg-dark sticky-top">
-            <a href="#" class="navbar-brand">
+            <a [routerLink]="#" class="navbar-brand">
                 <img src="./media/logo.svg" alt="StockView" id="logo" class="undraggable">
                 <span class="text-light mx-2 my-auto undraggable">StockView</span>
             </a>
@@ -23,11 +23,11 @@
                 <span class="navbar-toggler-icon"></span></button>
             <div class="navbar-collapse collapse" id="navbar1">
                 <ul class="navbar-nav ml-auto">
-                    <li class="nav-item"><a href="./admin-home.html" class="nav-link">Home</a></li>
-                    <li class="nav-item"><a href="./import-data.html" class="nav-link">Import Data</a></li>
-                    <li class="nav-item"><a href="./manage-company.html" class="nav-link active">Manage Company</a></li>
-                    <li class="nav-item"><a href="./manage-exchange.html" class="nav-link">Manage Exchange</a></li>
-                    <li class="nav-item"><a href="./update-ipo.html" class="nav-link">Update IPO</a></li>
+                    <li class="nav-item"><a [routerLink]="./admin-home.html" class="nav-link">Home</a></li>
+                    <li class="nav-item"><a [routerLink]="./import-data.html" class="nav-link">Import Data</a></li>
+                    <li class="nav-item"><a [routerLink]="./manage-company.html" class="nav-link active">Manage Company</a></li>
+                    <li class="nav-item"><a [routerLink]="./manage-exchange.html" class="nav-link">Manage Exchange</a></li>
+                    <li class="nav-item"><a [routerLink]="./update-ipo.html" class="nav-link">Update IPO</a></li>
                 </ul>
                 <button class=" btn text-light ml-md-5 pl-0 pl-md-5" role="logout">Logout</button>
             </div>
@@ -147,14 +147,14 @@
 
             </div>
             <ul class="my-2 list-unstyled col-sm-6 row align-self-center justify-content-between flex-wrap">
-                <li class="col-6 text-center"><a class="text-dark" href="./admin-home.html">Home</a></li>
-                <li class="col-6 text-center"><a class="text-dark" href="./import-data.html">Import Data</a></li>
-                <li class="col-6 text-center"><a class="text-dark" href="./manage-company.html">Manage Company</a></li>
-                <li class="col-6 text-center"><a class="text-dark" href="./manage-exchange.html">Manage Exchange</a>
+                <li class="col-6 text-center"><a class="text-dark" [routerLink]="./admin-home.html">Home</a></li>
+                <li class="col-6 text-center"><a class="text-dark" [routerLink]="./import-data.html">Import Data</a></li>
+                <li class="col-6 text-center"><a class="text-dark" [routerLink]="./manage-company.html">Manage Company</a></li>
+                <li class="col-6 text-center"><a class="text-dark" [routerLink]="./manage-exchange.html">Manage Exchange</a>
                 </li>
-                <li class="col-6 text-center"><a class="text-dark" href="./update-ipo.html">Update IPO</a></li>
-                <li class="col-6 text-center"><a class="text-dark" href="./template.html">Template</a></li>
-                <li class="col-6 text-center"><a class="text-dark" href="./template.html">Template</a></li>
+                <li class="col-6 text-center"><a class="text-dark" [routerLink]="./update-ipo.html">Update IPO</a></li>
+                <li class="col-6 text-center"><a class="text-dark" [routerLink]="./template.html">Template</a></li>
+                <li class="col-6 text-center"><a class="text-dark" [routerLink]="./template.html">Template</a></li>
             </ul>
         </div>
         <div class="row bg-dark socials-footer undraggable">
@@ -163,16 +163,16 @@
             </div>
             <div class="col-md-4 offset-md-2">
                 <div class="row justify-content-end flex-nowrap">
-                    <a href="" class="col">
+                    <a [routerLink]="" class="col">
                         <i class="fab fa-facebook h-100 py-2 social-icon text-light mx-4"></i>
                     </a>
-                    <a href="" class="col">
+                    <a [routerLink]="" class="col">
                         <i class="fab fa-twitter h-100 py-2 social-icon text-light mx-4"></i>
                     </a>
-                    <a href="" class="col">
+                    <a [routerLink]="" class="col">
                         <i class="fab fa-instagram h-100 py-2 social-icon text-light mx-4"></i>
                     </a>
-                    <a href="" class="col">
+                    <a [routerLink]="" class="col">
                         <i class="fab fa-github h-100 py-2 social-icon text-light mx-4"></i>
                     </a>
                 </div>

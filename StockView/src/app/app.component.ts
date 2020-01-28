@@ -8,5 +8,4 @@ import { User } from './models/users';
 })
 export class AppComponent {
   title = 'StockView';
-  user = new User(101,'Abdus Saboor','gaffari98@gmail.com',9876543210);
 }

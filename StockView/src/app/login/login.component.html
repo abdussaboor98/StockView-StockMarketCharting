@@ -25,9 +25,7 @@
                     <label for="email">Email:</label>
                     <div class="input-group">
                         <div class="input-group-prepend">
-                            <span class="input-group-text">
-                                <i class="fas fa-user"></i>
-                            </span>
+                            <span class="input-group-text"><fa-icon [icon]="faAt"></fa-icon></span>
                         </div>
                         <input type="text" name="email" id="email" class="form-control" autofocus
                             autocomplete formControlName="email">
@@ -37,7 +35,7 @@
                     <label for="password">Password:</label>
                     <div class="input-group">
                         <div class="input-group-prepend">
-                            <span class="input-group-text"><i class="fas fa-key"></i></span>
+                            <span class="input-group-text"><fa-icon [icon]="faKey"></fa-icon></span>
                         </div>
                         <input type="password" name="password" id="password" class="form-control" formControlName="password">
                         
@@ -49,7 +47,7 @@
                     <label for="rememberMe" class="custom-control-label">Remember me</label>
                 </div>
                 <button type="submit" class="btn btn-primary btn-block mt-5">Login</button>
-                <span class="row text-muted justify-content-center my-2"><small>New user?<a href="signup">
+                <span class="row text-muted justify-content-center my-2"><small>New user?<a [routerLink]="['signup']">
                             Signup</a></small></span>
             </form>
         </div>

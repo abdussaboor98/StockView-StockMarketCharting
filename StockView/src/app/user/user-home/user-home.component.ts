@@ -7,7 +7,6 @@ import { Component, OnInit } from '@angular/core';
 })
 export class UserHomeComponent implements OnInit {
 
-  userType : string = 'user';
   constructor() { }
 
   ngOnInit() {

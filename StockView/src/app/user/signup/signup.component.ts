@@ -1,5 +1,6 @@
 import { Component, OnInit } from "@angular/core";
-import { FormGroup, FormControl } from '@angular/forms';
+import { FormGroup, FormControl, Validators, FormBuilder } from '@angular/forms';
+import { UserService } from 'src/app/user.service';
 
 @Component({
   selector: "app-signup",
@@ -9,18 +10,24 @@ import { FormGroup, FormControl } from '@angular/forms';
 export class SignupComponent implements OnInit {
 
   signupForm: FormGroup;
-  constructor() { }
+  constructor(private formBuilder : FormBuilder, private userService : UserService) { }
   ngOnInit() { 
-    this.signupForm = new FormGroup({
-      'name' : new FormControl(null), 
-      'email' : new FormControl(null), 
-      'password' : new FormControl(null), 
-      'rePassword' : new FormControl((null)), 
-      'phoneNo' : new FormControl(null) 
+    this.signupForm = this.formBuilder.group({
+      id : [''],
+      username : ['',Validators.required], 
+      email : ['',[Validators.required, Validators.email]], 
+      password : ['',Validators.required], 
+      rePassword : ['',Validators.required], 
+      phoneNo : ['',Validators.required],
+      isAdmin : ['fasle'],
+      confirmed : ['false']
     });
   }
 
   onSubmit(){
-    console.log(this.signupForm);
+    console.log(this.signupForm.value);
+    this.userService.registerUser(this.signupForm.value).subscribe(data => {
+      this.signupForm.reset();
+    });
   }
 }

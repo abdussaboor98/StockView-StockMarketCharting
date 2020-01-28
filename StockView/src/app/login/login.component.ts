@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 
+import { faAt, faKey} from '@fortawesome/free-solid-svg-icons';
+
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
@@ -9,6 +11,8 @@ import { FormControl, FormGroup } from '@angular/forms';
 export class LoginComponent implements OnInit {
 
   loginForm: FormGroup;
+  faAt = faAt;
+  faKey = faKey;
   constructor() { }
 
   ngOnInit() {

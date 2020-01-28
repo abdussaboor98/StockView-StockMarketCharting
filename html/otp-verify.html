@@ -6,16 +6,16 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>StockView</title>
-    <link rel="stylesheet" href="./css/bootstrap.min.css">
-    <link rel="stylesheet" href="./css/style.css">
-    <link rel="shortcut icon" href="./media/logo.png" type="image/x-icon">
+    <link rel="stylesheet" [routerLink]="./css/bootstrap.min.css">
+    <link rel="stylesheet" [routerLink]="./css/style.css">
+    <link rel="shortcut icon" [routerLink]="./media/logo.png" type="image/x-icon">
     <script src="https://kit.fontawesome.com/0dace940b2.js" crossorigin="anonymous"></script>
 </head>
 
 <body>
     <header>
         <nav class="navbar navbar-expand-md navbar-dark bg-dark sticky-top">
-            <a href="#" class="navbar-brand">
+            <a [routerLink]="#" class="navbar-brand">
                 <img src="./media/logo.svg" alt="StockView" id="logo" class="undraggable">
                 <span class="text-light mx-2 my-auto undraggable">StockView</span>
             </a>
@@ -23,9 +23,9 @@
                 <span class="navbar-toggler-icon"></span></button>
             <div class="navbar-collapse collapse" id="navbar1">
                 <ul class="navbar-nav ml-auto">
-                    <li class="nav-item"><a href="./index.html" class="nav-link">Home</a></li>
-                    <li class="nav-item"><a href="#" class="nav-link">Link 1</a></li>
-                    <li class="nav-item active"><a href="#" class="nav-link">Signup</a></li>
+                    <li class="nav-item"><a [routerLink]="./index.html" class="nav-link">Home</a></li>
+                    <li class="nav-item"><a [routerLink]="#" class="nav-link">Link 1</a></li>
+                    <li class="nav-item active"><a [routerLink]="#" class="nav-link">Signup</a></li>
                 </ul>
                 <button class=" btn text-light ml-md-5 pl-0 pl-md-5" role="login" data-toggle="modal"
                     data-target="#login-modal">Login</button>
@@ -115,7 +115,7 @@
                             <label for="remember-me" class="custom-control-label">Remember me</label>
                         </div>
                         <button type="submit" class="btn btn-primary btn-block mt-5">Login</button>
-                        <span class="row text-muted justify-content-center my-2"><small>New user? <a href="#"
+                        <span class="row text-muted justify-content-center my-2"><small>New user? <a [routerLink]="#"
                                     data-dismiss="modal">Signup</a></small></span>
                     </form>
                 </div>
@@ -133,14 +133,14 @@
 
             </div>
             <ul class="my-2 list-unstyled col-sm-6 row align-self-center justify-content-between flex-wrap">
-                <li class="col-6 text-center"><a class="text-dark" href="">Link 1</a></li>
-                <li class="col-6 text-center"><a class="text-dark" href="">Link 2</a></li>
-                <li class="col-6 text-center"><a class="text-dark" href="">Link 3</a></li>
-                <li class="col-6 text-center"><a class="text-dark" href="">Link 4</a></li>
-                <li class="col-6 text-center"><a class="text-dark" href="">Link 5</a></li>
-                <li class="col-6 text-center"><a class="text-dark" href="">Link 6</a></li>
-                <li class="col-6 text-center"><a class="text-dark" href="">Link 7</a></li>
-                <li class="col-6 text-center"><a class="text-dark" href="./template.html">Template</a></li>
+                <li class="col-6 text-center"><a class="text-dark" [routerLink]="">Link 1</a></li>
+                <li class="col-6 text-center"><a class="text-dark" [routerLink]="">Link 2</a></li>
+                <li class="col-6 text-center"><a class="text-dark" [routerLink]="">Link 3</a></li>
+                <li class="col-6 text-center"><a class="text-dark" [routerLink]="">Link 4</a></li>
+                <li class="col-6 text-center"><a class="text-dark" [routerLink]="">Link 5</a></li>
+                <li class="col-6 text-center"><a class="text-dark" [routerLink]="">Link 6</a></li>
+                <li class="col-6 text-center"><a class="text-dark" [routerLink]="">Link 7</a></li>
+                <li class="col-6 text-center"><a class="text-dark" [routerLink]="./template.html">Template</a></li>
             </ul>
         </div>
         <div class="row bg-dark socials-footer undraggable">
@@ -149,16 +149,16 @@
             </div>
             <div class="col-md-4 offset-md-2">
                 <div class="row justify-content-end flex-nowrap">
-                    <a href="" class="col">
+                    <a [routerLink]="" class="col">
                         <i class="fab fa-facebook h-100 py-2 social-icon text-light mx-4"></i>
                     </a>
-                    <a href="" class="col">
+                    <a [routerLink]="" class="col">
                         <i class="fab fa-twitter h-100 py-2 social-icon text-light mx-4"></i>
                     </a>
-                    <a href="" class="col">
+                    <a [routerLink]="" class="col">
                         <i class="fab fa-instagram h-100 py-2 social-icon text-light mx-4"></i>
                     </a>
-                    <a href="" class="col">
+                    <a [routerLink]="" class="col">
                         <i class="fab fa-github h-100 py-2 social-icon text-light mx-4"></i>
                     </a>
                 </div>
