@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { FormGroup, FormControl } from '@angular/forms';
+import { FormGroup, FormControl, FormBuilder, Validators } from '@angular/forms';
+import { StockExchangesService } from 'src/app/stock-exchanges.service';
 
 @Component({
   selector: 'app-new-exchange',
@@ -9,17 +10,21 @@ import { FormGroup, FormControl } from '@angular/forms';
 export class NewExchangeComponent implements OnInit {
 
   newExchangeForm : FormGroup
-  constructor() { }
+  constructor(private formBuilder : FormBuilder, private stockExService : StockExchangesService) { }
 
   ngOnInit() {
-    this.newExchangeForm = new FormGroup({
-      exchangeName : new FormControl(null),
-      contactAddress : new FormControl(null),
-      remarks : new FormControl(null)
+    this.newExchangeForm = this.formBuilder.group({
+      id : [''],
+      name : ['', Validators.required],
+      brief : [''],
+      contactAddress : ['', Validators.required],
+      remarks : ['', Validators.required]
     })
   }
 
   onSubmit(){
-    console.log(this.newExchangeForm.value);
+    this.stockExService.addStockExchange(this.newExchangeForm.value).subscribe(data=>{
+      console.log('Stock Exchange added');
+    })
   }
 }

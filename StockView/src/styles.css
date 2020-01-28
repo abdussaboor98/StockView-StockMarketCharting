@@ -9,7 +9,6 @@ main {
 
 #logo {
     max-height: 3rem;
-    user-drag: none;
     -moz-user-select: none;
     -webkit-user-drag: none;
 }
@@ -61,7 +60,7 @@ a.crad:hover {
 .add-btn{
     height: 10vh;
     width: 10vh;
-    right: 5rem;
+    right: 2rem;
     bottom: 5rem;
     position: fixed;
 	text-align: center;

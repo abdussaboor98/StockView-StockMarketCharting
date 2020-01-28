@@ -1,4 +1,24 @@
 {
-    "users":[]
+  "users": [
+    {
+      "id": 1,
+      "username": "admin",
+      "password": "admin",
+      "rePassword": "admin",
+      "email": "admin@stockview.com",
+      "phone": 9876543210,
+      "isAdmin": true,
+      "confirmed": true
+    },
+    {
+      "id": 2,
+      "username": "afewf",
+      "email": "ewaf@efwef.efw",
+      "password": "weewf",
+      "rePassword": "wefwef",
+      "phoneNo": "32442434",
+      "isAdmin": "fasle",
+      "confirmed": "false"
+    }
+  ]
 }
-    

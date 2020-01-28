@@ -1,0 +1,32 @@
+<main class="container">
+    <div class="display-4 text-center my-4">Manage Exchanges</div>
+    <div>
+        <table class="table table-stripped table-sm table-hover table-responsive">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Name</th>
+                    <th>Brief</th>
+                    <th>Contact Address</th>
+                    <th>Remarks</th>
+                    <th>View</th>
+                    <th>Edit</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let stockEx of stockExchanges">
+                    <td> {{stockEx.id}} </td>
+                    <td> {{stockEx.name}} </td>
+                    <td> {{stockEx.brief}} </td>
+                    <td> {{stockEx.contactAddress}} </td>
+                    <td> {{stockEx.remarks}} </td>
+                    <td> <button class="btn btn-primary">View</button> </td>
+                    <td> <button class="btn btn-info">Edit</button> </td>
+                </tr>
+            </tbody>
+
+        </table>
+    </div>
+    <button type="button" class="btn btn-primary rounded-circle mx-auto add-btn">
+        <fa-icon [icon]="faPlus" class="pt-2"></fa-icon></button>
+</main>

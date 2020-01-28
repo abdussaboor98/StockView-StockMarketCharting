@@ -17,6 +17,8 @@ import { AccountUpdateComponent } from './user/account-update/account-update.com
 import { AdminHomeComponent } from './admin/admin-home/admin-home.component';
 import { UserHomeComponent } from './user/user-home/user-home.component';
 import { OtpComponent } from './user/otp/otp.component';
+import { ManageCompanyComponent } from './admin/manage-company/manage-company.component';
+import { ManageExchangeComponent } from './admin/manage-exchange/manage-exchange.component';
 
 
 @NgModule({
@@ -32,7 +34,9 @@ import { OtpComponent } from './user/otp/otp.component';
     AccountUpdateComponent,
     AdminHomeComponent,
     UserHomeComponent,
-    OtpComponent
+    OtpComponent,
+    ManageCompanyComponent,
+    ManageExchangeComponent
   ],
   imports: [
     BrowserModule,

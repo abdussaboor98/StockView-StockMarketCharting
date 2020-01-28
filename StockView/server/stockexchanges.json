@@ -1,0 +1,11 @@
+{
+  "stockexchanges": [
+    {
+      "id": 1,
+      "name": "BSE",
+      "brief": "The Bombay stock exchange was founded by Premchand Roychand, an influential businessman in the 19th-century Bombay. He made a fortune in the stockbroking business and came to be known as the Cotton King, the Bullion King or just the Big Bull. He was also the founder of the Native Share and Stock Brokers Association, an institution that is now known as the BSE.",
+      "contactAddress": "Mumbai, Maharashtra, India",
+      "remarks": "Good"
+    }
+  ]
+}
