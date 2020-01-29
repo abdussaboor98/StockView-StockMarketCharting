@@ -11,11 +11,11 @@ import { faPlus } from '@fortawesome/free-solid-svg-icons'
 export class ManageExchangeComponent implements OnInit {
 
   faPlus = faPlus;
-  stockExchanges : StockExchange[]
+  stockExchanges : any;
   constructor(private stockExService : StockExchangesService) { }
 
   ngOnInit() {
-    this.stockExService.getAllExchanges().subscribe(data=>{
+    this.stockExService.getAllExchanges().subscribe(data => {
       this.stockExchanges = data;
       console.log(this.stockExchanges);
     })

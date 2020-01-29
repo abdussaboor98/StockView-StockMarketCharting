@@ -1,0 +1,31 @@
+{
+  "companies": [
+    {
+      "id": 1,
+      "name": "Banana Inc.",
+      "sector": "Opt 1",
+      "ceo": "Abdus Saboor",
+      "directors": [
+        "Syed",
+        "Aneena",
+        "Anuhya"
+      ],
+      "stockExchanges": [
+        {
+          "stockExchange": "BSE ",
+          "stockCode": "888"
+        },
+        {
+          "stockExchange": "jjj",
+          "stockCode": "2323"
+        },
+        {
+          "stockExchange": "lekrforef",
+          "stockCode": "232555"
+        }
+      ],
+      "turnover": "76876876",
+      "brief": "mmmmm"
+    }
+  ]
+}

@@ -3,7 +3,7 @@
     <div class="row justify-content-center">
         <div class="card col-md-8 col-sm-10 col-11 mx-auto shadow">
             <div class="card-body">
-                <form [formGroup] = "newCompanyForm" (ngSubmit)="onSubmit()">
+                <form [formGroup]="newCompanyForm" (ngSubmit)="onSubmit()">
                     <div class="row">
                         <div class="col-4 mb-4">
                             <img class="w-100 px-2" src="../../../assets/ph.svg" alt="">
@@ -11,8 +11,9 @@
                         <div class="col-8">
                             <span>Upload logo: </span>
                             <div class="custom-file my-3">
-                                <input type="file" name="logoUpload" id="logoUpload" formControlName="logoUpload">
-                                <label for="logoUpload" class="custom-file-label"><span class="limit-text">Upload logo...</span></label>
+                                <input type="file" name="logoUpload" id="logoUpload">
+                                <label for="logoUpload" class="custom-file-label"><span class="limit-text">Upload
+                                        logo...</span></label>
                             </div>
                         </div>
 
@@ -20,8 +21,8 @@
                     <div class="form-group">
                         <label for="companyName" class="form-control-label">Name:</label>
                         <div class="input-group">
-                            <input type="text" name="companyName" id="companyName" formControlName="companyName" class="form-control"
-                                placeholder="Enter company name..." required>
+                            <input type="text" name="companyName" id="companyName" formControlName="name"
+                                class="form-control" placeholder="Enter company name..." required>
                         </div>
                     </div>
                     <div class="form-group">
@@ -37,33 +38,41 @@
                     <div class="form-group">
                         <label for="ceoName" class="form-control-label">CEO Name:</label>
                         <div class="input-group">
-                            <input type="text" name="ceoName" id="ceoName" formControlName="ceoName" class="form-control"
-                                placeholder="Enter the CEO name..." required>
+                            <input type="text" name="ceoName" id="ceoName" formControlName="ceo"
+                                class="form-control" placeholder="Enter the CEO name..." required>
                         </div>
                     </div>
-                    <div class="form-group">
+                    <div class="form-group" formArrayName="directors">
                         <div class="row px-3">
-                            <label for="director" class="form-control-label">Board of Directors:</label>
-                            <button class="btn btn-info ml-auto btn-sm mb-2" role="add_director">Add
+                            <label for="directors" class="form-control-label">Board of Directors:</label>
+                            <button type="button" class="btn btn-info ml-auto btn-sm mb-2" role="add_director"
+                                (click)="addDirector()">Add
                                 Director</button>
                         </div>
-                        <div class="input-group">
-                            <input type="text" name="director" id="director" formControlName="director" class="form-control"
+                        <div class="input-group mb-2"
+                            *ngFor="let directorControl of newCompanyForm.get('directors').controls; let i = index">
+                            <input type="text" [formControlName]="i" class="form-control "
                                 placeholder="Enter the director name..." required>
+                            <div class="input-group-append">
+                                <button *ngIf="i>0" class="btn btn-danger" (click)=(removeDirector(i))>-</button>
+                            </div>
                         </div>
                     </div>
-                    <div class="form-group">
+                    <div class="form-group" formArrayName="stockExchanges">
                         <div class="row px-3">
                             <label for="stockExchange" class="form-control-label">Stock Exchanges(with stock
                                 code):</label>
-                            <button class="btn btn-info ml-auto btn-sm mb-2">Add Exchange</button>
+                            <button type="button" class="btn btn-info ml-auto btn-sm mb-2" (click)="addStockExchange()">Add Exchange</button>
                         </div>
-                        <div class="input-group row mx-auto">
-                            <input type="text" name="stockExchange" id="stockExchange" formControlName="stockExchange" class="form-control col-7"
-                                placeholder="Enter the stock exchange..." required>
+                        <div *ngFor="let StockExG of newCompanyForm.get('stockExchanges').controls; let i = index" class="mb-2">
+                            <div class="input-group row mx-auto" [formGroupName]="i">
+                            <input type="text" name="stockExchange" id="stockExchange" formControlName="stockExchange"
+                                class="form-control col-7" placeholder="Enter the stock exchange..." required>
                             <input type="text" name="stockCode" id="stockCode" class="form-control col-5"
                                 placeholder="Enter the stock code..." required formControlName="stockCode">
                         </div>
+                        </div>
+                        
                     </div>
                     <div class="form-group">
                         <label for="turnover" class="form-control-label">Turnover: </label>
@@ -75,16 +84,17 @@
                     <div class="form-group">
                         <label for="briefDesc" class="form-control-label">Brief Description:</label>
                         <div class="input-group">
-                            <textarea type="text" name="briefDesc" id="briefDesc" formControlName="briefDesc" class="form-control"></textarea>
+                            <textarea type="text" name="briefDesc" id="briefDesc" formControlName="brief"
+                                class="form-control"></textarea>
                         </div>
                     </div>
-                    <div class="form-group">
+                    <!-- <div class="form-group">
                         <label for="ipoDate" class="form-control-label">IPO date: </label>
                         <div class="input-group">
                             <input type="text" name="ipoDate" id="ipoDate" class="form-control"
                                 placeholder="Enter the IPO date..." required formControlName="ipoDate">
                         </div>
-                    </div>
+                    </div> -->
                     <div class="row justify-content-around">
                         <div class="col-6">
                             <button type="reset" class="btn btn-danger btn-block">Reset</button>

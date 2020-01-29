@@ -94,30 +94,3 @@ a.crad:hover {
         display: none;
     }
 }
-
-.limit-text{
-    display: block;
-    width: 15rem;
-    overflow: hidden;
-    white-space: nowrap;
-    text-overflow: ellipsis;
-}
-
-.bg-carousel {
-    z-index: -1;
-}
-
-.bg-carousel img{
-    height: 20rem;
-    object-fit: cover;
-    filter: brightness(0.5);
-}
-.hero-text{
-    position: absolute;
-    z-index: 5;
-    margin-top: 5rem;
-}
-
-.text-shadow{
-    text-shadow: black 4px 4px 4px ;
-}

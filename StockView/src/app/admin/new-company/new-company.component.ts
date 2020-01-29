@@ -1,36 +1,64 @@
-import { Component, OnInit } from '@angular/core';
-import { FormGroup, FormControl } from '@angular/forms';
-import bsCustomFileInput from 'bs-custom-file-input';
+import { Component, OnInit } from "@angular/core";
+import {
+  FormGroup,
+  FormControl,
+  FormArray,
+  Validators,
+  FormBuilder
+} from "@angular/forms";
+import bsCustomFileInput from "bs-custom-file-input";
+import { CompaniesService } from 'src/app/companies.service';
 
 @Component({
-  selector: 'app-new-company',
-  templateUrl: './new-company.component.html',
-  styleUrls: ['./new-company.component.css']
+  selector: "app-new-company",
+  templateUrl: "./new-company.component.html",
+  styleUrls: ["./new-company.component.css"]
 })
 export class NewCompanyComponent implements OnInit {
-
-  newCompanyForm : FormGroup
-  constructor() { }
+  newCompanyForm: FormGroup;
+  constructor(private formBuilder: FormBuilder, private companiesService : CompaniesService) {}
 
   ngOnInit() {
     bsCustomFileInput.init();
-    this.newCompanyForm = new FormGroup({
-      "logoUpload" : new FormControl(null),
-      "companyName" : new FormControl(null),
-      "sector" : new FormControl('none'),
-      "ceoName" : new FormControl(null),
-      "director" : new FormControl(null),
-      "stockExchange" : new FormControl(null),
-      "stockCode" : new FormControl(null),
-      "turnover" : new FormControl(null),
-      "briefDesc" : new FormControl(null),
-      "ipoDate" : new FormControl(null)
+    this.newCompanyForm = this.formBuilder.group({
+      id: [''],
+      name: ["", Validators.required],
+      sector: ["", Validators.required],
+      ceo: ["", Validators.required],
+      directors: this.formBuilder.array([this.formBuilder.control("")]),
+      stockExchanges: this.formBuilder.array([
+        this.formBuilder.group({
+          stockExchange: ["", Validators.required],
+          stockCode: ["", Validators.required]
+        })
+      ]),
+      turnover: ["", Validators.required],
+      brief: ["", Validators.required]
+    });
+  }
+
+  onSubmit() {
+    this.companiesService.addCompany(this.newCompanyForm.value).subscribe(data => {
+      this.newCompanyForm.reset();
     })
   }
 
-  onSubmit(){
-    
-    console.log(this.newCompanyForm.value);
+  addDirector() {
+    const control = this.formBuilder.control("");
+    (<FormArray>this.newCompanyForm.get("directors")).push(control);
   }
 
+  removeDirector(i: number) {
+    (<FormArray>this.newCompanyForm.get("directors")).removeAt(i);
+  }
+
+  addStockExchange() {
+    const stockExGroup = this.formBuilder.group({
+      stockExchange: ["", Validators.required],
+      stockCode: ["", Validators.required]
+    });
+    (<FormArray>this.newCompanyForm.get('stockExchanges')).push(stockExGroup);
+  }
+
+  
 }

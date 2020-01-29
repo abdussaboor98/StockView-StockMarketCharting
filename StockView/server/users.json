@@ -6,9 +6,9 @@
       "password": "admin",
       "rePassword": "admin",
       "email": "admin@stockview.com",
-      "phone": 9876543210,
-      "isAdmin": true,
-      "confirmed": true
+      "phoneNo": "9876543210",
+      "isAdmin": "true",
+      "confirmed": "true"
     },
     {
       "id": 2,

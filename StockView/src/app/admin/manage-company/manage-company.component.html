@@ -1,7 +1,34 @@
 <main class="container">
     <div class="display-4 text-center my-4">Manage Companies</div>
-    <div class="card col-md-10 mx-auto mt-5 shadow hover-enlarge p-0">
-        
+    <div class="row justify-content-center">
+        <table class="table table-hover table-responsive table-sm table-stripped">
+            <thead>
+                <th>ID</th>
+                <th>Name</th>
+                <th>Sector</th>
+                <th>CEO</th>
+                <th>Board of Directors</th>
+                <th>Stock Exchanges</th>
+                <th>Turnover</th>
+                <th>Brief</th>
+            </thead>
+            <tbody>
+                <tr *ngFor="let company of companies">
+                    <td> {{company.id}} </td>
+                    <td> {{company.name}} </td>
+                    <td> {{company.sector}} </td>
+                    <td> {{company.ceo}} </td>
+                    <td> {{company.directors}} </td>
+                    <td>
+                        <div *ngFor="let exchange of company.stockExchanges" class="row justify-content-center">
+                            {{exchange.stockExchange}}:{{exchange.stockCode}}
+                        </div>
+                    </td>
+                    <td> {{company.turnover}} </td>
+                    <td> {{company.brief}} </td>
+                </tr>
+            </tbody>
+        </table>
     </div>
     <button type="button" class="btn btn-primary rounded-circle mx-auto add-btn "><i
             class="fas fa-plus pt-2"></i></button>

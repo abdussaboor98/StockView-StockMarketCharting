@@ -12,6 +12,7 @@ import { NewExchangeComponent } from './admin/new-exchange/new-exchange.componen
 import { NewIpoComponent } from './admin/new-ipo/new-ipo.component';
 import { OtpComponent } from './user/otp/otp.component';
 import { ManageExchangeComponent } from './admin/manage-exchange/manage-exchange.component';
+import { ManageCompanyComponent } from './admin/manage-company/manage-company.component';
 
 
 
@@ -25,7 +26,8 @@ const routes: Routes = [
   { path: 'new-exchange', component: NewExchangeComponent},
   { path: 'new-ipo', component: NewIpoComponent},
   { path: 'otp', component: OtpComponent},
-  { path: 'manage-exchange', component: ManageExchangeComponent}
+  { path: 'manage-exchange', component: ManageExchangeComponent},
+  { path: 'manage-company', component: ManageCompanyComponent}
 ];
 
 @NgModule({
