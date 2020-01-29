@@ -2,21 +2,11 @@
   "users": [
     {
       "id": 1,
-      "username": "admin",
-      "password": "admin",
-      "rePassword": "admin",
-      "email": "admin@stockview.com",
-      "phoneNo": "9876543210",
-      "isAdmin": "true",
-      "confirmed": "true"
-    },
-    {
-      "id": 2,
-      "username": "afewf",
-      "email": "ewaf@efwef.efw",
-      "password": "weewf",
-      "rePassword": "wefwef",
-      "phoneNo": "32442434",
+      "username": "abdussaboor",
+      "email": "gaffari98@gmail.com",
+      "password": "abcd",
+      "rePassword": "abcd",
+      "phoneNo": 8919372849,
       "isAdmin": "fasle",
       "confirmed": "false"
     }

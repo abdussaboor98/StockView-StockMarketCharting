@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { CompaniesService } from 'src/app/companies.service';
+import { CompaniesService } from 'src/app/services/companies.service';
 import { Company } from 'src/app/models/company';
 import { Router } from '@angular/router';
 

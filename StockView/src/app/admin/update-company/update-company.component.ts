@@ -7,7 +7,7 @@ import {
   FormBuilder
 } from "@angular/forms";
 import bsCustomFileInput from "bs-custom-file-input";
-import { CompaniesService } from 'src/app/companies.service';
+import { CompaniesService } from 'src/app/services/companies.service';
 import { Company } from 'src/app/models/company';
 import { faTrash } from '@fortawesome/free-solid-svg-icons';
 

@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, FormBuilder, Validators } from '@angular/forms';
-import { StockExchangesService } from 'src/app/stock-exchanges.service';
+import { StockExchangesService } from 'src/app/services/stock-exchanges.service';
 
 @Component({
   selector: 'app-new-exchange',

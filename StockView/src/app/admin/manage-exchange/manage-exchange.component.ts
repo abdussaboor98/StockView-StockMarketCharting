@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { StockExchangesService } from 'src/app/stock-exchanges.service';
+import { StockExchangesService } from 'src/app/services/stock-exchanges.service';
 import { StockExchange } from 'src/app/models/stockExchange';
 import { faPlus } from '@fortawesome/free-solid-svg-icons'
 
