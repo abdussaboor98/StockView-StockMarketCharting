@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { CompaniesService } from 'src/app/companies.service';
 import { Company } from 'src/app/models/company';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-manage-company',
@@ -9,13 +10,25 @@ import { Company } from 'src/app/models/company';
 })
 export class ManageCompanyComponent implements OnInit {
 
-  companies : any;
-  constructor(private companiesService: CompaniesService) { }
+  companies: Company[];
+  constructor(private companiesService: CompaniesService, private router: Router) { }
 
   ngOnInit() {
     this.companiesService.getAllCompanies().subscribe(data => {
       this.companies = data;
     });
+  }
+
+  deleteCompany(id: number) {
+    this.companiesService.deleteCompany(id).subscribe(data => {
+      this.companies = this.companies.filter((company) => company.id !== id);
+    });
+  }
+
+  updateCompany(id: number) {
+    localStorage.removeItem('companyId');
+    localStorage.setItem('companyId', id.toString());
+    this.router.navigate(['update-company']);
   }
 
 }

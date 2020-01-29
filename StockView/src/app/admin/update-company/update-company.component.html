@@ -1,0 +1,126 @@
+<main class="container bg-white">
+    <div class="display-4 text-center my-4">Add New Company</div>
+    <div class="row justify-content-center">
+        <div class="card col-md-8 col-sm-10 col-11 mx-auto shadow">
+            <div class="card-body">
+                <form [formGroup]="updateCompanyForm" (ngSubmit)="onSubmit()">
+                    <div class="row">
+                        <div class="col-4 mb-4">
+                            <img class="w-100 px-2" src="../../../assets/ph.svg" alt="">
+                        </div>
+                        <div class="col-8">
+                            <span>Upload logo: </span>
+                            <div class="custom-file my-3">
+                                <input type="file" name="logoUpload" id="logoUpload">
+                                <label for="logoUpload" class="custom-file-label"><span class="limit-text">Upload
+                                        logo...</span></label>
+                            </div>
+                        </div>
+
+                    </div>
+                    <div class="form-group">
+                        <label for="companyName" class="form-control-label">Name:</label>
+                        <div class="input-group">
+                            <input type="text" name="companyName" id="companyName" formControlName="name"
+                                class="form-control" placeholder="Enter company name..." required>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="sector">Select Company/Sector:</label>
+                        <div class="input-group">
+                            <select name="sector" id="sector" class="custom-select" formControlName="sector" required>
+                                <option value="none" selected disabled>Select sector...</option>
+                                <option value="Opt 1">Opt 1</option>
+                                <option value="Opt 2">Opt 2</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="ceoName" class="form-control-label">CEO Name:</label>
+                        <div class="input-group">
+                            <input type="text" name="ceoName" id="ceoName" formControlName="ceo" class="form-control"
+                                placeholder="Enter the CEO name..." required>
+                        </div>
+                    </div>
+                    <div class="form-group" formArrayName="directors">
+                        <div class="row px-3">
+                            <label for="directors" class="form-control-label">Board of Directors:</label>
+                            <button type="button" class="btn btn-info ml-auto btn-sm mb-2" role="add_director"
+                                (click)="addDirector()">Add
+                                Director</button>
+                        </div>
+                        <div class="input-group mb-2"
+                            *ngFor="let directorControl of updateCompanyForm.get('directors').controls; let i = index">
+                            <input type="text" [formControlName]="i" class="form-control "
+                                placeholder="Enter the director name..." required>
+                            <div class="input-group-append">
+                                <button *ngIf="i>0" class="btn btn-danger" (click)=(removeDirector(i))>
+                                    <fa-icon [icon]="faTrash"></fa-icon>
+                                </button>
+                                <button *ngIf="i == 0" class="btn btn-secondary" disabled>
+                                    <fa-icon [icon]="faTrash"></fa-icon>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group" formArrayName="stockExchanges">
+                        <div class="row px-3">
+                            <label for="stockExchange" class="form-control-label">Stock Exchanges(with stock
+                                code):</label>
+                            <button type="button" class="btn btn-info ml-auto btn-sm mb-2"
+                                (click)="addStockExchange()">Add Exchange</button>
+                        </div>
+                        <div *ngFor="let StockExG of updateCompanyForm.get('stockExchanges').controls; let i = index"
+                            class="mb-2">
+                            <div class="input-group row mx-auto" [formGroupName]="i">
+                                <input type="text" name="stockExchange" id="stockExchange"
+                                    formControlName="stockExchange" class="form-control col-7"
+                                    placeholder="Enter the stock exchange..." required>
+                                <input type="text" name="stockCode" id="stockCode" class="form-control col-5"
+                                    placeholder="Enter the stock code..." required formControlName="stockCode">
+                                <div class="input-group-append">
+                                    <button *ngIf="i>0" class="btn btn-danger" (click)=(removeStockExchange(i))>
+                                        <fa-icon [icon]="faTrash"></fa-icon>
+                                    </button>
+                                    <button *ngIf="i == 0" class="btn btn-secondary" disabled>
+                                        <fa-icon [icon]="faTrash"></fa-icon>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                    <div class="form-group">
+                        <label for="turnover" class="form-control-label">Turnover: </label>
+                        <div class="input-group">
+                            <input type="text" name="turnover" id="turnover" class="form-control"
+                                placeholder="Enter the turnover..." required formControlName="turnover">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="briefDesc" class="form-control-label">Brief Description:</label>
+                        <div class="input-group">
+                            <textarea type="text" name="briefDesc" id="briefDesc" formControlName="brief"
+                                class="form-control"></textarea>
+                        </div>
+                    </div>
+                    <!-- <div class="form-group">
+                        <label for="ipoDate" class="form-control-label">IPO date: </label>
+                        <div class="input-group">
+                            <input type="text" name="ipoDate" id="ipoDate" class="form-control"
+                                placeholder="Enter the IPO date..." required formControlName="ipoDate">
+                        </div>
+                    </div> -->
+                    <div class="row justify-content-around">
+                        <div class="col-6">
+                            <button type="button" class="btn btn-secondary btn-block">Cancel</button>
+                        </div>
+                        <div class="col-6">
+                            <button type="submit" class="btn btn-primary btn-block" [disabled]="!updateCompanyForm.valid" >Update</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</main>

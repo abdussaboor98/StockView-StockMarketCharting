@@ -20,6 +20,7 @@ import { OtpComponent } from './user/otp/otp.component';
 import { ManageCompanyComponent } from './admin/manage-company/manage-company.component';
 import { ManageExchangeComponent } from './admin/manage-exchange/manage-exchange.component';
 import { UpdateDetailsComponent } from './user/update-details/update-details.component';
+import { UpdateCompanyComponent } from './admin/update-company/update-company.component';
 
 
 @NgModule({
@@ -38,7 +39,8 @@ import { UpdateDetailsComponent } from './user/update-details/update-details.com
     OtpComponent,
     ManageCompanyComponent,
     ManageExchangeComponent,
-    UpdateDetailsComponent
+    UpdateDetailsComponent,
+    UpdateCompanyComponent
   ],
   imports: [
     BrowserModule,

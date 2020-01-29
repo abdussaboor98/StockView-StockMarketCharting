@@ -2,30 +2,21 @@
   "companies": [
     {
       "id": 1,
-      "name": "Banana Inc.",
+      "name": "ABC Inc.",
       "sector": "Opt 1",
-      "ceo": "Abdus Saboor",
+      "ceo": "XYZ",
       "directors": [
-        "Syed",
-        "Aneena",
-        "Anuhya"
+        "sdadad",
+        "asdsadsda"
       ],
       "stockExchanges": [
         {
-          "stockExchange": "BSE ",
-          "stockCode": "888"
-        },
-        {
-          "stockExchange": "jjj",
-          "stockCode": "2323"
-        },
-        {
-          "stockExchange": "lekrforef",
-          "stockCode": "232555"
+          "stockExchange": "asdsad",
+          "stockCode": "123"
         }
       ],
-      "turnover": "76876876",
-      "brief": "mmmmm"
+      "turnover": "1234321",
+      "brief": "efwefwfwefwefwef"
     }
   ]
 }
