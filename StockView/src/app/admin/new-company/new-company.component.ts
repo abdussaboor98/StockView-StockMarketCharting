@@ -7,7 +7,8 @@ import {
   FormBuilder
 } from "@angular/forms";
 import bsCustomFileInput from "bs-custom-file-input";
-import { CompaniesService } from 'src/app/services/companies.service';
+import { CompaniesService } from "src/app/services/companies.service";
+import { faTrash } from "@fortawesome/free-solid-svg-icons";
 
 @Component({
   selector: "app-new-company",
@@ -15,13 +16,17 @@ import { CompaniesService } from 'src/app/services/companies.service';
   styleUrls: ["./new-company.component.css"]
 })
 export class NewCompanyComponent implements OnInit {
+  faTrash = faTrash;
   newCompanyForm: FormGroup;
-  constructor(private formBuilder: FormBuilder, private companiesService : CompaniesService) {}
+  constructor(
+    private formBuilder: FormBuilder,
+    private companiesService: CompaniesService
+  ) {}
 
   ngOnInit() {
     bsCustomFileInput.init();
     this.newCompanyForm = this.formBuilder.group({
-      id: [''],
+      id: [""],
       name: ["", Validators.required],
       sector: ["", Validators.required],
       ceo: ["", Validators.required],
@@ -38,9 +43,11 @@ export class NewCompanyComponent implements OnInit {
   }
 
   onSubmit() {
-    this.companiesService.addCompany(this.newCompanyForm.value).subscribe(data => {
-      this.newCompanyForm.reset();
-    })
+    this.companiesService
+      .addCompany(this.newCompanyForm.value)
+      .subscribe(data => {
+        this.newCompanyForm.reset();
+      });
   }
 
   addDirector() {
@@ -57,8 +64,10 @@ export class NewCompanyComponent implements OnInit {
       stockExchange: ["", Validators.required],
       stockCode: ["", Validators.required]
     });
-    (<FormArray>this.newCompanyForm.get('stockExchanges')).push(stockExGroup);
+    (<FormArray>this.newCompanyForm.get("stockExchanges")).push(stockExGroup);
   }
 
-  
+  removeStockExchange(i: number) {
+    (<FormArray>this.newCompanyForm.get("stockExchanges")).removeAt(i);
+  }
 }

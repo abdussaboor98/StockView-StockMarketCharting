@@ -17,6 +17,45 @@
       ],
       "turnover": "1234321",
       "brief": "efwefwfwefwefwef"
+    },
+    {
+      "id": 2,
+      "name": "Banana Inc.",
+      "sector": "Opt 1",
+      "ceo": "Abdus Saboor",
+      "directors": [
+        "Syed",
+        "Anuhya"
+      ],
+      "stockExchanges": [
+        {
+          "stockExchange": "BSE ",
+          "stockCode": "1231"
+        },
+        {
+          "stockExchange": "NSE",
+          "stockCode": "7654"
+        }
+      ],
+      "turnover": "6876876",
+      "brief": "lorem ipsum notere "
+    },
+    {
+      "id": 3,
+      "name": "XYZ",
+      "sector": "Opt 2",
+      "ceo": "AAA",
+      "directors": [
+        "AA"
+      ],
+      "stockExchanges": [
+        {
+          "stockExchange": "XXX",
+          "stockCode": "987"
+        }
+      ],
+      "turnover": "97997",
+      "brief": "khkhhkjkn kjoij"
     }
   ]
 }

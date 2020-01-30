@@ -15,11 +15,14 @@ import { ManageExchangeComponent } from './admin/manage-exchange/manage-exchange
 import { ManageCompanyComponent } from './admin/manage-company/manage-company.component';
 import { UpdateCompanyComponent } from './admin/update-company/update-company.component';
 import { ViewUsersComponent } from './admin/view-users/view-users.component';
+import { AccountComponent } from './user/account/account.component';
+import { AccountUpdateComponent } from './user/account-update/account-update.component';
 
 
 
 const routes: Routes = [
   { path: '' , component: HomeComponent },
+  { path: 'home' , component: HomeComponent },
   { path: 'signup', component: SignupComponent } ,
   { path: 'admin-home', component: AdminHomeComponent },
   { path: 'user-home', component: UserHomeComponent },
@@ -31,7 +34,9 @@ const routes: Routes = [
   { path: 'manage-exchange', component: ManageExchangeComponent},
   { path: 'manage-company', component: ManageCompanyComponent},
   { path: 'update-company', component: UpdateCompanyComponent},
-  { path: 'view-users', component: ViewUsersComponent}
+  { path: 'view-users', component: ViewUsersComponent},
+  { path: 'account', component: AccountComponent},
+  { path: 'account-update', component: AccountUpdateComponent}
 ];
 
 @NgModule({

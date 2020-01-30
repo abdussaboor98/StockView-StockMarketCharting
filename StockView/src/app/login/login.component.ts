@@ -1,30 +1,33 @@
-import { Component, OnInit } from '@angular/core';
-import { FormControl, FormGroup } from '@angular/forms';
+import { Component, OnInit } from "@angular/core";
+import {
+  FormControl,
+  FormGroup,
+  FormBuilder,
+  Validators
+} from "@angular/forms";
 
-import { faAt, faKey} from '@fortawesome/free-solid-svg-icons';
+import { faAt, faKey } from "@fortawesome/free-solid-svg-icons";
 
 @Component({
-  selector: 'app-login',
-  templateUrl: './login.component.html',
-  styleUrls: ['./login.component.css']
+  selector: "app-login",
+  templateUrl: "./login.component.html",
+  styleUrls: ["./login.component.css"]
 })
 export class LoginComponent implements OnInit {
-
   loginForm: FormGroup;
   faAt = faAt;
   faKey = faKey;
-  constructor() { }
+  constructor(private formBuilder: FormBuilder) {}
 
   ngOnInit() {
-    this.loginForm = new FormGroup({
-      'email': new FormControl(null),
-      'password': new FormControl(null),
-      'rememberMe': new FormControl(false)
-    })
+    this.loginForm = this.formBuilder.group({
+      email: ["", Validators.required],
+      password: ["", Validators.required],
+      rememberMe: ["", Validators.required]
+    });
   }
 
-  login(){
+  login() {
     console.log(this.loginForm);
   }
-
 }

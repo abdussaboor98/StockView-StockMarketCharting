@@ -32,8 +32,8 @@ export class UpdateCompanyComponent implements OnInit {
     console.log(id);
     if (+id > 0) {
       this.companiesService.getCompayById(+id).subscribe(data => {
-        this.noOfDirectors = data.directors.length - 1;
-        this.noOfExchanges = data.stockExchanges.length - 1;
+        this.noOfDirectors = data.directors.length;
+        this.noOfExchanges = data.stockExchanges.length;
         console.log(this.noOfDirectors + ' ' + this.noOfExchanges)
         while (this.noOfDirectors > 0) {
           this.addDirector();
