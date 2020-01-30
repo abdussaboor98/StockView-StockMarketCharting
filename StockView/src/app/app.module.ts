@@ -22,6 +22,7 @@ import { ManageExchangeComponent } from './admin/manage-exchange/manage-exchange
 import { UpdateCompanyComponent } from './admin/update-company/update-company.component';
 import { ViewUsersComponent } from './admin/view-users/view-users.component';
 import { AccountComponent } from './user/account/account.component';
+import { UpdateExchangeComponent } from './admin/update-exchange/update-exchange.component';
 
 
 @NgModule({
@@ -42,7 +43,8 @@ import { AccountComponent } from './user/account/account.component';
     ManageExchangeComponent,
     UpdateCompanyComponent,
     ViewUsersComponent,
-    AccountComponent
+    AccountComponent,
+    UpdateExchangeComponent
   ],
   imports: [
     BrowserModule,

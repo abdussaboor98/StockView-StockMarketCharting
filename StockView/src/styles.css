@@ -46,10 +46,6 @@ width: 15vw;
     font-size: 1.5rem;
 }
 
-.active {
-    color: white;
-}
-
 .hover-enlarge {
     transition: transform ease-in 0.2s;
 }
