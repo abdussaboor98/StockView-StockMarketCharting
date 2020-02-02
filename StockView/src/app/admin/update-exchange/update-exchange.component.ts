@@ -36,9 +36,13 @@ export class UpdateExchangeComponent implements OnInit {
         this.stockExService
             .updateStockExchange(this.updateExchangeForm.value)
             .subscribe(data => {
-                console.log("Stock Exchange added");
                 this.updateExchangeForm.reset();
-                this.router.navigate(["manage-exchange"]);
+                this.goBack();
             });
+    }
+
+    
+    goBack() {
+        this.router.navigate(["manage-exchange"]);
     }
 }

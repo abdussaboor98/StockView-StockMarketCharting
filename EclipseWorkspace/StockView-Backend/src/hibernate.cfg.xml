@@ -14,5 +14,7 @@
   <mapping class="com.cts.stockview.model.Company"/>
   <mapping class="com.cts.stockview.model.StockExchange"/>
   <mapping class="com.cts.stockview.model.StockPrice"/>
+  <mapping class="com.cts.stockview.model.Sector"/>
+  <mapping class="com.cts.stockview.model.IPO"/>
  </session-factory>
 </hibernate-configuration>

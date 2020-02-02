@@ -10,8 +10,8 @@ export class IposService {
     url = "http://localhost:5000/ipos/";
     constructor(private httpClient: HttpClient) {}
 
-    getAllIPOs(): Observable<IPO> {
-        return this.httpClient.get<IPO>(this.url);
+    getAllIPOs(): Observable<IPO[]> {
+        return this.httpClient.get<IPO[]>(this.url);
     }
 
     getIPOById(id: number): Observable<IPO> {

@@ -2,6 +2,12 @@ import { Component, OnInit } from "@angular/core";
 import { UserService } from "src/app/services/user.service";
 import { Router } from "@angular/router";
 import { User } from "src/app/models/users";
+import {
+    faUserMinus,
+    faUserTag,
+    faEdit,
+    faUserEdit
+} from "@fortawesome/free-solid-svg-icons";
 
 @Component({
     selector: "app-view-users",
@@ -9,6 +15,10 @@ import { User } from "src/app/models/users";
     styleUrls: ["./view-users.component.css"]
 })
 export class ViewUsersComponent implements OnInit {
+    faTrash = faUserMinus;
+    faEye = faUserTag;
+    faEdit = faEdit;
+    faUserEdit = faUserEdit;
     users: User[];
     constructor(private userService: UserService, private router: Router) {}
 
@@ -18,9 +28,21 @@ export class ViewUsersComponent implements OnInit {
         });
     }
 
-    deleteUser(id) {
+    deleteUser(id: number) {
         this.userService.deleteUser(id).subscribe(data => {
             this.users = this.users.filter(user => user.id !== id);
         });
+    }
+
+    viewUser(id: number){
+        sessionStorage.removeItem('userId');
+        sessionStorage.setItem('userId',id.toString());
+        this.router.navigate(['account']);
+    }
+
+    updateUser(id: number){
+        sessionStorage.removeItem('userId');
+        sessionStorage.setItem('userId',id.toString());
+        this.router.navigate(['account-update']);
     }
 }

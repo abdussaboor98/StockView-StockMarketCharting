@@ -1,0 +1,57 @@
+<main class="container">
+    <div class="display-4 text-center my-4">Compare Companies</div>
+    <div class="row justify-content-center">
+        <div class="card col-md-6 col-sm-10 mx-auto shadow">
+            <div class="card-body">
+                <form [formGroup]="compareForm">
+                    <div class="form-group">
+                        <label for="company-sector" >Select Company/Sector:</label>
+                        <div class="input-group">
+                            <select name="company-sector" id="company-sector" class="custom-select" required>
+                                <option value="" selected disabled>Select comapny/sector...</option>
+                                <option value="">Company</option>
+                                <option value="">Sector</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="stock-ex" >Select stock exchange:</label>
+                        <div class="input-group">
+                            <select name="stock-ex" id="stock-ex" class="custom-select" required>
+                                <option value="" selected disabled>Select stock exchange...</option>
+                                <option value="">One</option>
+                                <option value="">Two</option>
+                                <option value="">Three</option>
+                            </select> </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="name" >Company Name: </label>
+                        <div class="input-group">
+                            <input type="text" name="name" id="name" class="form-control"
+                                placeholder="Enter company/sector name..." required>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-6">
+                            <label for="from-date">From: </label>
+                            <div class="input-group">
+                                <input type="date" name="from-date" id="from-date" class="form-control"
+                                    placeholder="Confirm your password..." required>
+                            </div>
+                        </div>
+                        <div class="col-6">
+                            <label for="to-date" >To: </label>
+                            <div class="input-group">
+                                <input type="date" name="to-date" id="to-date" class="form-control"
+                                    placeholder="Confirm your password..." required>
+                            </div>
+                        </div>
+                    </div>
+                    
+                </form>
+            </div>
+        </div>
+    </div>
+    <button type="submit" class="btn btn-primary btn-block mt-3 col-md-6 mx-auto">Compare</button>
+    <button type="button" class="btn btn-primary rounded-circle mx-auto add-btn"><i class="fas fa-plus pt-2"></i></button>
+</main>

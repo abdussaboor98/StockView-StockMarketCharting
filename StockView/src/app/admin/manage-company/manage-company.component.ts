@@ -31,6 +31,10 @@ export class ManageCompanyComponent implements OnInit {
         });
     }
 
+    gotoNew() {
+        this.router.navigate(["new-company"]);
+    }
+
     deleteCompany(id: number) {
         this.companiesService.deleteCompany(id).subscribe(data => {
             this.companies = this.companies.filter(

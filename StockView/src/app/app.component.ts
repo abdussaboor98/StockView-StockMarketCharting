@@ -1,5 +1,6 @@
 import { Component } from "@angular/core";
-import { User } from "./models/users";
+import * as $ from 'jquery';
+import bootstrap from 'bootstrap';
 
 @Component({
     selector: "app-root",
@@ -8,4 +9,8 @@ import { User } from "./models/users";
 })
 export class AppComponent {
     title = "StockView";
+
+    onViewInit(){
+        $('.carousel').carousel({interval: 200});
+    }
 }

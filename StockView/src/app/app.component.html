@@ -16,8 +16,8 @@
         </div>
     </nav>
 </header>
-<div class="main-body"></div>
 <router-outlet></router-outlet>
+
 
 
 
@@ -33,16 +33,11 @@
 
         </div>
         <ul class="my-2 list-unstyled col-sm-6 row align-self-center justify-content-between flex-wrap">
-            <li class="col-6 text-center"><a class="text-dark" [routerLink]="['admin-home']">Admin Home</a></li>
-            <li class="col-6 text-center"><a class="text-dark" [routerLink]="['user-home']">User Home</a></li>
-            <li class="col-6 text-center"><a class="text-dark" [routerLink]="['new-company']">New Company</a></li>
-            <li class="col-6 text-center"><a class="text-dark" [routerLink]="['new-exchange']">New Exchange</a></li>
-            <li class="col-6 text-center"><a class="text-dark" [routerLink]="['new-ipo']">New IPO</a></li>
-            <li class="col-6 text-center"><a class="text-dark" [routerLink]="['import-excel']">Import Data</a></li>
-            <li class="col-6 text-center"><a class="text-dark" [routerLink]="['otp']">OTP</a></li>
-            <li class="col-6 text-center"><a class="text-dark" [routerLink]="">Link 7</a></li>
-            <li class="col-6 text-center"><a class="text-dark" [routerLink]="">Link 7</a></li>
-            <li class="col-6 text-center"><a class="text-dark" [routerLink]="">Link 7</a></li>
+            <li class="col-6 text-center"><a class="text-dark" routerLink="admin-home">Admin Home</a></li>
+            <li class="col-6 text-center"><a class="text-dark" routerLink="user-home">User Home</a></li>
+            <li class="col-6 text-center"><a class="text-dark" routerLink="view-users">View users</a></li>
+            <li class="col-6 text-center"><a class="text-dark" routerLink="import-excel">Import Data</a></li>
+            <li class="col-6 text-center"><a class="text-dark" routerLink="otp">OTP</a></li>
             <li class="col-6 text-center"><a class="text-dark">Template</a></li>
         </ul>
     </div>

@@ -1,0 +1,14 @@
+{
+  "sectors": [
+    {
+      "id": 1,
+      "name": "Technology",
+      "brief": "Technology Sector"
+    },
+    {
+      "id": 2,
+      "name": "Finance",
+      "brief": "the finance sector"
+    }
+  ]
+}

@@ -2,8 +2,8 @@
     <div class="display-4 text-center my-4">List of Users</div>
     <div class="row justify-content-center">
         <div class="table-responsive">
-            <table class="table table-hover table-sm table-stripped mx-auto w-auto">
-                <thead>
+            <table class="table table-hover table-sm table-stripped mx-auto w-auto bg-light">
+                <thead class="thead-light">
                     <th>ID</th>
                     <th>Username</th>
                     <th>Email</th>
@@ -19,16 +19,20 @@
                         <td>{{ user.phoneNo }}</td>
                         <td>{{ user.confirmed }}</td>
                         <td>
-                            <button type="button" class="btn btn-info" (click)="updateCompany(company.id)">
-                                Update
+                            <button type="button" class="btn btn-info" (click)="updateUser(user.id)">
+                                <fa-icon [icon]="faUserEdit"></fa-icon>
                             </button>
                         </td>
                         <td>
                             <button type="button" class="btn btn-danger" (click)="deleteUser(user.id)">
-                                Delete
+                                <fa-icon [icon]="faTrash"></fa-icon>
                             </button>
                         </td>
-                        <td><button type="button" class="btn btn-primary">View</button></td>
+                        <td>
+                            <button type="button" class="btn btn-primary" (click)="viewUser(user.id)">
+                                <fa-icon [icon]="faEye"></fa-icon>
+                            </button>
+                        </td>
                     </tr>
                 </tbody>
             </table>

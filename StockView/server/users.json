@@ -4,8 +4,8 @@
       "id": 1,
       "username": "abdussaboor",
       "email": "gaffari98@gmail.com",
-      "password": "abcd",
-      "rePassword": "abcd",
+      "password": "aaaa",
+      "rePassword": "aaaa",
       "phoneNo": 8919372849,
       "isAdmin": "fasle",
       "confirmed": "false"

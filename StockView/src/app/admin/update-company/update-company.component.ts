@@ -10,6 +10,7 @@ import bsCustomFileInput from "bs-custom-file-input";
 import { CompaniesService } from "src/app/services/companies.service";
 import { Company } from "src/app/models/company";
 import { faTrash } from "@fortawesome/free-solid-svg-icons";
+import { Router } from '@angular/router';
 
 @Component({
     selector: "app-update-company",
@@ -26,7 +27,8 @@ export class UpdateCompanyComponent implements OnInit {
 
     constructor(
         private formBuilder: FormBuilder,
-        private companiesService: CompaniesService
+        private companiesService: CompaniesService,
+        private router: Router
     ) {}
 
     ngOnInit() {
@@ -91,5 +93,10 @@ export class UpdateCompanyComponent implements OnInit {
 
     removeStockExchange(i: number) {
         (<FormArray>this.updateCompanyForm.get("stockExchanges")).removeAt(i);
+    }
+
+    
+    goBack() {
+        this.router.navigate(["manage-company"]);
     }
 }

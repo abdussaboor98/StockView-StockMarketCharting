@@ -7,11 +7,11 @@ import { HttpClient } from "@angular/common/http";
     providedIn: "root"
 })
 export class SectorsService {
-    url = "http://localhost:5000/sectors/";
+    url = "http://localhost:5800/sectors/";
     constructor(private httpClient: HttpClient) {}
 
-    getAllSectors(): Observable<Sector> {
-        return this.httpClient.get<Sector>(this.url);
+    getAllSectors(): Observable<Sector[]> {
+        return this.httpClient.get<Sector[]>(this.url);
     }
 
     getSectorById(id: number): Observable<Sector> {

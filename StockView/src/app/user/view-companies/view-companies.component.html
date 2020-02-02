@@ -1,0 +1,39 @@
+<main class="container">
+    <div class="display-4 text-center my-4">Manage Companies</div>
+    <div class="row justify-content-center">
+        <div class="table-responsive">
+            <table class="table table-stripped table-hover text-center bg-light">
+                <thead class="thead-light">
+                    <th>ID</th>
+                    <th>Name</th>
+                    <th>Sector</th>
+                    <th>CEO</th>
+                    <th>Board of Directors</th>
+                    <th>Stock Exchanges</th>
+                    <th>Turnover</th>
+                    <th>Brief</th>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let company of companies">
+                        <td> {{company.id}} </td>
+                        <td> {{company.name}} </td>
+                        <td> {{company.sector}} </td>
+                        <td> {{company.ceo}} </td>
+                        <td>
+                            <div *ngFor="let director of company.directors" class="row justify-content-center">
+                                {{director}}
+                            </div>
+                        </td>
+                        <td>
+                            <div *ngFor="let exchange of company.stockExchanges" class="row justify-content-center">
+                                {{exchange.stockExchange}} : {{exchange.stockCode}}
+                            </div>
+                        </td>
+                        <td> {{company.turnover}} </td>
+                        <td> {{company.brief}} </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</main>

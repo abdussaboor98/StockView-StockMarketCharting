@@ -2,7 +2,7 @@
     <div class="display-4 text-center my-4">Manage Companies</div>
     <div class="row justify-content-center">
         <div class="table-responsive">
-            <table class="table table-stripped table-hover p-5 bg-light">
+            <table class="table table-stripped table-hover text-center bg-light">
                 <thead class="thead-light">
                     <th>ID</th>
                     <th>Name</th>
@@ -12,7 +12,7 @@
                     <th>Stock Exchanges</th>
                     <th>Turnover</th>
                     <th>Brief</th>
-                    <th colspan="3" class="text-center">Actions</th>
+                    <th colspan="2" class="text-center">Actions</th>
                 </thead>
                 <tbody>
                     <tr *ngFor="let company of companies">
@@ -34,18 +34,22 @@
                         <td> {{company.brief}} </td>
                         <td><button type="button" class="btn btn-info" (click)="updateCompany(company.id)">
                                 <fa-icon [icon]="faEdit"></fa-icon>
-                            </button></td>
+                            </button>
+                        </td>
                         <td><button type="button" class="btn btn-danger" (click)="deleteCompany(company.id)">
                                 <fa-icon [icon]="faTrash"></fa-icon>
-                            </button></td>
-                        <td><button type="button" class="btn btn-primary">
+                            </button>
+                        </td>
+                        <!-- <td><button type="button" class="btn btn-primary">
                                 <fa-icon [icon]="faEye"></fa-icon>
-                            </button></td>
+                            </button>
+                        </td> -->
                     </tr>
                 </tbody>
             </table>
         </div>
     </div>
-    <button type="button" class="btn btn-primary rounded-circle mx-auto add-btn "><i class="fas fa-plus pt-2"></i>
+    <button type="button" class="btn btn-primary rounded-circle mx-auto add-btn shadow" (click)="gotoNew()">
+        <fa-icon [icon]="faPlus" class="h2"></fa-icon>
     </button>
 </main>

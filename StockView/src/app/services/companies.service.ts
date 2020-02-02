@@ -7,7 +7,7 @@ import { Observable } from "rxjs";
     providedIn: "root"
 })
 export class CompaniesService {
-    url = "http://localhost:5000/companies/";
+    url = "http://localhost:5100/companies/";
     constructor(private httpClient: HttpClient) {}
 
     getAllCompanies(): Observable<Company[]> {

@@ -18,7 +18,15 @@ import { ViewUsersComponent } from "./admin/view-users/view-users.component";
 import { AccountComponent } from "./user/account/account.component";
 import { AccountUpdateComponent } from "./user/account-update/account-update.component";
 import { UpdateExchangeComponent } from "./admin/update-exchange/update-exchange.component";
-import { ManageIposComponent } from './manage-ipos/manage-ipos.component';
+import { ManageIposComponent } from "./admin/manage-ipos/manage-ipos.component";
+import { UpdateIpoComponent } from "./admin/update-ipo/update-ipo.component";
+import { NewSectorComponent } from "./admin/new-sector/new-sector.component";
+import { ManageSectorsComponent } from "./admin/manage-sectors/manage-sectors.component";
+import { UpdateSectorComponent } from "./admin/update-sector/update-sector.component";
+import { CompareComponent } from "./user/compare/compare.component";
+import { ViewCompaniesComponent } from "./user/view-companies/view-companies.component";
+import { ViewExchangesComponent } from "./user/view-exchanges/view-exchanges.component";
+import { ViewSectorsComponent } from "./user/view-sectors/view-sectors.component";
 
 const routes: Routes = [
     { path: "", redirectTo: "home", pathMatch: "full" },
@@ -30,15 +38,23 @@ const routes: Routes = [
     { path: "new-company", component: NewCompanyComponent },
     { path: "new-exchange", component: NewExchangeComponent },
     { path: "new-ipo", component: NewIpoComponent },
+    { path: "new-sector", component: NewSectorComponent },
     { path: "otp", component: OtpComponent },
     { path: "manage-exchange", component: ManageExchangeComponent },
     { path: "manage-company", component: ManageCompanyComponent },
-    { path: "manage-company", component: ManageIposComponent },
+    { path: "manage-ipos", component: ManageIposComponent },
+    { path: "manage-sectors", component: ManageSectorsComponent },
+    { path: "update-ipo", component: UpdateIpoComponent },
     { path: "update-company", component: UpdateCompanyComponent },
     { path: "update-exchange", component: UpdateExchangeComponent },
+    { path: "update-sector", component: UpdateSectorComponent },
     { path: "view-users", component: ViewUsersComponent },
+    { path: "view-companies", component: ViewCompaniesComponent },
+    { path: "view-exchanges", component: ViewExchangesComponent },
+    { path: "view-sectors", component: ViewSectorsComponent },
     { path: "account", component: AccountComponent },
-    { path: "account-update", component: AccountUpdateComponent }
+    { path: "account-update", component: AccountUpdateComponent },
+    { path: "compare", component: CompareComponent }
 ];
 
 @NgModule({

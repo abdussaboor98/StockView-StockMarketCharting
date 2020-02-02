@@ -32,6 +32,10 @@ export class ManageExchangeComponent implements OnInit {
         });
     }
 
+    gotoNew(){
+        this.router.navigate(['new-exchange'])
+    }
+
     updateStockExchange(id) {
         localStorage.removeItem("stockExId");
         localStorage.setItem("stockExId", id);

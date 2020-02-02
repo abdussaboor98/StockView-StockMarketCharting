@@ -9,6 +9,11 @@ import {
 import bsCustomFileInput from "bs-custom-file-input";
 import { CompaniesService } from "src/app/services/companies.service";
 import { faTrash } from "@fortawesome/free-solid-svg-icons";
+import { Router } from "@angular/router";
+import { SectorsService } from "src/app/services/sectors.service";
+import { Sector } from "src/app/models/sector";
+import { StockExchangesService } from 'src/app/services/stock-exchanges.service';
+import { StockExchange } from 'src/app/models/stockExchange';
 
 @Component({
     selector: "app-new-company",
@@ -18,17 +23,28 @@ import { faTrash } from "@fortawesome/free-solid-svg-icons";
 export class NewCompanyComponent implements OnInit {
     faTrash = faTrash;
     newCompanyForm: FormGroup;
+    sectors: Sector[];
+    stockExchanges: StockExchange[];
     constructor(
         private formBuilder: FormBuilder,
-        private companiesService: CompaniesService
+        private companiesService: CompaniesService,
+        private router: Router,
+        private sectorsService: SectorsService,
+        private stockExService: StockExchangesService
     ) {}
 
     ngOnInit() {
         bsCustomFileInput.init();
+        this.sectorsService.getAllSectors().subscribe(data => {
+            this.sectors = data;
+        });
+        this.stockExService.getAllExchanges().subscribe(data =>{
+            this.stockExchanges = data;
+        });
         this.newCompanyForm = this.formBuilder.group({
             id: [""],
             name: ["", Validators.required],
-            sector: ["", Validators.required],
+            sector: ["none", Validators.required],
             ceo: ["", Validators.required],
             directors: this.formBuilder.array([this.formBuilder.control("")]),
             stockExchanges: this.formBuilder.array([
@@ -47,6 +63,7 @@ export class NewCompanyComponent implements OnInit {
             .addCompany(this.newCompanyForm.value)
             .subscribe(data => {
                 this.newCompanyForm.reset();
+                this.goBack();
             });
     }
 
@@ -71,5 +88,9 @@ export class NewCompanyComponent implements OnInit {
 
     removeStockExchange(i: number) {
         (<FormArray>this.newCompanyForm.get("stockExchanges")).removeAt(i);
+    }
+
+    goBack() {
+        this.router.navigate(["manage-company"]);
     }
 }

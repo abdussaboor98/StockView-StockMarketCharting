@@ -26,12 +26,11 @@
                         </div>
                     </div>
                     <div class="form-group">
-                        <label for="sector">Select Company/Sector:</label>
+                        <label for="sector">Select sector:</label>
                         <div class="input-group">
-                            <select name="sector" id="sector" class="custom-select" formControlName="sector" required>
+                            <select name="sector" id="sector" class="custom-select" formControlName="sector" required >
                                 <option value="none" selected disabled>Select sector...</option>
-                                <option value="Opt 1">Opt 1</option>
-                                <option value="Opt 2">Opt 2</option>
+                                <option *ngFor="let sector of sectors" [value]="sector.name">{{sector.name}}</option>
                             </select>
                         </div>
                     </div>
@@ -73,9 +72,10 @@
                         <div *ngFor="let StockExG of newCompanyForm.get('stockExchanges').controls; let i = index"
                             class="mb-2">
                             <div class="input-group row mx-auto" [formGroupName]="i">
-                                <input type="text" name="stockExchange" id="stockExchange"
-                                    formControlName="stockExchange" class="form-control col-7"
-                                    placeholder="Enter the stock exchange..." required>
+                                <select name="stockExchange" id="stockExchange" class="custom-select col-7" formControlName="stockExchange" required >
+                                    <option value="" selected disabled>Select stock exchange...</option>
+                                    <option *ngFor="let stockExchange of stockExchanges" [value]="stockExchange.name">{{stockExchange.name}}</option>
+                                </select>
                                 <input type="text" name="stockCode" id="stockCode" class="form-control col-5"
                                     placeholder="Enter the stock code..." required formControlName="stockCode">
                                 <div class="input-group-append">
@@ -88,7 +88,6 @@
                                 </div>
                             </div>
                         </div>
-
                     </div>
                     <div class="form-group">
                         <label for="turnover" class="form-control-label">Turnover: </label>
@@ -116,9 +115,9 @@
                             <button type="reset" class="btn btn-danger btn-block">Reset</button>
                         </div>
                         <div class="col-6">
-                            <button type="button" class="btn btn-secondary btn-block">Cancel</button>
+                            <button type="button" class="btn btn-secondary btn-block" (click)="goBack()">Cancel</button>
                         </div>
-                        <button type="submit" class="btn btn-primary btn-block m-3">Add</button>
+                        <button type="submit" class="btn btn-primary btn-block m-3"[disabled]="!newCompanyForm.valid">Add</button>
                     </div>
                 </form>
             </div>

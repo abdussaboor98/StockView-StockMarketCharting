@@ -6,6 +6,7 @@ import {
     Validators
 } from "@angular/forms";
 import { StockExchangesService } from "src/app/services/stock-exchanges.service";
+import { Router } from '@angular/router';
 
 @Component({
     selector: "app-new-exchange",
@@ -16,7 +17,8 @@ export class NewExchangeComponent implements OnInit {
     newExchangeForm: FormGroup;
     constructor(
         private formBuilder: FormBuilder,
-        private stockExService: StockExchangesService
+        private stockExService: StockExchangesService,
+        private router: Router
     ) {}
 
     ngOnInit() {
@@ -33,7 +35,11 @@ export class NewExchangeComponent implements OnInit {
         this.stockExService
             .addStockExchange(this.newExchangeForm.value)
             .subscribe(data => {
-                console.log("Stock Exchange added");
+                this.goBack();
             });
+    }
+    
+    goBack() {
+        this.router.navigate(["manage-exchange"]);
     }
 }

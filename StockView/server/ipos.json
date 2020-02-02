@@ -1,4 +1,13 @@
 {
-  "ipos": []
+  "ipos": [
+    {
+      "id": 1,
+      "companyName": "AAA",
+      "stockExchange": "BBB",
+      "pricePerShare": 213213,
+      "totalShares": 32231,
+      "openDateTime": "2019-03-12T02:34",
+      "remarks": "ewfwfwef"
+    }
+  ]
 }
-    

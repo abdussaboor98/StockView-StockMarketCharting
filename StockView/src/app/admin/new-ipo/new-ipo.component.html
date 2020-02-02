@@ -7,15 +7,26 @@
                     <div class="form-group">
                         <label for="companyName" class="form-control-label">Company name:</label>
                         <div class="input-group">
-                            <input type="text" name="companyName" id="companyName" formControlName="companyName"
-                                class="form-control" placeholder="Enter company name..." required>
+                            <select name="companyName" id="companyName" formControlName="companyName"
+                                class="custom-select" placeholder="Enter company name..." required
+                                (change)="populateExchanges($event)">
+                                <option value="" selected disabled>Select company</option>
+                                <option *ngFor="let company of companies" [value]="company.name"> 
+                                    {{company.name}}
+                                </option>
+                            </select>
                         </div>
                     </div>
                     <div class="form-group">
                         <label for="stockExchange" class="form-control-label">Stock Exchange:</label>
                         <div class="input-group">
-                            <input type="text" name="stockExchange" id="stockExchange" formControlName="stockExchange"
+                            <select name="stockExchange" id="stockExchange" formControlName="stockExchange"
                                 class="form-control" placeholder="Enter stock exchange..." required>
+                                <option value="" selected disabled>Select stock exchange</option>
+                                <option *ngFor="let stockEntry of stockExchanges" [value]="stockEntry.stockExchange">
+                                    {{stockEntry.stockExchange}} 
+                                </option>
+                            </select>
                         </div>
                     </div>
                     <div class="form-group">
@@ -44,7 +55,7 @@
                     <div class="form-group">
                         <label for="remarks" class="form-control-label">Remarks:</label>
                         <div class="input-group">
-                            <textarea type="text" name="remarks" id="remarks" formContrlName="remarks"
+                            <textarea type="text" name="remarks" id="remarks" formControlName="remarks"
                                 class="form-control"></textarea>
                         </div>
                     </div>
@@ -53,7 +64,7 @@
                             <button type="reset" class="btn btn-danger btn-block">Reset</button>
                         </div>
                         <div class="col-6">
-                            <button type="button" class="btn btn-secondary btn-block">Cancel</button>
+                            <button type="button" class="btn btn-secondary btn-block" (click)="goBack()">Cancel</button>
                         </div>
                         <button type="submit" class="btn btn-primary btn-block m-3">Add</button>
                     </div>

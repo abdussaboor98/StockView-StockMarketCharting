@@ -1,20 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { ManageIposComponent } from './manage-ipos.component';
+import { ViewExchangesComponent } from './view-exchanges.component';
 
-describe('ManageIposComponent', () => {
-  let component: ManageIposComponent;
-  let fixture: ComponentFixture<ManageIposComponent>;
+describe('ViewExchangesComponent', () => {
+  let component: ViewExchangesComponent;
+  let fixture: ComponentFixture<ViewExchangesComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ ManageIposComponent ]
+      declarations: [ ViewExchangesComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(ManageIposComponent);
+    fixture = TestBed.createComponent(ViewExchangesComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

@@ -1,0 +1,44 @@
+<main class="container">
+    <div class="display-4 text-center my-4">Manage IPOs</div>
+    <div class="table-responsive">
+        <table class="table table-stripped table-hover  text-center bg-light">
+            <thead class="thead-light">
+                <tr>
+                    <th>ID</th>
+                    <th>Company name</th>
+                    <th>Stock Exchange</th>
+                    <th>Price per share</th>
+                    <th>Total shares</th>
+                    <th>Open Date/Time</th>
+                    <th>Remarks</th>
+                    <th colspan="2" class="text-center">Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let ipo of ipos">
+                    <td> {{ipo.id}} </td>
+                    <td> {{ipo.companyName}} </td>
+                    <td> {{ipo.stockExchange}} </td>
+                    <td> {{ipo.pricePerShare | currency: "INR"}} </td>
+                    <td> {{ipo.totalShares}} </td>
+                    <td> {{ipo.openDateTime | date: "dd/MM/yyyy hh:mm a"}} </td>
+                    <td> {{ipo.remarks}} </td>
+                    <!-- <td> <button class="btn btn-primary">
+                            <fa-icon [icon]="faEye"></fa-icon>
+                        </button>
+                    </td> -->
+                    <td> <button class="btn btn-info" (click)="updateIPO(ipo.id)">
+                            <fa-icon [icon]="faEdit"></fa-icon>
+                        </button> </td>
+                    <td> <button class="btn btn-danger" (click)="deleteIPO(ipo.id)">
+                            <fa-icon [icon]="faTrash"></fa-icon>
+                        </button> </td>
+                </tr>
+            </tbody>
+
+        </table>
+    </div>
+    <button type="button" class="btn btn-primary rounded-circle mx-auto add-btn shadow" (click)="gotoNew()">
+        <fa-icon [icon]="faPlus" class="h2"></fa-icon>
+    </button>
+</main>

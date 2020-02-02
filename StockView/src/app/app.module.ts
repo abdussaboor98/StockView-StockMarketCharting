@@ -23,7 +23,15 @@ import { UpdateCompanyComponent } from "./admin/update-company/update-company.co
 import { ViewUsersComponent } from "./admin/view-users/view-users.component";
 import { AccountComponent } from "./user/account/account.component";
 import { UpdateExchangeComponent } from "./admin/update-exchange/update-exchange.component";
-import { ManageIposComponent } from "./manage-ipos/manage-ipos.component";
+import { ManageIposComponent } from "./admin/manage-ipos/manage-ipos.component";
+import { UpdateIpoComponent } from './admin/update-ipo/update-ipo.component';
+import { ManageSectorsComponent } from './admin/manage-sectors/manage-sectors.component';
+import { NewSectorComponent } from './admin/new-sector/new-sector.component';
+import { UpdateSectorComponent } from './admin/update-sector/update-sector.component';
+import { CompareComponent } from './user/compare/compare.component';
+import { ViewCompaniesComponent } from './user/view-companies/view-companies.component';
+import { ViewExchangesComponent } from './user/view-exchanges/view-exchanges.component';
+import { ViewSectorsComponent } from './user/view-sectors/view-sectors.component';
 
 @NgModule({
     declarations: [
@@ -45,7 +53,15 @@ import { ManageIposComponent } from "./manage-ipos/manage-ipos.component";
         ViewUsersComponent,
         AccountComponent,
         UpdateExchangeComponent,
-        ManageIposComponent
+        ManageIposComponent,
+        UpdateIpoComponent,
+        ManageSectorsComponent,
+        NewSectorComponent,
+        UpdateSectorComponent,
+        CompareComponent,
+        ViewCompaniesComponent,
+        ViewExchangesComponent,
+        ViewSectorsComponent
     ],
     imports: [
         BrowserModule,

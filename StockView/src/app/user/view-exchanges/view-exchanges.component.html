@@ -1,0 +1,25 @@
+<main class="container">
+    <div class="display-4 text-center my-4">Manage Exchanges</div>
+    <div class="table-responsive">
+        <table class="table table-stripped table-hover text-center bg-light rounded">
+            <thead class="thead-light">
+                <tr>
+                    <th>ID</th>
+                    <th>Name</th>
+                    <th>Brief</th>
+                    <th>Contact Address</th>
+                    <th>Remarks</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let stockEx of stockExchanges">
+                    <td> {{stockEx.id}} </td>
+                    <td> {{stockEx.name}} </td>
+                    <td> {{stockEx.brief}} </td>
+                    <td> {{stockEx.contactAddress}} </td>
+                    <td> {{stockEx.remarks}} </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</main>
