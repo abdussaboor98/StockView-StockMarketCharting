@@ -3,50 +3,49 @@
     <div class="row justify-content-center">
         <div class="card col-md-8 col-sm-10 col-11 mx-auto shadow">
             <div class="card-body">
-                <form [formGroup] = "newIPOForm" (ngSubmit)="onSubmit()">
+                <form [formGroup]="newIPOForm" (ngSubmit)="onSubmit()">
                     <div class="form-group">
-                        <label for="companyName" class="form-control-label">Name:</label>
+                        <label for="companyName" class="form-control-label">Company name:</label>
                         <div class="input-group">
-                            <input type="text" name="companyName" id="companyName" formControlName="companyName" class="form-control"
-                                placeholder="Enter company name..." required>
+                            <input type="text" name="companyName" id="companyName" formControlName="companyName"
+                                class="form-control" placeholder="Enter company name..." required>
                         </div>
                     </div>
                     <div class="form-group">
-                        <label for="sector">Select sector:</label>
+                        <label for="stockExchange" class="form-control-label">Stock Exchange:</label>
                         <div class="input-group">
-                            <select name="sector" id="sector" formCOntrolName="sector" class="custom-select" required>
-                                <option value="" selected disabled>Select sector...</option>
-                                <option value="">Opt 1</option>
-                                <option value="">Opt 2</option>
-                            </select>
+                            <input type="text" name="stockExchange" id="stockExchange" formControlName="stockExchange"
+                                class="form-control" placeholder="Enter stock exchange..." required>
                         </div>
                     </div>
                     <div class="form-group">
-                        <label for="price" class="form-control-label">Price per Share:</label>
+                        <label for="pricePerShare" class="form-control-label">Price per Share:</label>
                         <div class="input-group">
-                            <input type="number" name="price" id="price" formControlName="price" class="form-control"
-                                placeholder="Enter price per share..." required>
+                            <input type="number" name="pricePerShare" id="pricePerShare" formControlName="pricePerShare"
+                                class="form-control" placeholder="Enter price per share..." required>
                         </div>
                     </div>
                     <div class="form-group">
-                        <label for="totShares" class="form-control-label">Total shares:</label>
+                        <label for="totalShares" class="form-control-label">Total shares:</label>
                         <div class="input-group">
-                            <input type="number" name="totShares" id="totShares" formControlName="totShares" class="form-control"
-                                placeholder="Enter total shares..." required>
+                            <input type="number" name="totalShares" id="totalShares" formControlName="totalShares"
+                                class="form-control" placeholder="Enter total shares..." required>
                         </div>
                     </div>
 
                     <div class="form-group">
                         <label for="openDateTime" class="form-control-label">Opening Date/Time: </label>
                         <div class="input-group">
-                            <input type="datetime-local" name="openDateTime" id="openDateTime" formControlName="openDateTime" class="form-control"
+                            <input type="datetime-local" name="openDateTime" id="openDateTime"
+                                formControlName="openDateTime" class="form-control"
                                 placeholder="Enter the opening date and time..." required>
                         </div>
                     </div>
                     <div class="form-group">
                         <label for="remarks" class="form-control-label">Remarks:</label>
                         <div class="input-group">
-                            <textarea type="text" name="remarks" id="remarks" formContrlName="remarks" class="form-control"></textarea>
+                            <textarea type="text" name="remarks" id="remarks" formContrlName="remarks"
+                                class="form-control"></textarea>
                         </div>
                     </div>
                     <div class="row justify-content-around">

@@ -1,7 +1,7 @@
 export class StockExchange {
-    id : number
-    exchangeName : string
-    brief : string
-    contactAddress : string
-    remarks : string
+    id: number;
+    exchangeName: string;
+    brief: string;
+    contactAddress: string;
+    remarks: string;
 }

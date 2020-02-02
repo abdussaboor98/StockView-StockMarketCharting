@@ -25,25 +25,31 @@
                     <label for="email">Email:</label>
                     <div class="input-group">
                         <div class="input-group-prepend">
-                            <span class="input-group-text"><fa-icon [icon]="faAt"></fa-icon></span>
+                            <span class="input-group-text">
+                                <fa-icon [icon]="faAt"></fa-icon>
+                            </span>
                         </div>
-                        <input type="text" name="email" id="email" class="form-control" autofocus
-                            autocomplete formControlName="email">
+                        <input type="text" name="email" id="email" class="form-control" autofocus autocomplete
+                            formControlName="email">
                     </div>
                 </div>
                 <div class="form-group">
                     <label for="password">Password:</label>
                     <div class="input-group">
                         <div class="input-group-prepend">
-                            <span class="input-group-text"><fa-icon [icon]="faKey"></fa-icon></span>
+                            <span class="input-group-text">
+                                <fa-icon [icon]="faKey"></fa-icon>
+                            </span>
                         </div>
-                        <input type="password" name="password" id="password" class="form-control" formControlName="password">
-                        
+                        <input type="password" name="password" id="password" class="form-control"
+                            formControlName="password">
+
                     </div>
 
                 </div>
                 <div class="custom-control custom-checkbox">
-                    <input type="checkbox" name="rememberMe" id="rememberMe" class="custom-control-input" formControlName="rememberMe">
+                    <input type="checkbox" name="rememberMe" id="rememberMe" class="custom-control-input"
+                        formControlName="rememberMe">
                     <label for="rememberMe" class="custom-control-label">Remember me</label>
                 </div>
                 <button type="submit" class="btn btn-primary btn-block mt-5">Login</button>

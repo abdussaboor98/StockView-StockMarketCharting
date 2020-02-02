@@ -1,28 +1,27 @@
-import { Component, OnInit } from '@angular/core';
-import { FormGroup, FormControl } from '@angular/forms';
+import { Component, OnInit } from "@angular/core";
+import { FormGroup, FormBuilder, Validators } from "@angular/forms";
 
 @Component({
-  selector: 'app-new-ipo',
-  templateUrl: './new-ipo.component.html',
-  styleUrls: ['./new-ipo.component.css']
+    selector: "app-new-ipo",
+    templateUrl: "./new-ipo.component.html",
+    styleUrls: ["./new-ipo.component.css"]
 })
 export class NewIpoComponent implements OnInit {
+    newIPOForm: FormGroup;
+    constructor(private formBuilder: FormBuilder) {}
 
-  newIPOForm : FormGroup
-  constructor() { }
+    ngOnInit() {
+        this.newIPOForm = this.formBuilder.group({
+            companyName: ["", Validators.required],
+            stockExchange: ["", Validators.required],
+            pricePerShare: ["", Validators.required],
+            totalShares: ["", Validators.required],
+            openDateTime: ["", Validators.required],
+            remarks: ["", Validators.required]
+        });
+    }
 
-  ngOnInit() {
-    this.newIPOForm = new FormGroup({
-      companyName : new FormControl(null),
-      sector : new FormControl(''),
-      price: new FormControl(''),
-      totShares : new FormControl(null),
-      openDateTime : new FormControl(null),
-      remarks : new FormControl(null)
-    })
-  }
-
-  onSubmit(){
-    console.log(this.newIPOForm.value);
-  }
+    onSubmit() {
+        console.log(this.newIPOForm.value);
+    }
 }

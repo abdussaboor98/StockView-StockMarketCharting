@@ -1,11 +1,11 @@
-import { Component } from '@angular/core';
-import { User } from './models/users';
+import { Component } from "@angular/core";
+import { User } from "./models/users";
 
 @Component({
-  selector: 'app-root',
-  templateUrl: './app.component.html',
-  styleUrls: ['./app.component.css']
+    selector: "app-root",
+    templateUrl: "./app.component.html",
+    styleUrls: ["./app.component.css"]
 })
 export class AppComponent {
-  title = 'StockView';
+    title = "StockView";
 }
