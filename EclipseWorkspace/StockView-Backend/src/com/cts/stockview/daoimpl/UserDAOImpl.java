@@ -3,6 +3,7 @@ package com.cts.stockview.daoimpl;
 import java.util.List;
 
 import org.hibernate.HibernateException;
+import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
@@ -90,6 +91,29 @@ public class UserDAOImpl implements UserDAO {
 		} catch (HibernateException e) {
 			e.printStackTrace();
 			return null;
+		}
+	}
+
+	@Override
+	public boolean validateUser(String username, String password) {
+		try {
+			SessionFactory sessionFactory = HibernateHelper.getSessionFactory();
+			Session session = sessionFactory.openSession();
+			Transaction tx = session.beginTransaction();
+			Query query = session.createQuery("from User where username= :username and password= :password");
+			query.setString("username", username);
+			query.setString("password", password);
+			User user = (User) query.uniqueResult();
+			if (user != null) {
+				session.close();
+				return true;
+			} else {
+				session.close();
+				return false;
+			}
+		} catch (HibernateException e) {
+			e.printStackTrace();
+			return false;
 		}
 	}
 }

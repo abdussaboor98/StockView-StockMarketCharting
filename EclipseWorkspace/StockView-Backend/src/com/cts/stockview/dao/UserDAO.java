@@ -15,4 +15,6 @@ public interface UserDAO {
 	public User getUserById(int id);
 
 	public List<User> getAllUsers();
+	
+	public boolean validateUser(String username, String password);
 }
