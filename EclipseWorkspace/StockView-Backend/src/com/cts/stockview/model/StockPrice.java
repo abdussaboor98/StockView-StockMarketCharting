@@ -6,6 +6,7 @@ import java.time.LocalDateTime;
 import java.time.LocalTime;
 
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
@@ -19,20 +20,15 @@ public class StockPrice implements Serializable {
 	private static final long serialVersionUID = 6893738367295298635L;
 	
 	@Id
+	@GeneratedValue
 	private int id;
-	private int companyId;
-	private long currentPrice;
+	private String companyCode;
+	private String stockExchange;
+	private double currentPrice;
 	private LocalDate date;
 	private LocalTime time;
 	
-	public StockPrice(int id, int companyId, long currentPrice, LocalDate date, LocalTime time) {
-		super();
-		this.id = id;
-		this.companyId = companyId;
-		this.currentPrice = currentPrice;
-		this.date = date;
-		this.time = time;
-	}
+
 	public StockPrice() {
 		super();
 		// TODO Auto-generated constructor stub
@@ -43,16 +39,22 @@ public class StockPrice implements Serializable {
 	public void setId(int id) {
 		this.id = id;
 	}
-	public int getCompanyId() {
-		return companyId;
+	public String getCompanyCode() {
+		return companyCode;
 	}
-	public void setCompanyId(int companyId) {
-		this.companyId = companyId;
+	public void setCompanyCode(String companyCode) {
+		this.companyCode = companyCode;
 	}
-	public long getCurrentPrice() {
+	public String getStockExchange() {
+		return stockExchange;
+	}
+	public void setStockExchange(String stockExchange) {
+		this.stockExchange = stockExchange;
+	}
+	public double getCurrentPrice() {
 		return currentPrice;
 	}
-	public void setCurrentPrice(long currentPrice) {
+	public void setCurrentPrice(double currentPrice) {
 		this.currentPrice = currentPrice;
 	}
 	public LocalDate getDate() {
@@ -70,7 +72,7 @@ public class StockPrice implements Serializable {
 	
 	@Override
 	public String toString() {
-		return "StockPrice [id=" + id + ", companyId=" + companyId + ", currentPrice=" + currentPrice + ", dateTime="
+		return "StockPrice [id=" + id + ", companyId=" + companyCode + ", currentPrice=" + currentPrice + ", dateTime="
 				+ date + "]";
 	}	
 }
