@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
+import { faUser } from "@fortawesome/free-solid-svg-icons"
 
 @Component({
   selector: 'app-user-header',
@@ -7,9 +9,18 @@ import { Component, OnInit } from '@angular/core';
 })
 export class UserHeaderComponent implements OnInit {
 
-  constructor() { }
+  faUser = faUser;
+  constructor(private router: Router) { }
 
   ngOnInit() {
   }
 
+  logout(){
+    console.log('logging out user');
+    localStorage.removeItem("userType");
+    sessionStorage.removeItem("userType");
+    localStorage.removeItem("userId");
+    sessionStorage.removeItem("userId");
+    this.router.navigate(["home"]);
+  }
 }

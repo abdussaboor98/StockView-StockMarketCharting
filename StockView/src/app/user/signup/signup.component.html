@@ -6,40 +6,39 @@
                 <form [formGroup]="signupForm" (ngSubmit)="onSubmit()">
                     <div class="form-group">
                         <label for="username" class="form-control-label">Name:</label>
-                        <div class="input-group">
-                            <input type="text" name="username" id="username" class="form-control"
-                                placeholder="Enter username..." formControlName="username">
-                        </div>
+                        <input type="text" name="username" id="username" class="form-control"
+                            placeholder="Enter username..." formControlName="username" (keyup)="checkUsername()" (change)="checkUsername()">
+                            <span class="text-danger" *ngIf="usernameTaken"><small>This username is already taken.</small></span>
                     </div>
                     <div class="form-group">
                         <label for="email" class="form-control-label">E-mail:</label>
-                        <div class="input-group">
-                            <input type="email" name="email" id="email" class="form-control"
-                                placeholder="Enter your email..." formControlName="email">
-                        </div>
+                        <input type="email" name="email" id="email" class="form-control"
+                            placeholder="Enter your email..." formControlName="email" (keyup)="checkEmail()" (change)="checkEmail()">
+                            <span class="text-danger" *ngIf="emailTaken"><small>This email is already in use.</small></span>
+                            <span class="text-danger" *ngIf="!signupForm.get('email').valid && signupForm.get('email').touched"><small>Enter a valid email id</small></span>
                     </div>
                     <div class="form-group">
                         <label for="password" class="form-control-label">Password: </label>
-                        <div class="input-group">
-                            <input type="password" name="password" id="password" class="form-control"
-                                placeholder="Enter your password..." formControlName="password">
-                        </div>
+                        <input type="password" name="password" id="password" class="form-control"
+                            placeholder="Enter your password..." formControlName="password">
+                            <span class="text-danger" *ngIf="!signupForm.get('password').valid && signupForm.get('password').touched"><small>Enter a valid password</small></span>
+
                     </div>
                     <div class="form-group">
                         <label for="rePassword" class="form-control-label">Confirm Password: </label>
-                        <div class="input-group">
-                            <input type="password" name="rePassword" id="rePassword" class="form-control"
-                                placeholder="Confirm your password..." formControlName="rePassword">
-                        </div>
+                        <input type="password" name="rePassword" id="rePassword" class="form-control"
+                            placeholder="Confirm your password..." formControlName="rePassword" (keyup)="checkPasswordMatch()">
+                            <span class="text-danger" *ngIf="!passwordsMatch"><small>The passwords do not match</small></span>
+                            <span class="text-danger" *ngIf="!signupForm.get('rePassword').valid && signupForm.get('rePassword').touched"><small>Please reenter password</small></span>
+
                     </div>
                     <div class="form-group">
                         <label for="phoneNo" class="form-control-label">Phone number: </label>
-                        <div class="input-group">
-                            <input type="number" name="phoneNo" id="phoneNo" class="form-control"
-                                placeholder="Enter phone number..." formControlName="phoneNo">
-                        </div>
+                        <input type="number" name="phoneNo" id="phoneNo" class="form-control"
+                            placeholder="Enter phone number..." formControlName="phoneNo">
+                            <span class="text-danger" *ngIf="!signupForm.get('phoneNo').valid && signupForm.get('phoneNo').touched"><small>Enter a valid phone number</small></span>
                     </div>
-                    <button type="submit" class="btn btn-primary btn-block mt-3">Signup</button>
+                    <button type="submit" class="btn btn-primary btn-block mt-3" [disabled]="!signupForm.valid  || !passwordsMatch || usernameTaken || emailTaken">Signup</button>
                     <span class="row text-muted justify-content-center my-2"><small>Already a user? <a href="#"
                                 data-toggle="modal" data-target="#login-modal">Login</a></small></span>
                 </form>
@@ -47,7 +46,6 @@
         </div>
     </div>
 </main>
-<button data-target="#successModal" data-toggle="modal">Click</button>
 <div class="modal fade" id="successModal" data-backdrop="static">
     <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content">

@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-admin-header',
@@ -7,9 +8,18 @@ import { Component, OnInit } from '@angular/core';
 })
 export class AdminHeaderComponent implements OnInit {
 
-  constructor() { }
+  constructor(private router: Router) { }
 
   ngOnInit() {
+  }
+
+  logout(){
+    console.log('logging out admin');
+    localStorage.removeItem("userType");
+    sessionStorage.removeItem("userType");
+    localStorage.removeItem("userId");
+    sessionStorage.removeItem("userId");
+    this.router.navigate([""]);
   }
 
 }

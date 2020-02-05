@@ -9,24 +9,8 @@
         <div class="modal-body">
             <div class="alert alert-danger alert-dismissible fade show" [hidden]="isValid">
                 Invalid username or password.
-                <button class="close" data-dismiss="alert">
-                    <span>&times;</span>
-                </button>
             </div>
             <form [formGroup]="loginForm" (ngSubmit)="login()">
-                <!-- <div class="row justify-content-around">
-                    <div class="custom-control custom-radio custom-control-inline">
-                        <input type="radio" class="custom-control-input" name="login-type" id="login-type1" value="user"
-                            checked>
-                        <label for="login-type1" class="custom-control-label"> User</label>
-                    </div>
-                    <div class="custom-control custom-radio custom-control-inline">
-                        <input type="radio" class="custom-control-input" name="login-type" id="login-type2"
-                            value="admin">
-                        <label for="login-type2" class="custom-control-label"> Admin</label>
-
-                    </div>
-                </div> --> 
                 <div class="form-group mt-4">
                     <label for="username">Username:</label>
                     <div class="input-group">

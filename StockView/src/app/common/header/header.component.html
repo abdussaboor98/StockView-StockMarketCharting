@@ -1,1 +1,18 @@
-<p>header works!</p>
+<header class="">
+    <nav class="navbar navbar-expand-md navbar-dark bg-dark sticky-top">
+        <a routerLink="home" class="navbar-brand">
+            <img src="../assets/logo.svg" alt="StockView" id="logo" class="undraggable">
+            <span class="text-light mx-2 my-auto undraggable">StockView</span>
+        </a>
+        <button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#navbar1">
+            <span class="navbar-toggler-icon"></span></button>
+        <div class="navbar-collapse collapse" id="navbar1">
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item"><a routerLink="home" routerLinkActive="active" class="nav-link">Home</a></li>
+                <li class="nav-item"><a routerLink="signup" routerLinkActive="active" class="nav-link">Signup</a></li>
+            </ul>
+            <a class="btn text-light ml-md-5 pl-0 pl-md-5" role="login" data-toggle="modal"
+                data-target="#login-modal">Login</a>
+        </div>
+    </nav>
+</header>

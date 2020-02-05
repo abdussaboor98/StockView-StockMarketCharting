@@ -30,41 +30,28 @@ export class UserService {
         return this.httpClient.put<User>(this.url + user.id, user);
     }
 
-    isAdmin(username: string): boolean {
+    isAdmin(): boolean {
         if (
             localStorage.getItem("userType") == "admin" ||
             sessionStorage.getItem("userType") == "admin"
         ) {
             return true;
-        } else return false;
+        } else {
+            return false;
+        } 
+    }
+    isUser(): boolean {
+        if (
+            localStorage.getItem("userType") == "user" ||
+            sessionStorage.getItem("userType") == "user"
+        ) {
+            return true;
+        } else {
+            return false;
+        } 
     }
 
-    getUserType(username: string): string {
-        let type: string;
-        this.getAllUsers().subscribe(data => {
-            for (let u of data) {
-                if (u.userame == username) {
-                    if (u.isAdmin) {
-                        type = "admin";
-                    }
-                    type = "user";
-                    break;
-                }
-            }
-        });
-        return type;
-    }
+    
 
-    validateUser(username: string, password: string): boolean {
-        let users: User[];
-        this.getAllUsers().subscribe(data => {
-            users = data;
-        });
-        for (let u of users) {
-            if (u.userame === username && u.password == password) {
-                return true;
-            }
-        }
-        return false;
-    }
+    
 }

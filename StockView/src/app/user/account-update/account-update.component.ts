@@ -16,12 +16,16 @@ export class AccountUpdateComponent implements OnInit {
         private router: Router
     ) {}
     ngOnInit() {
-        const id = sessionStorage.getItem("userId");
+        let id: string;
+        if(sessionStorage.getItem("userId") !== null)
+            id = sessionStorage.getItem("userId");
+        else
+            id = localStorage.getItem("userId");
         if (+id > 0) {
             this.userService.getUserById(+id).subscribe(data => {
                 this.accountUpdateForm.patchValue(data);
             });
-        } else this.router.navigate(["view-users"]);
+        } else this.router.navigate(["/landing"]);
         this.accountUpdateForm = this.formBuilder.group({
             id: [""],
             username: ["", Validators.required],
@@ -44,6 +48,6 @@ export class AccountUpdateComponent implements OnInit {
     }
 
     goBack() {
-        this.router.navigate(["view-users"]);
+        this.router.navigate(["/account"]);
     }
 }

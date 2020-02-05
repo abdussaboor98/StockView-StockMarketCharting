@@ -1,16 +1,32 @@
-import { Component } from "@angular/core";
-import * as $ from 'jquery';
-import bootstrap from 'bootstrap';
+import { Component, OnInit, AfterViewInit, DoCheck } from "@angular/core";
 
 @Component({
     selector: "app-root",
     templateUrl: "./app.component.html",
     styleUrls: ["./app.component.css"]
 })
-export class AppComponent {
+export class AppComponent implements DoCheck{
     title = "StockView";
+    commonHeader: boolean = true;
+    userHeader: boolean = false;
+    adminHeader: boolean = false;
 
-    onViewInit(){
-        $('.carousel').carousel({interval: 200});
+    ngDoCheck(){
+        if(localStorage.getItem("userType") == "admin" || sessionStorage.getItem("userType") == "admin"){
+            this.commonHeader = false;
+            this.adminHeader = true;
+            this.userHeader = false;    
+        }
+        else if(localStorage.getItem("userType") == "user" || sessionStorage.getItem("userType") == "user"){
+            this.commonHeader = false;
+            this.adminHeader = false;
+            this.userHeader = true;    
+        }
+        else if(localStorage.getItem("userType") == null && sessionStorage.getItem("userType") == null){
+
+            this.commonHeader = true;
+            this.adminHeader = false;
+            this.userHeader = false;    
+        }
     }
 }

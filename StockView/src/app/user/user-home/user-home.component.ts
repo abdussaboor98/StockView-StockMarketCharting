@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { User } from 'src/app/models/users';
+import { UserService } from 'src/app/services/user.service';
 
 @Component({
   selector: 'app-user-home',
@@ -7,9 +9,20 @@ import { Component, OnInit } from '@angular/core';
 })
 export class UserHomeComponent implements OnInit {
 
-  constructor() { }
+  user: User;
+  constructor(private userService: UserService) { }
 
   ngOnInit() {
+    let id: string;
+        if(sessionStorage.getItem("userId") !== null)
+            id = sessionStorage.getItem("userId");
+        else
+            id = localStorage.getItem("userId");
+        if (+id > 0) {
+            this.userService.getUserById(+id).subscribe(data => {
+				this.user = data;
+      });
+    }
   }
 
 }

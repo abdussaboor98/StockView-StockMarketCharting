@@ -7,7 +7,7 @@ import { HttpClientModule } from "@angular/common/http";
 
 import { AppComponent } from "./app.component";
 import { SignupComponent } from "./user/signup/signup.component";
-import { HomeComponent } from "./home/home.component";
+import { HomeComponent } from "./common/home/home.component";
 import { LoginComponent } from "./login/login.component";
 import { NewCompanyComponent } from "./admin/new-company/new-company.component";
 import { NewExchangeComponent } from "./admin/new-exchange/new-exchange.component";
@@ -36,6 +36,8 @@ import { HeaderComponent } from './common/header/header.component';
 import { FooterComponent } from './common/footer/footer.component';
 import { UserHeaderComponent } from './user/user-header/user-header.component';
 import { AdminHeaderComponent } from './admin/admin-header/admin-header.component';
+import { LandingComponent } from './common/landing/landing.component';
+import { ViewIpoComponent } from './user/view-ipo/view-ipo.component';
 
 @NgModule({
     declarations: [
@@ -69,7 +71,9 @@ import { AdminHeaderComponent } from './admin/admin-header/admin-header.componen
         HeaderComponent,
         FooterComponent,
         UserHeaderComponent,
-        AdminHeaderComponent
+        AdminHeaderComponent,
+        LandingComponent,
+        ViewIpoComponent
     ],
     imports: [
         BrowserModule,

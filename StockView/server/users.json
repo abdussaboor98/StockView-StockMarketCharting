@@ -27,6 +27,16 @@
       "password": "admin",
       "rePassword": "admin",
       "phoneNo": 1234,
+      "isAdmin": true,
+      "confirmed": true
+    },
+    {
+      "id": 4,
+      "username": "",
+      "email": "",
+      "password": "",
+      "rePassword": "",
+      "phoneNo": "",
       "isAdmin": false,
       "confirmed": false
     }

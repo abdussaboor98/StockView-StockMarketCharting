@@ -7,12 +7,13 @@ import {
     Router
 } from "@angular/router";
 import { Observable } from "rxjs";
-import { UserService } from "./services/user.service";
+import { UserService } from '../services/user.service';
+declare var $:any;
 
 @Injectable({
     providedIn: "root"
 })
-export class AuthGuard implements CanActivate {
+export class LoginGuard implements CanActivate {
     constructor(private userService: UserService, private router: Router) {}
 
     canActivate(
@@ -23,11 +24,12 @@ export class AuthGuard implements CanActivate {
         | Promise<boolean | UrlTree>
         | boolean
         | UrlTree {
-        if (this.userService.isAdmin()) {
+        if (this.userService.isAdmin() || this.userService.isUser()) {
             return true;
         } else {
-            alert("You do not have access to this page!");
-            this.router.navigate(['home']);
+            alert("You need to login first!");
+            this.router.navigate(["home"]);
+            $("#login-modal").modal("show");
             return false;
         }
     }

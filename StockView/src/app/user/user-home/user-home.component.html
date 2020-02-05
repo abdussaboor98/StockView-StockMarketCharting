@@ -1,6 +1,6 @@
 <section class="jumbotron jumbotron-fluid py-4">
     <div class="container">
-        <h1 class="display-4 text-center">Hi! [PH]User,<br>
+        <h1 class="display-4 text-center">Hi! <span *ngIf="user">{{ user.username }}</span>,<br>
             <p class="lead text-center mt-5">What would you like to do?</p>
         </h1>
     </div>

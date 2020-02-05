@@ -1,65 +1,8 @@
-<header class="">
-    <nav class="navbar navbar-expand-md navbar-dark bg-dark sticky-top">
-        <a routerLink="home" class="navbar-brand">
-            <img src="../assets/logo.svg" alt="StockView" id="logo" class="undraggable">
-            <span class="text-light mx-2 my-auto undraggable">StockView</span>
-        </a>
-        <button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#navbar1">
-            <span class="navbar-toggler-icon"></span></button>
-        <div class="navbar-collapse collapse" id="navbar1">
-            <ul class="navbar-nav ml-auto">
-                <li class="nav-item"><a routerLink="home" routerLinkActive="active" class="nav-link">Home</a></li>
-                <li class="nav-item"><a routerLink="signup" routerLinkActive="active" class="nav-link">Signup</a></li>
-            </ul>
-            <a class="btn text-light ml-md-5 pl-0 pl-md-5" role="login" data-toggle="modal"
-                data-target="#login-modal">Login</a>
-        </div>
-    </nav>
-</header>
+<app-header *ngIf="commonHeader"></app-header>
+<app-admin-header *ngIf="adminHeader"></app-admin-header >
+<app-user-header *ngIf="userHeader"></app-user-header>
 <router-outlet></router-outlet>
-
-
-
+<app-footer></app-footer>
 
 <app-login class="modal fade" id="login-modal"></app-login>
 
-<footer class="container-fluid bg-light mt-5">
-    <div class="row justify-content-center">
-        <div class="media col-sm-6 ">
-            <div class="row mx-auto justify-content-center">
-                <img src="../assets/logo.svg" class="my-4 ml-5 undraggable" id="logo-foot" alt="" srcset="">
-                <h3 class="media-body align-self-center ml-3 col-6 undraggable">StockView</h3>
-            </div>
-
-        </div>
-        <ul class="my-2 list-unstyled col-sm-6 row align-self-center justify-content-between flex-wrap">
-            <li class="col-6 text-center"><a class="text-dark" routerLink="admin-home">Admin Home</a></li>
-            <li class="col-6 text-center"><a class="text-dark" routerLink="user-home">User Home</a></li>
-            <li class="col-6 text-center"><a class="text-dark" routerLink="view-users">View users</a></li>
-            <li class="col-6 text-center"><a class="text-dark" routerLink="import-excel">Import Data</a></li>
-            <li class="col-6 text-center"><a class="text-dark" routerLink="otp">OTP</a></li>
-            <li class="col-6 text-center"><a class="text-dark">Template</a></li>
-        </ul>
-    </div>
-    <div class="row bg-dark socials-footer undraggable">
-        <div class="col-md-6 align-self-center text-muted text-md-left text-center">
-            <span>&#169; Copyright 2020-2021</span>
-        </div>
-        <div class="col-md-4 offset-md-2">
-            <div class="row justify-content-end flex-nowrap">
-                <a [routerLink]="['']" class="col">
-                    <i class="fab fa-facebook h-100 py-2 social-icon text-light mx-4"></i>
-                </a>
-                <a [routerLink]="" class="col">
-                    <i class="fab fa-twitter h-100 py-2 social-icon text-light mx-4"></i>
-                </a>
-                <a [routerLink]="" class="col">
-                    <i class="fab fa-instagram h-100 py-2 social-icon text-light mx-4"></i>
-                </a>
-                <a [routerLink]="" class="col">
-                    <i class="fab fa-github h-100 py-2 social-icon text-light mx-4"></i>
-                </a>
-            </div>
-        </div>
-    </div>
-</footer>

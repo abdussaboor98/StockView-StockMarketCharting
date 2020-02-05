@@ -1,1 +1,21 @@
-<p>admin-header works!</p>
+<header>
+    <nav class="navbar navbar-expand-md navbar-dark bg-dark sticky-top">
+        <a routerLink="/landing" class="navbar-brand">
+            <img src="../../../assets/logo.svg" alt="StockView" id="logo" class="undraggable">
+            <span class="text-light mx-2 my-auto undraggable">StockView</span>
+        </a>
+        <button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#navbar1">
+            <span class="navbar-toggler-icon"></span></button>
+        <div class="navbar-collapse collapse" id="navbar1">
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item"><a routerLink="/landing" class="nav-link active">Home</a></li>
+                <li class="nav-item"><a routerLink="/import-excel" class="nav-link">Import Data</a></li>
+                <li class="nav-item"><a routerLink="/manage-company" class="nav-link">Manage Companies</a></li>
+                <li class="nav-item"><a routerLink="/manage-exchange" class="nav-link">Manage Exchange</a></li>
+                <li class="nav-item"><a routerLink="/manage-sectors" class="nav-link">Manage Sectors</a></li>
+                <li class="nav-item"><a routerLink="/manage-ipos" class="nav-link">Manage IPOs</a></li>
+            </ul>
+            <button class=" btn text-light ml-md-5 pl-0 pl-md-5" role="logout" (click)="logout()">Logout</button>
+        </div>
+    </nav>
+</header>

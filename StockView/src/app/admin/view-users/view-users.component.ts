@@ -33,16 +33,4 @@ export class ViewUsersComponent implements OnInit {
             this.users = this.users.filter(user => user.id !== id);
         });
     }
-
-    viewUser(id: number){
-        sessionStorage.removeItem('userId');
-        sessionStorage.setItem('userId',id.toString());
-        this.router.navigate(['account']);
-    }
-
-    updateUser(id: number){
-        sessionStorage.removeItem('userId');
-        sessionStorage.setItem('userId',id.toString());
-        this.router.navigate(['account-update']);
-    }
 }

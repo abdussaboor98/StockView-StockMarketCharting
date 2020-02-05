@@ -1,1 +1,40 @@
-<p>footer works!</p>
+<footer class="container-fluid bg-light mt-5">
+    <div class="row justify-content-center">
+        <div class="media col-sm-6 ">
+            <div class="row mx-auto justify-content-center">
+                <img src="../assets/logo.svg" class="my-4 ml-5 undraggable" id="logo-foot" alt="" srcset="">
+                <h3 class="media-body align-self-center ml-3 col-6 undraggable">StockView</h3>
+            </div>
+
+        </div>
+        <ul class="my-2 list-unstyled col-sm-6 row align-self-center justify-content-between flex-wrap">
+            <li class="col-6 text-center"><a class="text-dark" routerLink="admin-home">Admin Home</a></li>
+            <li class="col-6 text-center"><a class="text-dark" routerLink="user-home">User Home</a></li>
+            <li class="col-6 text-center"><a class="text-dark" routerLink="view-users">View users</a></li>
+            <li class="col-6 text-center"><a class="text-dark" routerLink="import-excel">Import Data</a></li>
+            <li class="col-6 text-center"><a class="text-dark" routerLink="otp">OTP</a></li>
+            <li class="col-6 text-center"><a class="text-dark">Template</a></li>
+        </ul>
+    </div>
+    <div class="row bg-dark socials-footer undraggable py-1">
+        <div class="col-md-6 align-self-center text-muted text-md-left text-center">
+            <span>&#169; Copyright 2020-2021</span>
+        </div>
+        <div class="col-md-4 offset-md-2">
+            <div class="row justify-content-end flex-nowrap">
+                <a href="http://facebook.com" class="col" target="_new">
+                    <fa-icon [icon]="faFacebook" class="h-100 py-2 social-icon text-light mx-4"></fa-icon>
+                </a>
+                <a href="http://twitter.com" class="col" target="_new">
+                    <fa-icon [icon]="faTwitter" class="h-100 py-2 social-icon text-light mx-4"></fa-icon>
+                </a>
+                <a href="http://instagram.com" class="col" target="_new">
+                    <fa-icon [icon]="faInstagram" class="h-100 py-2 social-icon text-light mx-4"></fa-icon>
+                </a>
+                <a href="https://github.com/abdussaboor98/StockView-StockMarketCharting" class="col" target="_new">
+                    <fa-icon [icon]="faGithub" class="h-100 py-2 social-icon text-light mx-4"></fa-icon>
+                </a>
+            </div>
+        </div>
+    </div>
+</footer>

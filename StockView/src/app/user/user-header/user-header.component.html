@@ -1,1 +1,40 @@
-<p>user-header works!</p>
+<header>
+    <nav class="navbar navbar-expand-md navbar-dark bg-dark sticky-top">
+        <a routerLink="landing" class="navbar-brand">
+            <img src="../assets/logo.svg" alt="StockView" id="logo" class="undraggable">
+            <span class="text-light mx-2 my-auto undraggable">StockView</span>
+        </a>
+        <div class="nav-item dropdown text-light ml-auto ml-md-5 pl-0 pl-md-5 col-auto not-md">
+            <a class="btn dropdown-toggle text-light nav-link" data-toggle="dropdown">
+                <fa-icon [icon]="faUser"></fa-icon>
+            </a>
+            <div class="dropdown-menu dropdown-menu-right">
+                <a routerLink="/account" class="dropdown-item">My Account</a>
+                <a class="dropdown-item btn" (click)="logout()">Logout</a>
+            </div>
+        </div>
+        <button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#navbar1">
+            <span class="navbar-toggler-icon"></span></button>
+        <div class="navbar-collapse collapse" id="navbar1">
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item"><a routerLink="/landing" class="nav-link active">Home</a></li>
+                <li class="nav-item"><a routerLink="/compare" class="nav-link">Compare</a>
+                </li>
+                <li class="nav-item"><a routerLink="/view-sectors" class="nav-link">Sectors</a></li>
+                <li class="nav-item"><a routerLink="/view-ipos" class="nav-link">IPO</a></li>
+                <li class="nav-item"><a routerLink="/view-companies" class="nav-link">Companies</a></li>
+                <li class="nav-item"><a routerLink="/view-exchanges" class="nav-link">Exchanges</a></li>
+            </ul>
+        </div>
+        <div class="nav-item dropdown text-light ml-auto ml-md-5 pl-0 pl-md-5 col-auto md-only">
+            <a class="btn dropdown-toggle text-light nav-link" data-toggle="dropdown">
+                <fa-icon [icon]="faUser"></fa-icon>
+            </a>
+            <div class="dropdown-menu dropdown-menu-right">
+                <a routerLink="/account" class="dropdown-item">My Account</a>
+                <a class="dropdown-item btn" (click)="logout()">Logout</a>
+            </div>
+        </div>
+    </nav>
+
+</header>

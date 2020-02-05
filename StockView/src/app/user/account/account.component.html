@@ -1,10 +1,11 @@
 <main class="container ">
-    <div class="card w-75 mx-auto mt-5">
+    <div class="card w-md-75 w-100 mx-auto mt-5">
         <div class="card-body"> 
             <div class="row mx-5">
                 <div class="row">
                     <img src="../../../assets/ph.svg" alt="Profile image" class="rounded-circle profile mt-2 p-0">
-                    <h5 class="display-4 ml-3 m-0 align-self-end"> {{user.username}} </h5>
+                    <h5 class="display-4 ml-3 m-0 align-self-end d-md-block d-none"> {{user.username}} </h5>
+                    <h4 class="ml-3 m-0 align-self-end d-block d-md-none"> {{user.username}} </h4>
                 </div>
             </div>
             <div class="row mt-5 mx-5">
@@ -16,9 +17,9 @@
                 <span class="col-auto"> {{user.phoneNo}} </span>
             </div>
         </div>
-        <!-- <div class="card-footer text-right">
-            <button type="button" class="btn btn-primary">Change Password</button>
-            <button type="button" class="btn btn-secondary ml-2" (click)="updateUser()">Update Details</button>
-        </div> -->
+        <div class="card-footer text-right">
+            <!-- <button type="button" class="btn btn-primary">Change Password</button> -->
+            <button type="button" class="btn btn-secondary ml-2" routerLink="/account-update">Update Details</button>
+        </div>
     </div>
 </main>
