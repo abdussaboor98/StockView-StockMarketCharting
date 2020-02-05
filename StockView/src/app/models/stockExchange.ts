@@ -1,6 +1,6 @@
 export class StockExchange {
     id: number;
-    exchangeName: string;
+    name: string;
     brief: string;
     contactAddress: string;
     remarks: string;

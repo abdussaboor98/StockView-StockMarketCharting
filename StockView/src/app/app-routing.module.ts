@@ -27,12 +27,13 @@ import { CompareComponent } from "./user/compare/compare.component";
 import { ViewCompaniesComponent } from "./user/view-companies/view-companies.component";
 import { ViewExchangesComponent } from "./user/view-exchanges/view-exchanges.component";
 import { ViewSectorsComponent } from "./user/view-sectors/view-sectors.component";
+import { AuthGuard } from './auth.guard';
 
 const routes: Routes = [
     { path: "", redirectTo: "home", pathMatch: "full" },
     { path: "home", component: HomeComponent },
     { path: "signup", component: SignupComponent },
-    { path: "admin-home", component: AdminHomeComponent },
+    { path: "admin-home", component: AdminHomeComponent, canActivate: [AuthGuard] },
     { path: "user-home", component: UserHomeComponent },
     { path: "import-excel", component: ImportExcelComponent },
     { path: "new-company", component: NewCompanyComponent },
@@ -40,8 +41,8 @@ const routes: Routes = [
     { path: "new-ipo", component: NewIpoComponent },
     { path: "new-sector", component: NewSectorComponent },
     { path: "otp", component: OtpComponent },
-    { path: "manage-exchange", component: ManageExchangeComponent },
-    { path: "manage-company", component: ManageCompanyComponent },
+    { path: "manage-exchange", component: ManageExchangeComponent, canActivate: [AuthGuard] },
+    { path: "manage-company", component: ManageCompanyComponent,canActivate: [AuthGuard] },
     { path: "manage-ipos", component: ManageIposComponent },
     { path: "manage-sectors", component: ManageSectorsComponent },
     { path: "update-ipo", component: UpdateIpoComponent },

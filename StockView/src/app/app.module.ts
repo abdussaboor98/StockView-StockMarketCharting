@@ -32,6 +32,10 @@ import { CompareComponent } from './user/compare/compare.component';
 import { ViewCompaniesComponent } from './user/view-companies/view-companies.component';
 import { ViewExchangesComponent } from './user/view-exchanges/view-exchanges.component';
 import { ViewSectorsComponent } from './user/view-sectors/view-sectors.component';
+import { HeaderComponent } from './common/header/header.component';
+import { FooterComponent } from './common/footer/footer.component';
+import { UserHeaderComponent } from './user/user-header/user-header.component';
+import { AdminHeaderComponent } from './admin/admin-header/admin-header.component';
 
 @NgModule({
     declarations: [
@@ -61,7 +65,11 @@ import { ViewSectorsComponent } from './user/view-sectors/view-sectors.component
         CompareComponent,
         ViewCompaniesComponent,
         ViewExchangesComponent,
-        ViewSectorsComponent
+        ViewSectorsComponent,
+        HeaderComponent,
+        FooterComponent,
+        UserHeaderComponent,
+        AdminHeaderComponent
     ],
     imports: [
         BrowserModule,
