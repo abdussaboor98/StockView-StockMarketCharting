@@ -38,8 +38,7 @@ a.card {
     user-select: none;
 }
 
-.adv-imgs,
-.company-logo {
+.adv-imgs{
     width: 15vw;
 }
 
@@ -92,10 +91,6 @@ a.crad:hover {
     }
 }
 
-.fa-user {
-    font-size: 20px;
-}
-
 @media (max-width: 768px) {
     .md-only {
         display: none;
@@ -115,21 +110,10 @@ a.crad:hover {
     text-overflow: ellipsis;
 }
 
-.bg-carousel {
-    z-index: -1;
-}
-
-.bg-carousel img {
-    height: 20rem;
-    object-fit: cover;
-    filter: brightness(0.5);
-}
-.hero-text {
-    position: absolute;
-    z-index: 5;
-    margin-top: 5rem;
-}
-
 .text-shadow {
     text-shadow: black 4px 4px 4px;
+}
+
+.btn:disabled {
+    cursor: context-menu;
 }

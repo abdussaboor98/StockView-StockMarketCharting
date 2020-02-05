@@ -1,0 +1,5 @@
+package com.cts.stockview.model;
+
+public class StockExchange {
+
+}

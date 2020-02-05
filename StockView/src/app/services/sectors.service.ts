@@ -7,7 +7,7 @@ import { HttpClient } from "@angular/common/http";
     providedIn: "root"
 })
 export class SectorsService {
-    url = "http://localhost:5800/sectors/";
+    url = "http://localhost:5300/sectors/";
     constructor(private httpClient: HttpClient) {}
 
     getAllSectors(): Observable<Sector[]> {

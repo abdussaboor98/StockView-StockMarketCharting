@@ -7,8 +7,28 @@
       "password": "aaaa",
       "rePassword": "aaaa",
       "phoneNo": 8919372849,
-      "isAdmin": "fasle",
-      "confirmed": "false"
+      "isAdmin": false,
+      "confirmed": true
+    },
+    {
+      "id": 2,
+      "username": "bhanuprakash",
+      "email": "bhanu@mail.com",
+      "password": "abcd",
+      "rePassword": "abcd",
+      "phoneNo": 9876543210,
+      "isAdmin": false,
+      "confirmed": true
+    },
+    {
+      "id": 3,
+      "username": "admin",
+      "email": "admin@stockview.com",
+      "password": "admin",
+      "rePassword": "admin",
+      "phoneNo": 1234,
+      "isAdmin": false,
+      "confirmed": false
     }
   ]
 }

@@ -7,6 +7,7 @@ import {
 } from "@angular/forms";
 
 import { faAt, faKey } from "@fortawesome/free-solid-svg-icons";
+import { UserService } from '../services/user.service';
 
 @Component({
     selector: "app-login",
@@ -15,15 +16,19 @@ import { faAt, faKey } from "@fortawesome/free-solid-svg-icons";
 })
 export class LoginComponent implements OnInit {
     loginForm: FormGroup;
+    isValid: boolean = true;
     faAt = faAt;
     faKey = faKey;
-    constructor(private formBuilder: FormBuilder) {}
+    constructor(
+        private formBuilder: FormBuilder,
+        private userService: UserService
+    ) {}
 
     ngOnInit() {
         this.loginForm = this.formBuilder.group({
-            email: ["", Validators.required],
+            username: ["", Validators.required],
             password: ["", Validators.required],
-            rememberMe: ["", Validators.required]
+            rememberMe: [false]
         });
     }
 
