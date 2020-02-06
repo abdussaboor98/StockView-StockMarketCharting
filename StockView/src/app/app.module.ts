@@ -38,6 +38,7 @@ import { UserHeaderComponent } from './user/user-header/user-header.component';
 import { AdminHeaderComponent } from './admin/admin-header/admin-header.component';
 import { LandingComponent } from './common/landing/landing.component';
 import { ViewIpoComponent } from './user/view-ipo/view-ipo.component';
+import { CompareResultComponent } from './user/compare-result/compare-result.component';
 
 @NgModule({
     declarations: [
@@ -73,7 +74,8 @@ import { ViewIpoComponent } from './user/view-ipo/view-ipo.component';
         UserHeaderComponent,
         AdminHeaderComponent,
         LandingComponent,
-        ViewIpoComponent
+        ViewIpoComponent,
+        CompareResultComponent
     ],
     imports: [
         BrowserModule,

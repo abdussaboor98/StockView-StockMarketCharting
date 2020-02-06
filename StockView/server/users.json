@@ -32,11 +32,11 @@
     },
     {
       "id": 4,
-      "username": "",
-      "email": "",
-      "password": "",
-      "rePassword": "",
-      "phoneNo": "",
+      "username": "anuhya",
+      "email": "anu@123.com",
+      "password": "anu123",
+      "rePassword": "anu123",
+      "phoneNo": 9876543210,
       "isAdmin": false,
       "confirmed": false
     }

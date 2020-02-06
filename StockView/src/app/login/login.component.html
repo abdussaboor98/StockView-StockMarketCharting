@@ -42,7 +42,7 @@
                         formControlName="rememberMe">
                     <label for="rememberMe" class="custom-control-label">Remember me</label>
                 </div>
-                <button type="submit" class="btn btn-primary btn-block mt-5">Login</button>
+                <button type="submit" class="btn btn-primary btn-block mt-5"[disabled] = "!loginForm.valid || disableButton">Login</button>
                 <span class="row text-muted justify-content-center my-2"><small>New user?<a [routerLink]="['signup']">
                             Signup</a></small></span>
             </form>

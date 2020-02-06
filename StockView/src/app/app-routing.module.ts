@@ -3,7 +3,6 @@ import { Routes, RouterModule } from "@angular/router";
 
 import { SignupComponent } from "./user/signup/signup.component";
 import { HomeComponent } from "./common/home/home.component";
-import { LoginComponent } from "./login/login.component";
 import { AdminHomeComponent } from "./admin/admin-home/admin-home.component";
 import { UserHomeComponent } from "./user/user-home/user-home.component";
 import { ImportExcelComponent } from "./admin/import-excel/import-excel.component";
@@ -33,6 +32,7 @@ import { AdminAuthGuard } from './guards/admin-auth.guard';
 import { UserAuthGuard } from './guards/user-auth.guard';
 import { NoLoginGuard } from './guards/no-login.guard';
 import { LoginGuard } from './guards/login.guard';
+import { CompareResultComponent } from './user/compare-result/compare-result.component';
 
 const routes: Routes = [
     { path: "", redirectTo: "home", pathMatch: "full" },
@@ -45,7 +45,7 @@ const routes: Routes = [
     { path: "new-exchange", component: NewExchangeComponent,canActivate:[AdminAuthGuard] },
     { path: "new-ipo", component: NewIpoComponent,canActivate:[AdminAuthGuard] },
     { path: "new-sector", component: NewSectorComponent,canActivate:[AdminAuthGuard] },
-    { path: "otp", component: OtpComponent, canActivate: [UserAuthGuard] },
+    { path: "otp", component: OtpComponent, canActivate: [NoLoginGuard] },
     { path: "manage-exchange", component: ManageExchangeComponent,canActivate:[AdminAuthGuard]},
     { path: "manage-company", component: ManageCompanyComponent,canActivate:[AdminAuthGuard]},
     { path: "manage-ipos", component: ManageIposComponent,canActivate:[AdminAuthGuard] },
@@ -54,7 +54,7 @@ const routes: Routes = [
     { path: "update-company", component: UpdateCompanyComponent,canActivate:[AdminAuthGuard] },
     { path: "update-exchange", component: UpdateExchangeComponent,canActivate:[AdminAuthGuard] },
     { path: "update-sector", component: UpdateSectorComponent,canActivate:[AdminAuthGuard] },
-    { path: "view-users", component: ViewUsersComponent },
+    { path: "view-users", component: ViewUsersComponent,canActivate:[AdminAuthGuard] },
     { path: "view-companies", component: ViewCompaniesComponent, canActivate: [UserAuthGuard] },
     { path: "view-exchanges", component: ViewExchangesComponent, canActivate: [UserAuthGuard] },
     { path: "view-sectors", component: ViewSectorsComponent, canActivate: [UserAuthGuard] },
@@ -62,12 +62,13 @@ const routes: Routes = [
     { path: "account", component: AccountComponent, canActivate: [UserAuthGuard] },
     { path: "account-update", component: AccountUpdateComponent , canActivate: [UserAuthGuard]},
     { path: "compare", component: CompareComponent, canActivate: [UserAuthGuard] },
+    { path: "compare-result", component: CompareResultComponent, canActivate: [UserAuthGuard] },
     { path: "landing", component: LandingComponent, canActivate:[LoginGuard]},
 
 ];
 
 @NgModule({
-    imports: [RouterModule.forRoot(routes, { scrollPositionRestoration: 'enabled' })],
+    imports: [RouterModule.forRoot(routes)],//, { scrollPositionRestoration: 'enabled' })],
     exports: [RouterModule]
 })
 export class AppRoutingModule {}

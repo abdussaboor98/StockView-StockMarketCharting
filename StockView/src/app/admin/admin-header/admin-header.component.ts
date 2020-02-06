@@ -19,7 +19,7 @@ export class AdminHeaderComponent implements OnInit {
     sessionStorage.removeItem("userType");
     localStorage.removeItem("userId");
     sessionStorage.removeItem("userId");
-    this.router.navigate([""]);
+    this.router.navigate(["home"]);
   }
 
 }

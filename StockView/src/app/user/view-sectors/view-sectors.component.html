@@ -1,5 +1,5 @@
 <main class="container">
-    <div class="display-4 text-center my-4">Manage IPOs</div>
+    <div class="display-4 text-center my-4">Sectors</div>
     <div class="table-responsive">
         <table class="table table-stripped table-hover bg-light text-center">
             <thead class="thead-light">
@@ -7,7 +7,6 @@
                     <th>ID</th>
                     <th>Sector name</th>
                     <th>Brief</th>
-                    <th colspan="2" class="text-center">Actions</th>
                 </tr>
             </thead>
             <tbody>
@@ -15,16 +14,6 @@
                     <td> {{sector.id}} </td>
                     <td> {{sector.name}} </td>
                     <td> {{sector.brief}} </td>
-                    <!-- <td> <button class="btn btn-primary">
-                            <fa-icon [icon]="faEye"></fa-icon>
-                        </button>
-                    </td> -->
-                    <td> <button class="btn btn-info" (click)="updateSector(sector.id)">
-                            <fa-icon [icon]="faEdit"></fa-icon>
-                        </button> </td>
-                    <td> <button class="btn btn-danger" (click)="deleteSector(sector.id)">
-                            <fa-icon [icon]="faTrash"></fa-icon>
-                        </button> </td>
                 </tr>
             </tbody>
         </table>

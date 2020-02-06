@@ -19,6 +19,7 @@ import { User } from "../models/users";
 })
 export class LoginComponent implements OnInit {
     loginForm: FormGroup;
+    disableButton:boolean;
     isValid: boolean = true;
     faAt = faAt;
     faKey = faKey;
@@ -27,9 +28,10 @@ export class LoginComponent implements OnInit {
         private formBuilder: FormBuilder,
         private userService: UserService,
         private router: Router
-    ) {}
+    ) { }
 
     ngOnInit() {
+        this.disableButton = false;
         this.loginForm = this.formBuilder.group({
             username: ["", Validators.required],
             password: ["", Validators.required],
@@ -41,42 +43,26 @@ export class LoginComponent implements OnInit {
     }
 
     login() {
+        this.disableButton = true;
         this.isValid = true;
         localStorage.removeItem("userId");
         localStorage.removeItem("userType");
         sessionStorage.removeItem("userId");
         sessionStorage.removeItem("userType");
-        if (
-            this.validateUser(
-                this.loginForm.get("username").value,
-                this.loginForm.get("password").value
-            )
-        ) {
+        if (this.validateUser(this.loginForm.get("username").value,this.loginForm.get("password").value)) {
             if (this.loginForm.get("rememberMe").value) {
-                localStorage.setItem(
-                    "userId",
-                    this.getUserId(
-                        this.loginForm.get("username").value
-                    ).toString()
-                );
-                localStorage.setItem(
-                    "userType",
-                    this.getUserType(this.loginForm.get("username").value)
-                );
+                localStorage.setItem("userId",this.getUserId(this.loginForm.get("username").value).toString());
+                localStorage.setItem("userType",this.getUserType(this.loginForm.get("username").value));
             }
-            sessionStorage.setItem(
-                "userId",
-                this.getUserId(this.loginForm.get("username").value).toString()
-            );
-            sessionStorage.setItem(
-                "userType",
-                this.getUserType(this.loginForm.get("username").value)
-            );
+            sessionStorage.setItem("userId",this.getUserId(this.loginForm.get("username").value).toString());
+            sessionStorage.setItem("userType",this.getUserType(this.loginForm.get("username").value));
             this.router.navigate(["landing"]);
             $("#login-modal").modal("hide");
             this.loginForm.reset();
+            this.disableButton = false;
         } else {
             this.isValid = false;
+            this.disableButton = false;
         }
     }
 
