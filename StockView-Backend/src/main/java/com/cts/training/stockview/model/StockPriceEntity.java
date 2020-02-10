@@ -32,6 +32,16 @@ public class StockPriceEntity implements Serializable {
 	public StockPriceEntity() {
 		
 	}
+	
+	public StockPriceEntity(String companyCode, String stockExchange, double currentPrice, LocalDate date,
+			LocalTime time) {
+		this.companyCode = companyCode;
+		this.stockExchange = stockExchange;
+		this.currentPrice = currentPrice;
+		this.date = date;
+		this.time = time;
+	}
+
 	public int getId() {
 		return id;
 	}

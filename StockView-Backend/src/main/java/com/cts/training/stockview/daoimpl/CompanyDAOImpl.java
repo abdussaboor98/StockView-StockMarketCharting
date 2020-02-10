@@ -7,10 +7,14 @@ import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.cts.training.stockview.dao.CompanyDAO;
 import com.cts.training.stockview.model.CompanyEntity;
 
+@Transactional
+@Repository(value = "companyDAO")
 public class CompanyDAOImpl implements CompanyDAO {
 
 	@Autowired

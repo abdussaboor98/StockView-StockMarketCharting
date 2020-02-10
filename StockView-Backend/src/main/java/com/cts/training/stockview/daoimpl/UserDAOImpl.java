@@ -2,6 +2,8 @@ package com.cts.training.stockview.daoimpl;
 
 import java.util.List;
 
+import javax.persistence.TypedQuery;
+
 import org.hibernate.HibernateException;
 import org.hibernate.Query;
 import org.hibernate.Session;
@@ -63,10 +65,11 @@ public class UserDAOImpl implements UserDAO {
 		}
 	}
 
+	@SuppressWarnings("unchecked")
 	@Override
 	public List<UserEntity> getAllUsers() {
 		try {
-			return sessionFactory.getCurrentSession().createQuery("FROM UserEntity").list();
+			return sessionFactory.getCurrentSession().createQuery("FROM UserEntity").getResultList();
 		} catch (HibernateException e) {
 			e.printStackTrace();
 			return null;
@@ -76,11 +79,11 @@ public class UserDAOImpl implements UserDAO {
 	@Override
 	public boolean validateUser(String username, String password) {
 		try {
-			Query query = sessionFactory.getCurrentSession()
+			TypedQuery<UserEntity> query = sessionFactory.getCurrentSession()
 					.createQuery("from UserEntity where username= :username and password= :password");
-			query.setString("username", username);
-			query.setString("password", password);
-			List<UserEntity> users = query.list();
+			query.setParameter("username", username);
+			query.setParameter("password", password);
+			List<UserEntity> users = query.getResultList();
 			if (users.size() > 0) {
 				return true;
 			} else {

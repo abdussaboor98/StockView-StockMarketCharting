@@ -11,7 +11,7 @@ import javax.persistence.Table;
 import org.springframework.stereotype.Component;
 
 @Entity
-@Component
+@Component(value = "ipoEntity")
 @Table(name = "ipos")
 public class IPOEntity implements Serializable {
 

@@ -37,8 +37,8 @@ public class UserEntityTest {
 	
 	@Test
 	public void testGetUserByIdSuccess() {
-		UserEntity u = new UserEntity(107, "Abdus Saboor", "gaffari98@gmail.com", "abdus123", 9819372849L, false, true);
-		assertEquals(u.getEmail(), userDAO.getUserById(107).getEmail());
+		UserEntity u = new UserEntity(1, "Abdus Saboor", "gaffari98@gmail.com", "abdus123", 9819372849L, false, true);
+		assertEquals(u.getEmail(), userDAO.getUserById(1).getEmail());
 	}
 
 	@Test
@@ -48,7 +48,7 @@ public class UserEntityTest {
 	
 	@Test
 	public void testUpdateUserSuccess() {
-		UserEntity u = userDAO.getUserById(107);
+		UserEntity u = userDAO.getUserById(1);
 		u.setConfirmed(true);
 		assertEquals(true, userDAO.updateUser(u));
 	}

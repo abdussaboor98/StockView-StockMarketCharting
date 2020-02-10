@@ -5,10 +5,14 @@ import java.util.List;
 import org.hibernate.HibernateException;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.cts.training.stockview.dao.StockExchangeDAO;
 import com.cts.training.stockview.model.StockExchangeEntity;
 
+@Transactional
+@Repository(value = "stockExchangeDAO")
 public class StockExchangeDAOImpl implements StockExchangeDAO {
 
 	@Autowired

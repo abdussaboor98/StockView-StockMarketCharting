@@ -5,10 +5,14 @@ import java.util.List;
 import org.hibernate.HibernateException;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.cts.training.stockview.dao.IPODAO;
 import com.cts.training.stockview.model.IPOEntity;
 
+@Transactional
+@Repository(value = "ipoDAO")
 public class IPODAOImpl implements IPODAO {
 
 	@Autowired
