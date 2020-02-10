@@ -10,9 +10,12 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
+import org.springframework.stereotype.Component;
+
 @Entity
+@Component
 @Table(name = "stock_prices")
-public class StockPrice implements Serializable {
+public class StockPriceEntity implements Serializable {
 
 	private static final long serialVersionUID = 6893738367295298635L;
 	
@@ -26,7 +29,7 @@ public class StockPrice implements Serializable {
 	private LocalTime time;
 	
 
-	public StockPrice() {
+	public StockPriceEntity() {
 		
 	}
 	public int getId() {

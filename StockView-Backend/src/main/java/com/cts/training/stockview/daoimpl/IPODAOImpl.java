@@ -3,25 +3,20 @@ package com.cts.training.stockview.daoimpl;
 import java.util.List;
 
 import org.hibernate.HibernateException;
-import org.hibernate.Session;
 import org.hibernate.SessionFactory;
-import org.hibernate.Transaction;
+import org.springframework.beans.factory.annotation.Autowired;
 
 import com.cts.training.stockview.dao.IPODAO;
-import com.cts.training.stockview.model.IPO;
-import com.cts.training.stockview.util.HibernateHelper;
+import com.cts.training.stockview.model.IPOEntity;
 
 public class IPODAOImpl implements IPODAO {
 
+	@Autowired
+	SessionFactory sessionFactory;
 	@Override
-	public boolean addIPO(IPO ipo) {
+	public boolean addIPO(IPOEntity ipo) {
 		try {
-			SessionFactory sessionFactory = HibernateHelper.getSessionFactory();
-			Session session = sessionFactory.openSession();
-			Transaction tx = session.beginTransaction();
-			session.save(ipo);
-			tx.commit();
-			session.close();
+			sessionFactory.getCurrentSession().save(ipo);
 			return true;
 		} catch (HibernateException e) {
 			e.printStackTrace();
@@ -30,14 +25,9 @@ public class IPODAOImpl implements IPODAO {
 	}
 
 	@Override
-	public boolean updateIPO(IPO ipo) {
+	public boolean updateIPO(IPOEntity ipo) {
 		try {
-			SessionFactory sessionFactory = HibernateHelper.getSessionFactory();
-			Session session = sessionFactory.openSession();
-			Transaction tx = session.beginTransaction();
-			session.update(ipo);
-			tx.commit();
-			session.close();
+			sessionFactory.getCurrentSession().update(ipo);
 			return true;
 		} catch (HibernateException e) {
 			e.printStackTrace();
@@ -46,14 +36,9 @@ public class IPODAOImpl implements IPODAO {
 	}
 
 	@Override
-	public boolean deleteIPO(IPO ipo) {
+	public boolean deleteIPO(IPOEntity ipo) {
 		try {
-			SessionFactory sessionFactory = HibernateHelper.getSessionFactory();
-			Session session = sessionFactory.openSession();
-			Transaction tx = session.beginTransaction();
-			session.delete(ipo);
-			tx.commit();
-			session.close();
+			sessionFactory.getCurrentSession().delete(ipo);
 			return true;
 		} catch (HibernateException e) {
 			e.printStackTrace();
@@ -62,31 +47,20 @@ public class IPODAOImpl implements IPODAO {
 	}
 
 	@Override
-	public IPO getIPOById(int id) {
+	public IPOEntity getIPOById(int id) {
 		try {
-			SessionFactory sessionFactory = HibernateHelper.getSessionFactory();
-			Session session = sessionFactory.openSession();
-			Transaction tx = session.beginTransaction();
-			IPO ipo = session.get(IPO.class, id);
-			tx.commit();
-			session.close();
-			return ipo;
+			return sessionFactory.getCurrentSession().get(IPOEntity.class, id);
 		} catch (HibernateException e) {
 			e.printStackTrace();
 			return null;
 		}
 	}
 
+	@SuppressWarnings("unchecked")
 	@Override
-	public List<IPO> getAllIPOs() {
+	public List<IPOEntity> getAllIPOs() {
 		try {
-			SessionFactory sessionFactory = HibernateHelper.getSessionFactory();
-			Session session = sessionFactory.openSession();
-			Transaction tx = session.beginTransaction();
-			List<IPO> ipos = session.createQuery("FROM IPO").list();
-			tx.commit();
-			session.close();
-			return ipos;
+			return sessionFactory.getCurrentSession().createQuery("FROM IPOEntity").getResultList();
 		} catch (HibernateException e) {
 			e.printStackTrace();
 			return null;

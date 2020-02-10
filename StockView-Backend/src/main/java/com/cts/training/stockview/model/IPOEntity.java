@@ -8,9 +8,12 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
+import org.springframework.stereotype.Component;
+
 @Entity
+@Component
 @Table(name = "ipos")
-public class IPO implements Serializable {
+public class IPOEntity implements Serializable {
 
 	@Id
 	@GeneratedValue
@@ -21,10 +24,10 @@ public class IPO implements Serializable {
 	private long totalStocks;
 	private LocalDateTime openDateTime;
 	private String remarks;
-	public IPO() { 
+	public IPOEntity() { 
 		
 	}
-	public IPO(int id, String companyName, String stockExchange, long pricePerShare, long totalStocks,
+	public IPOEntity(int id, String companyName, String stockExchange, long pricePerShare, long totalStocks,
 			LocalDateTime openDateTime, String remarks) {
 		this.id = id;
 		this.companyName = companyName;

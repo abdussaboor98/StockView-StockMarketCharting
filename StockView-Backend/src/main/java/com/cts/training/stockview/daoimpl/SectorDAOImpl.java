@@ -3,26 +3,20 @@ package com.cts.training.stockview.daoimpl;
 import java.util.List;
 
 import org.hibernate.HibernateException;
-import org.hibernate.Session;
 import org.hibernate.SessionFactory;
-import org.hibernate.Transaction;
+import org.springframework.beans.factory.annotation.Autowired;
 
 import com.cts.training.stockview.dao.SectorDAO;
-import com.cts.training.stockview.model.Sector;
-import com.cts.training.stockview.model.Sector;
-import com.cts.training.stockview.util.HibernateHelper;
+import com.cts.training.stockview.model.SectorEntity;
 
 public class SectorDAOImpl implements SectorDAO {
 
+	@Autowired
+	SessionFactory sessionFactory;
 	@Override
-	public boolean addSector(Sector sector) {
+	public boolean addSector(SectorEntity sector) {
 		try {
-			SessionFactory sessionFactory = HibernateHelper.getSessionFactory();
-			Session session = sessionFactory.openSession();
-			Transaction tx = session.beginTransaction();
-			session.save(sector);
-			tx.commit();
-			session.close();
+			sessionFactory.getCurrentSession().save(sector);
 			return true;
 		} catch (HibernateException e) {
 			e.printStackTrace();
@@ -31,14 +25,9 @@ public class SectorDAOImpl implements SectorDAO {
 	}
 
 	@Override
-	public boolean updateSector(Sector sector) {
+	public boolean updateSector(SectorEntity sector) {
 		try {
-			SessionFactory sessionFactory = HibernateHelper.getSessionFactory();
-			Session session = sessionFactory.openSession();
-			Transaction tx = session.beginTransaction();
-			session.update(sector);
-			tx.commit();
-			session.close();
+			sessionFactory.getCurrentSession().update(sector);
 			return true;
 		} catch (HibernateException e) {
 			e.printStackTrace();
@@ -47,14 +36,9 @@ public class SectorDAOImpl implements SectorDAO {
 	}
 
 	@Override
-	public boolean deleteSector(Sector sector) {
+	public boolean deleteSector(SectorEntity sector) {
 		try {
-			SessionFactory sessionFactory = HibernateHelper.getSessionFactory();
-			Session session = sessionFactory.openSession();
-			Transaction tx = session.beginTransaction();
-			session.delete(sector);
-			tx.commit();
-			session.close();
+			sessionFactory.getCurrentSession().delete(sector);
 			return true;
 		} catch (HibernateException e) {
 			e.printStackTrace();
@@ -63,31 +47,20 @@ public class SectorDAOImpl implements SectorDAO {
 	}
 
 	@Override
-	public Sector getSectorById(int id) {
+	public SectorEntity getSectorById(int id) {
 		try {
-			SessionFactory sessionFactory = HibernateHelper.getSessionFactory();
-			Session session = sessionFactory.openSession();
-			Transaction tx = session.beginTransaction();
-			Sector sector = session.get(Sector.class, id);
-			tx.commit();
-			session.close();
-			return sector;
+			return sessionFactory.getCurrentSession().get(SectorEntity.class, id);
 		} catch (HibernateException e) {
 			e.printStackTrace();
 			return null;
 		}
 	}
 
+	@SuppressWarnings("unchecked")
 	@Override
-	public List<Sector> getAllSectors() {
+	public List<SectorEntity> getAllSectors() {
 		try {
-			SessionFactory sessionFactory = HibernateHelper.getSessionFactory();
-			Session session = sessionFactory.openSession();
-			Transaction tx = session.beginTransaction();
-			List<Sector> sectors = session.createQuery("FROM Sector").list();
-			tx.commit();
-			session.close();
-			return sectors;
+			return sessionFactory.getCurrentSession().createQuery("FROM SectorEntity").getResultList();
 		} catch (HibernateException e) {
 			e.printStackTrace();
 			return null;

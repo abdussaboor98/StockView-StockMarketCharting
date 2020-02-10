@@ -2,17 +2,17 @@ package com.cts.training.stockview.dao;
 
 import java.util.List;
 
-import com.cts.training.stockview.model.IPO;
+import com.cts.training.stockview.model.IPOEntity;
 
 public interface IPODAO {
 
-	public boolean addIPO(IPO ipo);
+	public boolean addIPO(IPOEntity ipo);
 
-	public boolean updateIPO(IPO ipo);
+	public boolean updateIPO(IPOEntity ipo);
 
-	public boolean deleteIPO(IPO ipo);
+	public boolean deleteIPO(IPOEntity ipo);
 
-	public IPO getIPOById(int id);
+	public IPOEntity getIPOById(int id);
 
-	public List<IPO> getAllIPOs();
+	public List<IPOEntity> getAllIPOs();
 }

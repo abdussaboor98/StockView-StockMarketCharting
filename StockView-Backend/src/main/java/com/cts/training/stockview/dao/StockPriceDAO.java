@@ -2,18 +2,18 @@ package com.cts.training.stockview.dao;
 
 import java.util.List;
 
-import com.cts.training.stockview.model.StockPrice;
+import com.cts.training.stockview.model.StockPriceEntity;
 
 public interface StockPriceDAO {
 
-	public boolean addStockPrice(StockPrice stockPrice);
+	public boolean addStockPrice(StockPriceEntity stockPrice);
 
-	public boolean updateStockPrice(StockPrice stockPrice);
+	public boolean updateStockPrice(StockPriceEntity stockPrice);
 
-	public boolean deleteStockPrice(StockPrice stockPrice);
+	public boolean deleteStockPrice(StockPriceEntity stockPrice);
 
-	public StockPrice getStockPriceById(int id);
+	public StockPriceEntity getStockPriceById(int id);
 
-	public List<StockPrice> getAllStockPrices();
+	public List<StockPriceEntity> getAllStockPrices();
 	
 }

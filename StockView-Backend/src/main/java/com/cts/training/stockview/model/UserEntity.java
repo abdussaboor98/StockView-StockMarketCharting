@@ -2,29 +2,34 @@ package com.cts.training.stockview.model;
 
 import java.io.Serializable;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
+import org.springframework.stereotype.Component;
+
 @Entity
-@Table(name = "user")
-public class User implements Serializable {
+@Component
+@Table(name = "users")
+public class UserEntity implements Serializable {
 	
 	private static final long serialVersionUID = 5463522255309500638L;
 	@Id
 	@GeneratedValue
 	private int id;
+	@Column(unique = true)
 	private String username;
 	private String email;
 	private String password;
 	private long phoneNo;
 	private boolean isAdmin;
 	private boolean confirmed;
-	public User() {
+	public UserEntity() {
 		
 	}
-	public User(int id, String username, String email, String password, long phoneNo, boolean isAdmin,
+	public UserEntity(int id, String username, String email, String password, long phoneNo, boolean isAdmin,
 			boolean confirmed) {
 		super();
 		this.id = id;

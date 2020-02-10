@@ -6,22 +6,20 @@ import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
+import org.springframework.beans.factory.annotation.Autowired;
 
 import com.cts.training.stockview.dao.CompanyDAO;
-import com.cts.training.stockview.model.Company;
-import com.cts.training.stockview.util.HibernateHelper;
+import com.cts.training.stockview.model.CompanyEntity;
 
 public class CompanyDAOImpl implements CompanyDAO {
 
+	@Autowired
+	private SessionFactory sessionFactory;
+
 	@Override
-	public boolean addCompany(Company company) {
+	public boolean addCompany(CompanyEntity company) {
 		try {
-			SessionFactory sessionFactory = HibernateHelper.getSessionFactory();
-			Session session = sessionFactory.openSession();
-			Transaction tx = session.beginTransaction();
-			session.save(company);
-			tx.commit();
-			session.close();
+			sessionFactory.getCurrentSession().save(company);
 			return true;
 		} catch (HibernateException e) {
 			e.printStackTrace();
@@ -30,14 +28,9 @@ public class CompanyDAOImpl implements CompanyDAO {
 	}
 
 	@Override
-	public boolean updateCompany(Company company) {
+	public boolean updateCompany(CompanyEntity company) {
 		try {
-			SessionFactory sessionFactory = HibernateHelper.getSessionFactory();
-			Session session = sessionFactory.openSession();
-			Transaction tx = session.beginTransaction();
-			session.update(company);
-			tx.commit();
-			session.close();
+			sessionFactory.getCurrentSession().update(company);
 			return true;
 		} catch (HibernateException e) {
 			e.printStackTrace();
@@ -46,14 +39,9 @@ public class CompanyDAOImpl implements CompanyDAO {
 	}
 
 	@Override
-	public boolean deleteCompany(Company company) {
+	public boolean deleteCompany(CompanyEntity company) {
 		try {
-			SessionFactory sessionFactory = HibernateHelper.getSessionFactory();
-			Session session = sessionFactory.openSession();
-			Transaction tx = session.beginTransaction();
-			session.delete(company);
-			tx.commit();
-			session.close();
+			sessionFactory.getCurrentSession().delete(company);
 			return true;
 		} catch (HibernateException e) {
 			e.printStackTrace();
@@ -62,31 +50,20 @@ public class CompanyDAOImpl implements CompanyDAO {
 	}
 
 	@Override
-	public Company getCompanyById(int id) {
+	public CompanyEntity getCompanyById(int id) {
 		try {
-			SessionFactory sessionFactory = HibernateHelper.getSessionFactory();
-			Session session = sessionFactory.openSession();
-			Transaction tx = session.beginTransaction();
-			Company company = session.get(Company.class,id);
-			tx.commit();
-			session.close();
-			return company;
+			return sessionFactory.getCurrentSession().get(CompanyEntity.class, id);
 		} catch (HibernateException e) {
 			e.printStackTrace();
 			return null;
 		}
 	}
 
+	@SuppressWarnings("unchecked")
 	@Override
-	public List<Company> getAllCompanys() {
+	public List<CompanyEntity> getAllCompanys() {
 		try {
-			SessionFactory sessionFactory = HibernateHelper.getSessionFactory();
-			Session session = sessionFactory.openSession();
-			Transaction tx = session.beginTransaction();
-			List<Company> companies = session.createQuery("FROM Company").list();
-			tx.commit();
-			session.close();
-			return companies;
+			return sessionFactory.getCurrentSession().createQuery("FROM CompanyEntity").getResultList();
 		} catch (HibernateException e) {
 			e.printStackTrace();
 			return null;

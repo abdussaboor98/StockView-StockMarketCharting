@@ -3,26 +3,21 @@ package com.cts.training.stockview.daoimpl;
 import java.util.List;
 
 import org.hibernate.HibernateException;
-import org.hibernate.Session;
 import org.hibernate.SessionFactory;
-import org.hibernate.Transaction;
+import org.springframework.beans.factory.annotation.Autowired;
 
 import com.cts.training.stockview.dao.StockExchangeDAO;
-import com.cts.training.stockview.model.StockExchange;
-import com.cts.training.stockview.model.User;
-import com.cts.training.stockview.util.HibernateHelper;
+import com.cts.training.stockview.model.StockExchangeEntity;
 
 public class StockExchangeDAOImpl implements StockExchangeDAO {
 
+	@Autowired
+	SessionFactory sessionFactory;
+	
 	@Override
-	public boolean addStockExchange(StockExchange stockExchange) {
+	public boolean addStockExchange(StockExchangeEntity stockExchange) {
 		try {
-			SessionFactory sessionFactory = HibernateHelper.getSessionFactory();
-			Session session = sessionFactory.openSession();
-			Transaction tx = session.beginTransaction();
-			session.save(stockExchange);
-			tx.commit();
-			session.close();
+			sessionFactory.getCurrentSession().save(stockExchange);
 			return true;
 		} catch (HibernateException e) {
 			e.printStackTrace();
@@ -31,14 +26,9 @@ public class StockExchangeDAOImpl implements StockExchangeDAO {
 	}
 
 	@Override
-	public boolean updateStockExchange(StockExchange stockExchange) {
+	public boolean updateStockExchange(StockExchangeEntity stockExchange) {
 		try {
-			SessionFactory sessionFactory = HibernateHelper.getSessionFactory();
-			Session session = sessionFactory.openSession();
-			Transaction tx = session.beginTransaction();
-			session.update(stockExchange);
-			tx.commit();
-			session.close();
+			sessionFactory.getCurrentSession().update(stockExchange);
 			return true;
 		} catch (HibernateException e) {
 			e.printStackTrace();
@@ -47,14 +37,9 @@ public class StockExchangeDAOImpl implements StockExchangeDAO {
 	}
 
 	@Override
-	public boolean deleteStockExchange(StockExchange stockExchange) {
+	public boolean deleteStockExchange(StockExchangeEntity stockExchange) {
 		try {
-			SessionFactory sessionFactory = HibernateHelper.getSessionFactory();
-			Session session = sessionFactory.openSession();
-			Transaction tx = session.beginTransaction();
-			session.delete(stockExchange);
-			tx.commit();
-			session.close();
+			sessionFactory.getCurrentSession().delete(stockExchange);
 			return true;
 		} catch (HibernateException e) {
 			e.printStackTrace();
@@ -63,31 +48,20 @@ public class StockExchangeDAOImpl implements StockExchangeDAO {
 	}
 
 	@Override
-	public StockExchange getStockExchangeById(int id) {
+	public StockExchangeEntity getStockExchangeById(int id) {
 		try {
-			SessionFactory sessionFactory = HibernateHelper.getSessionFactory();
-			Session session = sessionFactory.openSession();
-			Transaction tx = session.beginTransaction();
-			StockExchange stockExchange = session.get(StockExchange.class, id);
-			tx.commit();
-			session.close();
-			return stockExchange;
+			return sessionFactory.getCurrentSession().get(StockExchangeEntity.class, id);
 		} catch (HibernateException e) {
 			e.printStackTrace();
 			return null;
 		}
 	}
 
+	@SuppressWarnings("unchecked")
 	@Override
-	public List<StockExchange> getAllStockExchanges() {
+	public List<StockExchangeEntity> getAllStockExchanges() {
 		try {
-			SessionFactory sessionFactory = HibernateHelper.getSessionFactory();
-			Session session = sessionFactory.openSession();
-			Transaction tx = session.beginTransaction();
-			List <StockExchange> stockExchanges = session.createQuery("FROM StockExchange").list();
-			tx.commit();
-			session.close();
-			return stockExchanges;
+			return sessionFactory.getCurrentSession().createQuery("FROM StockExchangeEntity").getResultList();
 		} catch (HibernateException e) {
 			e.printStackTrace();
 			return null;

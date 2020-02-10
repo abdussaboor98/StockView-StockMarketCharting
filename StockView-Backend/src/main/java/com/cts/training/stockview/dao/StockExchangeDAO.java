@@ -2,17 +2,17 @@ package com.cts.training.stockview.dao;
 
 import java.util.List;
 
-import com.cts.training.stockview.model.StockExchange;
+import com.cts.training.stockview.model.StockExchangeEntity;
 
 public interface StockExchangeDAO {
 
-	public boolean addStockExchange(StockExchange stockExchange);
+	public boolean addStockExchange(StockExchangeEntity stockExchange);
 
-	public boolean updateStockExchange(StockExchange stockExchange);
+	public boolean updateStockExchange(StockExchangeEntity stockExchange);
 
-	public boolean deleteStockExchange(StockExchange stockExchange);
+	public boolean deleteStockExchange(StockExchangeEntity stockExchange);
 
-	public StockExchange getStockExchangeById(int id);
+	public StockExchangeEntity getStockExchangeById(int id);
 
-	public List<StockExchange> getAllStockExchanges();
+	public List<StockExchangeEntity> getAllStockExchanges();
 }

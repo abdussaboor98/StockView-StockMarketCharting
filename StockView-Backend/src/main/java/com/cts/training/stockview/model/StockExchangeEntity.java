@@ -7,9 +7,12 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
+import org.springframework.stereotype.Component;
+
 @Entity
+@Component
 @Table(name = "stock_exchanges")
-public class StockExchange implements Serializable {
+public class StockExchangeEntity implements Serializable {
 
 	private static final long serialVersionUID = 5971304677677187555L;
 	@Id
@@ -19,10 +22,10 @@ public class StockExchange implements Serializable {
 	private String contractAddress;
 	private String brief;
 	private String remarks;
-	public StockExchange() {
+	public StockExchangeEntity() {
 		
 	}
-	public StockExchange(int id, String exchangeName, String contractAddress, String brief, String remarks) {
+	public StockExchangeEntity(int id, String exchangeName, String contractAddress, String brief, String remarks) {
 		super();
 		this.id = id;
 		this.exchangeName = exchangeName;

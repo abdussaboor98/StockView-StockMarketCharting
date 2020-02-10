@@ -2,18 +2,18 @@ package com.cts.training.stockview.dao;
 
 import java.util.List;
 
-import com.cts.training.stockview.model.Company;
+import com.cts.training.stockview.model.CompanyEntity;
 
 public interface CompanyDAO {
 
-	public boolean addCompany(Company company);
+	public boolean addCompany(CompanyEntity company);
 
-	public boolean updateCompany(Company company);
+	public boolean updateCompany(CompanyEntity company);
 
-	public boolean deleteCompany(Company company);
+	public boolean deleteCompany(CompanyEntity company);
 
-	public Company getCompanyById(int id);
+	public CompanyEntity getCompanyById(int id);
 
-	public List<Company> getAllCompanys();
+	public List<CompanyEntity> getAllCompanys();
 	
 }

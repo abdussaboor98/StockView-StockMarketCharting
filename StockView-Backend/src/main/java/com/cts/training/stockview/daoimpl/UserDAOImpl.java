@@ -6,23 +6,24 @@ import org.hibernate.HibernateException;
 import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
-import org.hibernate.Transaction;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.cts.training.stockview.dao.UserDAO;
-import com.cts.training.stockview.model.User;
-import com.cts.training.stockview.util.HibernateHelper;
+import com.cts.training.stockview.model.UserEntity;
 
+@Transactional
+@Repository(value = "userDAO")
 public class UserDAOImpl implements UserDAO {
 
+	@Autowired
+	private SessionFactory sessionFactory;
+
 	@Override
-	public boolean addUser(User user) {
+	public boolean addUser(UserEntity user) {
 		try {
-			SessionFactory sessionFactory = HibernateHelper.getSessionFactory();
-			Session session = sessionFactory.openSession();
-			Transaction tx = session.beginTransaction();
-			session.save(user);
-			tx.commit();
-			session.close();
+			sessionFactory.getCurrentSession().save(user);
 			return true;
 		} catch (HibernateException e) {
 			e.printStackTrace();
@@ -31,14 +32,9 @@ public class UserDAOImpl implements UserDAO {
 	}
 
 	@Override
-	public boolean updateUser(User user) {
+	public boolean updateUser(UserEntity user) {
 		try {
-			SessionFactory sessionFactory = HibernateHelper.getSessionFactory();
-			Session session = sessionFactory.openSession();
-			Transaction tx = session.beginTransaction();
-			session.update(user);
-			tx.commit();
-			session.close();
+			sessionFactory.getCurrentSession().update(user);
 			return true;
 		} catch (HibernateException e) {
 			e.printStackTrace();
@@ -47,14 +43,9 @@ public class UserDAOImpl implements UserDAO {
 	}
 
 	@Override
-	public boolean deleteUser(User user) {
+	public boolean deleteUser(UserEntity user) {
 		try {
-			SessionFactory sessionFactory = HibernateHelper.getSessionFactory();
-			Session session = sessionFactory.openSession();
-			Transaction tx = session.beginTransaction();
-			session.delete(user);
-			tx.commit();
-			session.close();
+			sessionFactory.getCurrentSession().delete(user);
 			return true;
 		} catch (HibernateException e) {
 			e.printStackTrace();
@@ -63,15 +54,9 @@ public class UserDAOImpl implements UserDAO {
 	}
 
 	@Override
-	public User getUserById(int id) {
+	public UserEntity getUserById(int id) {
 		try {
-			SessionFactory sessionFactory = HibernateHelper.getSessionFactory();
-			Session session = sessionFactory.openSession();
-			Transaction tx = session.beginTransaction();
-			User user = session.get(User.class, id);
-			tx.commit();
-			session.close();
-			return user;
+			return sessionFactory.getCurrentSession().get(UserEntity.class, id);
 		} catch (HibernateException e) {
 			e.printStackTrace();
 			return null;
@@ -79,15 +64,9 @@ public class UserDAOImpl implements UserDAO {
 	}
 
 	@Override
-	public List<User> getAllUsers() {
+	public List<UserEntity> getAllUsers() {
 		try {
-			SessionFactory sessionFactory = HibernateHelper.getSessionFactory();
-			Session session = sessionFactory.openSession();
-			Transaction tx = session.beginTransaction();
-			List<User> users = session.createQuery("FROM User").list();
-			tx.commit();
-			session.close();
-			return users;
+			return sessionFactory.getCurrentSession().createQuery("FROM UserEntity").list();
 		} catch (HibernateException e) {
 			e.printStackTrace();
 			return null;
@@ -97,18 +76,14 @@ public class UserDAOImpl implements UserDAO {
 	@Override
 	public boolean validateUser(String username, String password) {
 		try {
-			SessionFactory sessionFactory = HibernateHelper.getSessionFactory();
-			Session session = sessionFactory.openSession();
-			Transaction tx = session.beginTransaction();
-			Query query = session.createQuery("from User where username= :username and password= :password");
+			Query query = sessionFactory.getCurrentSession()
+					.createQuery("from UserEntity where username= :username and password= :password");
 			query.setString("username", username);
 			query.setString("password", password);
-			User user = (User) query.uniqueResult();
-			if (user != null) {
-				session.close();
+			List<UserEntity> users = query.list();
+			if (users.size() > 0) {
 				return true;
 			} else {
-				session.close();
 				return false;
 			}
 		} catch (HibernateException e) {
