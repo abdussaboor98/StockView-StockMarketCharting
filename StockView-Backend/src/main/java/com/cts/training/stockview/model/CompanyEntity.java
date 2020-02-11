@@ -25,7 +25,7 @@ public class CompanyEntity implements Serializable {
 	private String name;
 	private String ceoName;
 	
-	@ElementCollection(fetch = FetchType.LAZY)
+	@ElementCollection(fetch = FetchType.EAGER)
 	@CollectionTable(name = "directors")
 	private List<String> directors;
 	
