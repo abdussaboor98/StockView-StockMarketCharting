@@ -70,4 +70,15 @@ public class IPODAOImpl implements IPODAO {
 			return null;
 		}
 	}
+
+	@Override
+	public boolean addOrUpdateIPO(IPOEntity ipo) {
+		try {
+			sessionFactory.getCurrentSession().saveOrUpdate(ipo);
+			return true;
+		} catch (HibernateException e) {
+			e.printStackTrace();
+			return false;
+		}
+	}
 }

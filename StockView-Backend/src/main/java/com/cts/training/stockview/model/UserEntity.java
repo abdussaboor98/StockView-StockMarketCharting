@@ -24,8 +24,8 @@ public class UserEntity implements Serializable {
 	private String email;
 	private String password;
 	private long phoneNo;
-	private boolean isAdmin;
-	private boolean confirmed;
+	private boolean isAdmin = false;
+	private boolean confirmed = false;
 	public UserEntity() {
 		
 	}

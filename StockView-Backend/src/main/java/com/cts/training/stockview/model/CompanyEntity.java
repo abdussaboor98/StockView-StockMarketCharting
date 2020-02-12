@@ -25,7 +25,7 @@ public class CompanyEntity implements Serializable {
 	private String name;
 	private String ceoName;
 	
-	@ElementCollection(fetch = FetchType.EAGER)
+	@ElementCollection(fetch = FetchType.LAZY)
 	@CollectionTable(name = "directors")
 	private List<String> directors;
 	
@@ -82,6 +82,7 @@ public class CompanyEntity implements Serializable {
 		this.ceoName = ceoName;
 	}
 
+	
 	public List<String> getDirectors() {
 		return directors;
 	}

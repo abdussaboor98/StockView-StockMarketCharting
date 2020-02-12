@@ -10,6 +10,8 @@ public interface IPODAO {
 
 	public boolean updateIPO(IPOEntity ipo);
 
+	public boolean addOrUpdateIPO(IPOEntity ipo);
+
 	public boolean deleteIPO(IPOEntity ipo);
 
 	public IPOEntity getIPOById(int id);

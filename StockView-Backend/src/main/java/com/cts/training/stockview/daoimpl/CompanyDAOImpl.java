@@ -2,11 +2,13 @@ package com.cts.training.stockview.daoimpl;
 
 import java.util.List;
 
+import org.hibernate.Hibernate;
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.orm.hibernate5.HibernateTransactionManager;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
@@ -14,12 +16,14 @@ import org.springframework.transaction.annotation.Transactional;
 import com.cts.training.stockview.dao.CompanyDAO;
 import com.cts.training.stockview.model.CompanyEntity;
 
-@Transactional
 @Repository(value = "companyDAO")
 public class CompanyDAOImpl implements CompanyDAO {
 
 	@Autowired
 	private SessionFactory sessionFactory;
+	
+//	@Autowired
+//	private HibernateTransactionManager transactionManager;
 
 	@Override
 	public boolean addCompany(CompanyEntity company) {
@@ -66,10 +70,16 @@ public class CompanyDAOImpl implements CompanyDAO {
 
 	@SuppressWarnings("unchecked")
 	@Override
-	@Transactional(propagation=Propagation.REQUIRED, readOnly=true, noRollbackFor=Exception.class)
+	@Transactional
 	public List<CompanyEntity> getAllCompanys() {
 		try {
-			return sessionFactory.getCurrentSession().createQuery("FROM CompanyEntity").getResultList();
+			List<CompanyEntity> companies = sessionFactory.getCurrentSession().createQuery("FROM CompanyEntity").list();
+			for(CompanyEntity company:companies) {
+				Hibernate.initialize(company.getDirectors());
+				Hibernate.initialize(company.getStockExchanges());
+				Hibernate.initialize(company.getStockCodes());
+			}
+			return companies;
 		} catch (HibernateException e) {
 			e.printStackTrace();
 			return null;

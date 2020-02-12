@@ -94,4 +94,15 @@ public class UserDAOImpl implements UserDAO {
 			return false;
 		}
 	}
+
+	@Override
+	public boolean addOrUpdateUser(UserEntity user) {
+		try {
+			sessionFactory.getCurrentSession().saveOrUpdate(user);
+			return true;
+		} catch (HibernateException e) {
+			e.printStackTrace();
+			return false;
+		}
+	}
 }

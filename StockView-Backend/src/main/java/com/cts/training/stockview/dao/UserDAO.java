@@ -9,6 +9,8 @@ public interface UserDAO {
 	public boolean addUser(UserEntity user);
 
 	public boolean updateUser(UserEntity user);
+	
+	public boolean addOrUpdateUser(UserEntity user);
 
 	public boolean deleteUser(UserEntity user);
 

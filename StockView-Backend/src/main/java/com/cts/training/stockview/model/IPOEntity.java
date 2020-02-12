@@ -2,12 +2,14 @@ package com.cts.training.stockview.model;
 
 import java.io.Serializable;
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.stereotype.Component;
 
 @Entity
@@ -70,8 +72,10 @@ public class IPOEntity implements Serializable {
 	public LocalDateTime getOpenDateTime() {
 		return openDateTime;
 	}
-	public void setOpenDateTime(LocalDateTime openDateTime) {
-		this.openDateTime = openDateTime;
+	public void setOpenDateTime(String openDateTime) {
+		
+		DateTimeFormatter format =  DateTimeFormatter.ofPattern("yyyy-MM-dd'T'H:m");
+		this.openDateTime = LocalDateTime.parse(openDateTime, format);
 	}
 	public String getRemarks() {
 		return remarks;
