@@ -72,11 +72,15 @@ public class IPOEntity implements Serializable {
 	public LocalDateTime getOpenDateTime() {
 		return openDateTime;
 	}
+	
+	
 	public void setOpenDateTime(String openDateTime) {
 		
-		DateTimeFormatter format =  DateTimeFormatter.ofPattern("yyyy-MM-dd'T'H:m");
-		this.openDateTime = LocalDateTime.parse(openDateTime, format);
+		DateTimeFormatter formatter =  DateTimeFormatter.ofPattern("yyyy-MM-dd'T'H:m");
+		this.openDateTime = LocalDateTime.parse(openDateTime, formatter);
 	}
+	
+	
 	public String getRemarks() {
 		return remarks;
 	}

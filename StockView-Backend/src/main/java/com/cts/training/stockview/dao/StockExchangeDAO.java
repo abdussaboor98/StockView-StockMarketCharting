@@ -9,6 +9,8 @@ public interface StockExchangeDAO {
 	public boolean addStockExchange(StockExchangeEntity stockExchange);
 
 	public boolean updateStockExchange(StockExchangeEntity stockExchange);
+	
+	public boolean saveOrUpdateStockExchange(StockExchangeEntity stockExchange);
 
 	public boolean deleteStockExchange(StockExchangeEntity stockExchange);
 

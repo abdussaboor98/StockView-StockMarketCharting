@@ -10,6 +10,8 @@ public interface StockPriceDAO {
 
 	public boolean updateStockPrice(StockPriceEntity stockPrice);
 
+	public boolean addOrUpdateStockPrice(StockPriceEntity stockPrice);
+
 	public boolean deleteStockPrice(StockPriceEntity stockPrice);
 
 	public StockPriceEntity getStockPriceById(int id);

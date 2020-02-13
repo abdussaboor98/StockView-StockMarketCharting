@@ -72,4 +72,16 @@ public class StockPriceDAOImpl implements StockPriceDAO {
 		}
 	}
 
+	@Override
+	public boolean addOrUpdateStockPrice(StockPriceEntity stockPrice) {
+		try {
+			sessionFactory.getCurrentSession().saveOrUpdate(stockPrice);
+			return true;
+		} catch (HibernateException e) {
+			e.printStackTrace();
+			return false;
+		}
+
+	}
+
 }
