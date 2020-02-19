@@ -25,6 +25,7 @@ public class UserDAOImpl implements UserDAO {
 	@Override
 	public boolean addUser(UserEntity user) {
 		try {
+			System.out.println("Adding "+user);
 			sessionFactory.getCurrentSession().save(user);
 			return true;
 		} catch (HibernateException e) {

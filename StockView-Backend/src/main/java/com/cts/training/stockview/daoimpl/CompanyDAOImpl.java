@@ -17,13 +17,11 @@ import com.cts.training.stockview.dao.CompanyDAO;
 import com.cts.training.stockview.model.CompanyEntity;
 
 @Repository(value = "companyDAO")
+@Transactional
 public class CompanyDAOImpl implements CompanyDAO {
 
 	@Autowired
 	private SessionFactory sessionFactory;
-	
-//	@Autowired
-//	private HibernateTransactionManager transactionManager;
 
 	@Override
 	public boolean addCompany(CompanyEntity company) {
@@ -70,15 +68,10 @@ public class CompanyDAOImpl implements CompanyDAO {
 
 	@SuppressWarnings("unchecked")
 	@Override
-	@Transactional
 	public List<CompanyEntity> getAllCompanys() {
 		try {
-			List<CompanyEntity> companies = sessionFactory.getCurrentSession().createQuery("FROM CompanyEntity").list();
-			for(CompanyEntity company:companies) {
-				Hibernate.initialize(company.getDirectors());
-				Hibernate.initialize(company.getStockExchanges());
-				Hibernate.initialize(company.getStockCodes());
-			}
+			List<CompanyEntity> companies = sessionFactory.getCurrentSession().createQuery("FROM CompanyEntity")
+					.getResultList();
 			return companies;
 		} catch (HibernateException e) {
 			e.printStackTrace();

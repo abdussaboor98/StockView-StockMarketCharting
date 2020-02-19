@@ -11,6 +11,8 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
+import org.hibernate.annotations.Fetch;
+import org.hibernate.annotations.FetchMode;
 import org.springframework.stereotype.Component;
 
 @Entity
@@ -25,17 +27,20 @@ public class CompanyEntity implements Serializable {
 	private String name;
 	private String ceoName;
 	
-	@ElementCollection(fetch = FetchType.LAZY)
+	@ElementCollection(fetch = FetchType.EAGER)
+	@Fetch(value = FetchMode.SUBSELECT)
 	@CollectionTable(name = "directors")
 	private List<String> directors;
 	
-	@ElementCollection(fetch = FetchType.LAZY)
+	@ElementCollection(fetch = FetchType.EAGER)
+	@Fetch(value = FetchMode.SUBSELECT)
 	@CollectionTable(name = "in_stock_exchanges")
 	private List<String> stockExchanges;
 	private String sector;
 	private String brief;
 	
-	@ElementCollection(fetch = FetchType.LAZY)
+	@ElementCollection(fetch = FetchType.EAGER)
+	@Fetch(value = FetchMode.SUBSELECT)
 	@CollectionTable(name = "stock_codes")
 	private List<String> stockCodes;
 	private double turnover;

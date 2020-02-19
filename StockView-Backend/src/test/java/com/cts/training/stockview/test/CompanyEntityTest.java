@@ -50,6 +50,7 @@ public class CompanyEntityTest {
 //	@Ignore
 	public void testGetAllCompanys() {
 		List<CompanyEntity> companys = companyDAO.getAllCompanys();
+		System.out.println(companys);
 		assertEquals(12, companys.size());
 	}
 
@@ -83,13 +84,13 @@ public class CompanyEntityTest {
 //		assertEquals(true, companyDAO.updateCompany(c));
 //	}
 //
-//	@Test
+	@Test
 //	@Ignore
-//	public void testAddCompanySuccess() {
-//		CompanyEntity c = new CompanyEntity(1, "XYZ", "The CEO", directors, stockExchanges, "Technology",
-//				"Some Company", stockCodes, 33123123L);
-//		assertEquals(true, companyDAO.addCompany(c));
-//	}
+	public void testAddCompanySuccess() {
+		CompanyEntity c = new CompanyEntity(1, "XYZ", "The CEO", directors, stockExchanges, "Technology",
+				"Some Company", stockCodes, 33123123L);
+		assertEquals(true, companyDAO.addCompany(c));
+	}
 //
 //	@Test(expected = DataIntegrityViolationException.class)
 //	@Ignore

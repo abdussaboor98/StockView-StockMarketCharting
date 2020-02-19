@@ -24,7 +24,6 @@ public class HibernateConfiguration {
 		LocalSessionFactoryBean sessionFactory = new LocalSessionFactoryBean();
 		sessionFactory.setDataSource(getDataSource());
 		sessionFactory.setPackagesToScan(new String[] { "com.cts.training.stockview.model" });
-//		sessionFactory.setAnnotatedClasses(UserEntity.class);
 		sessionFactory.setHibernateProperties(getHibernateProperties());
 		return sessionFactory;
 	}
@@ -49,7 +48,7 @@ public class HibernateConfiguration {
 
 	@Bean
 	@Autowired
-	public HibernateTransactionManager getTransactionManager(SessionFactory sessionFactory) {
+	public HibernateTransactionManager transactionManager(SessionFactory sessionFactory) {
 		HibernateTransactionManager transactionManager = new HibernateTransactionManager();
 		transactionManager.setSessionFactory(sessionFactory);
 		return transactionManager;
