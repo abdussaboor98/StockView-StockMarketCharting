@@ -42,7 +42,7 @@ export class ManageExchangeComponent implements OnInit {
         this.router.navigate(["update-exchange"]);
     }
 
-    deleteStockExchange(id) {
+    deleteStockExchange(id: number) {
         this.stockExService.deleteStockExchange(id).subscribe(data => {
             this.stockExchanges = this.stockExchanges.filter(
                 exchange => exchange.id !== id

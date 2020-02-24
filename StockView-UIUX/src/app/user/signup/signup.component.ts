@@ -32,7 +32,7 @@ export class SignupComponent implements OnInit {
             password: ["", Validators.required],
             rePassword: ["", Validators.required],
             phoneNo: ["", Validators.required],
-            isAdmin: [false],
+            admin: [false],
             confirmed: [false]
         });
     }

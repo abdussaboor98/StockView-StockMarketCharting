@@ -7,7 +7,7 @@ import { User } from "../models/users";
     providedIn: "root"
 })
 export class UserService {
-    url = "http://localhost:3000/users/";
+    url = "http://localhost:8080/users/";
     constructor(private httpClient: HttpClient) {}
 
     getAllUsers(): Observable<User[]> {
@@ -27,7 +27,7 @@ export class UserService {
     }
 
     updateUser(user: User): Observable<User> {
-        return this.httpClient.put<User>(this.url + user.id, user);
+        return this.httpClient.put<User>(this.url, user);
     }
 
     isAdmin(): boolean {

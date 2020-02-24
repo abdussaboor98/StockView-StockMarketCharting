@@ -5,6 +5,6 @@ export class User {
     password: string;
     rePassword: string;
     phoneNo: number;
-    isAdmin: boolean;
+    admin: boolean;
     confirmed: boolean;
 }

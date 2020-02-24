@@ -7,7 +7,7 @@ import { HttpClient } from "@angular/common/http";
     providedIn: "root"
 })
 export class SectorsService {
-    url = "http://localhost:5300/sectors/";
+    url = "http://localhost:8080/sectors/";
     constructor(private httpClient: HttpClient) {}
 
     getAllSectors(): Observable<Sector[]> {
@@ -18,12 +18,12 @@ export class SectorsService {
         return this.httpClient.get<Sector>(this.url + id);
     }
 
-    addNewSector(Sector: Sector): Observable<Sector> {
-        return this.httpClient.post<Sector>(this.url, Sector);
+    addNewSector(sector: Sector): Observable<Sector> {
+        return this.httpClient.post<Sector>(this.url, sector);
     }
 
-    updateSector(Sector: Sector): Observable<Sector> {
-        return this.httpClient.put<Sector>(this.url + Sector.id, Sector);
+    updateSector(sector: Sector): Observable<Sector> {
+        return this.httpClient.put<Sector>(this.url, sector);
     }
 
     deleteSector(id: number): Observable<Sector> {

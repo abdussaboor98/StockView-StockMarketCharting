@@ -32,7 +32,7 @@ export class UpdateSectorComponent implements OnInit {
 
     onSubmit(){
         this.sectorsService.updateSector(this.updateSectorForm.value).subscribe(data=>{
-            this.router.navigate(['manage-sectorsF'])
+            this.router.navigate(['manage-sectors'])
         })
     }
 }

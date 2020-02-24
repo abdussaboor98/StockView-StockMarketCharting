@@ -78,7 +78,7 @@ export class LoginComponent implements OnInit {
     getUserType(username: string): string {
         for (let user of this.users) {
             if (user.username == username) {
-                if (user.isAdmin) {
+                if (user.admin) {
                     return "admin";
                 }
             }

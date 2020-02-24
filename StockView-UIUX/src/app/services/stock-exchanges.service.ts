@@ -7,7 +7,7 @@ import { StockExchange } from "../models/stockExchange";
     providedIn: "root"
 })
 export class StockExchangesService {
-    url = "http://localhost:5400/stockexchanges/";
+    url = "http://localhost:8080/stockExchanges/";
     constructor(private httpClient: HttpClient) {}
 
     getAllExchanges(): Observable<StockExchange[]> {
@@ -23,13 +23,10 @@ export class StockExchangesService {
     }
 
     updateStockExchange(stockEx: StockExchange): Observable<StockExchange> {
-        return this.httpClient.put<StockExchange>(
-            this.url + stockEx.id,
-            stockEx
-        );
+        return this.httpClient.put<StockExchange>(this.url,stockEx);
     }
 
-    deleteStockExchange(stockEx: StockExchange): Observable<StockExchange> {
-        return this.httpClient.delete<StockExchange>(this.url + stockEx.id);
+    deleteStockExchange(id: number): Observable<StockExchange> {
+        return this.httpClient.delete<StockExchange>(this.url + id);
     }
 }
