@@ -33,6 +33,7 @@ import { UserAuthGuard } from './guards/user-auth.guard';
 import { NoLoginGuard } from './guards/no-login.guard';
 import { LoginGuard } from './guards/login.guard';
 import { CompareResultComponent } from './user/compare-result/compare-result.component';
+import { ActivateComponent } from './user/activate/activate.component';
 
 const routes: Routes = [
     { path: "", redirectTo: "home", pathMatch: "full" },
@@ -64,6 +65,7 @@ const routes: Routes = [
     { path: "compare", component: CompareComponent, canActivate: [UserAuthGuard] },
     { path: "compare-result", component: CompareResultComponent, canActivate: [UserAuthGuard] },
     { path: "landing", component: LandingComponent, canActivate:[LoginGuard]},
+    { path: "user/activate", component: ActivateComponent, canActivate:[NoLoginGuard]}
 
 ];
 

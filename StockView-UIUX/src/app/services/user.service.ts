@@ -30,6 +30,10 @@ export class UserService {
         return this.httpClient.put<User>(this.url, user);
     }
 
+    activateUser(email: string): Observable<boolean> {
+        return this.httpClient.put<boolean>(this.url+"activate",email);
+    }
+
     isAdmin(): boolean {
         if (
             localStorage.getItem("userType") == "admin" ||
