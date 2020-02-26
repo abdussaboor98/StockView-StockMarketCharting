@@ -38,7 +38,7 @@ export class NewIpoComponent implements OnInit {
 
     populateExchanges($event){
         const index = $event.target.selectedIndex-1;
-        this.stockExchanges = this.companies[index].stockExchanges;
+        this.stockExchanges = this.companies[index].listedIn;
     }
 
     onSubmit() {

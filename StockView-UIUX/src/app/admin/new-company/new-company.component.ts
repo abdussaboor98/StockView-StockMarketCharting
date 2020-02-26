@@ -47,9 +47,9 @@ export class NewCompanyComponent implements OnInit {
             sector: ["none", Validators.required],
             ceo: ["", Validators.required],
             directors: this.formBuilder.array([this.formBuilder.control("")]),
-            stockExchanges: this.formBuilder.array([
+            listedIn: this.formBuilder.array([
                 this.formBuilder.group({
-                    stockExchange: ["", Validators.required],
+                    stockExchangeName: ["", Validators.required],
                     stockCode: ["", Validators.required]
                 })
             ]),
@@ -78,16 +78,16 @@ export class NewCompanyComponent implements OnInit {
 
     addStockExchange() {
         const stockExGroup = this.formBuilder.group({
-            stockExchange: ["", Validators.required],
+            stockExchangeName: ["", Validators.required],
             stockCode: ["", Validators.required]
         });
-        (<FormArray>this.newCompanyForm.get("stockExchanges")).push(
+        (<FormArray>this.newCompanyForm.get("listedIn")).push(
             stockExGroup
         );
     }
 
     removeStockExchange(i: number) {
-        (<FormArray>this.newCompanyForm.get("stockExchanges")).removeAt(i);
+        (<FormArray>this.newCompanyForm.get("listedIn")).removeAt(i);
     }
 
     goBack() {

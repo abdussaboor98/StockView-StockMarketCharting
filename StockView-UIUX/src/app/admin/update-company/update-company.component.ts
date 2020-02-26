@@ -38,7 +38,7 @@ export class UpdateCompanyComponent implements OnInit {
         if (+id > 0) {
             this.companiesService.getCompayById(+id).subscribe(data => {
                 this.noOfDirectors = data.directors.length;
-                this.noOfExchanges = data.stockExchanges.length;
+                this.noOfExchanges = data.listedIn.length;
                 console.log(this.noOfDirectors + " " + this.noOfExchanges);
                 while (this.noOfDirectors > 0) {
                     this.addDirector();
@@ -58,7 +58,7 @@ export class UpdateCompanyComponent implements OnInit {
             sector: ["", Validators.required],
             ceo: ["", Validators.required],
             directors: this.formBuilder.array([]),
-            stockExchanges: this.formBuilder.array([]),
+            listedIn: this.formBuilder.array([]),
             turnover: ["", Validators.required],
             brief: ["", Validators.required]
         });
@@ -83,7 +83,7 @@ export class UpdateCompanyComponent implements OnInit {
 
     addStockExchange() {
         const stockExGroup = this.formBuilder.group({
-            stockExchange: ["", Validators.required],
+            stockExchangeName: ["", Validators.required],
             stockCode: ["", Validators.required]
         });
         (<FormArray>this.updateCompanyForm.get("stockExchanges")).push(

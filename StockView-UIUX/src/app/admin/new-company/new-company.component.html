@@ -62,17 +62,17 @@
                             </div>
                         </div>
                     </div>
-                    <div class="form-group" formArrayName="stockExchanges">
+                    <div class="form-group" formArrayName="listedIn">
                         <div class="row px-3">
                             <label for="stockExchange" class="form-control-label">Stock Exchanges(with stock
                                 code):</label>
                             <button type="button" class="btn btn-info ml-auto btn-sm mb-2"
                                 (click)="addStockExchange()">Add Exchange</button>
                         </div>
-                        <div *ngFor="let StockExG of newCompanyForm.get('stockExchanges').controls; let i = index"
+                        <div *ngFor="let StockExG of newCompanyForm.get('listedIn').controls; let i = index"
                             class="mb-2">
                             <div class="input-group row mx-auto" [formGroupName]="i">
-                                <select name="stockExchange" id="stockExchange" class="custom-select col-7" formControlName="stockExchange" required >
+                                <select name="stockExchange" id="stockExchange" class="custom-select col-7" formControlName="stockExchangeName" required >
                                     <option value="" selected disabled>Select stock exchange...</option>
                                     <option *ngFor="let stockExchange of stockExchanges" [value]="stockExchange.name">{{stockExchange.name}}</option>
                                 </select>

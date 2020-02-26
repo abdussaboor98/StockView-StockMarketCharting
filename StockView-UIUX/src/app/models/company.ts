@@ -4,12 +4,12 @@ export class Company {
     sector: string;
     ceo: string;
     directors: string[];
-    stockExchanges: StockExchange[];
+    listedIn: ListedIn[];
     turnover: number;
     brief: string;
 }
 
-class StockExchange {
-    stockExchange: string;
+class ListedIn {
+    stockExchangeName: string;
     stockCode: string;
 }
