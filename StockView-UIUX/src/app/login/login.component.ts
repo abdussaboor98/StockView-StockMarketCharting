@@ -19,7 +19,7 @@ import { User } from "../models/users";
 })
 export class LoginComponent implements OnInit {
     loginForm: FormGroup;
-    disableButton:boolean;
+    disableButton: boolean;
     isValid: boolean = true;
     faAt = faAt;
     faKey = faKey;
@@ -28,7 +28,7 @@ export class LoginComponent implements OnInit {
         private formBuilder: FormBuilder,
         private userService: UserService,
         private router: Router
-    ) { }
+    ) {}
 
     ngOnInit() {
         this.disableButton = false;
@@ -43,54 +43,68 @@ export class LoginComponent implements OnInit {
     }
 
     login() {
+        let username = this.loginForm.get("username").value;
+        let password = this.loginForm.get("password").value;
         this.disableButton = true;
         this.isValid = true;
         localStorage.removeItem("userId");
         localStorage.removeItem("userType");
         sessionStorage.removeItem("userId");
         sessionStorage.removeItem("userType");
-        if (this.validateUser(this.loginForm.get("username").value,this.loginForm.get("password").value)) {
-            if (this.loginForm.get("rememberMe").value) {
-                localStorage.setItem("userId",this.getUserId(this.loginForm.get("username").value).toString());
-                localStorage.setItem("userType",this.getUserType(this.loginForm.get("username").value));
-            }
-            sessionStorage.setItem("userId",this.getUserId(this.loginForm.get("username").value).toString());
-            sessionStorage.setItem("userType",this.getUserType(this.loginForm.get("username").value));
-            this.router.navigate(["landing"]);
-            $("#login-modal").modal("hide");
-            this.loginForm.reset();
-            this.disableButton = false;
-        } else {
-            this.isValid = false;
-            this.disableButton = false;
-        }
-    }
-
-    validateUser(username: string, password: string): boolean {
-        for (let u of this.users) {
-            if (u.username == username && u.password == password) {
-                return true;
-            }
-        }
-        return false;
-    }
-
-    getUserType(username: string): string {
-        for (let user of this.users) {
-            if (user.username == username) {
-                if (user.admin) {
-                    return "admin";
+        this.userService
+            .getUserByUsernameAndPassword(username, password)
+            .subscribe(data => {
+                if (data!==null && data.confirmed) {
+                    if (this.loginForm.get("rememberMe").value) {
+                        localStorage.setItem(
+                            "userId",
+                            data.id.toString()
+                        );
+                        localStorage.setItem(
+                            "userType",
+                            data.admin ? "admin" : "user"
+                        );
+                    }
+                    sessionStorage.setItem(
+                        "userId",
+                        data.id.toString()
+                    );
+                    sessionStorage.setItem(
+                        "userType",
+                        data.admin ? "admin" : "user"
+                    );
+                    this.router.navigate(["landing"]);
+                    $("#login-modal").modal("hide");
+                    this.loginForm.reset();
+                    this.disableButton = false;
+                } else {
+                    this.isValid = false;
+                    this.disableButton = false;
                 }
-            }
-        }
-        return "user";
+            });
     }
 
-    getUserId(username: string): number {
-        for (let user of this.users) {
-            if (user.username == username) {
-                return user.id;
-            }
-        }
-    }
+    // validateUser(username: string, password: string, user: User): boolean {
+    //     if (user.username == username && user.password == password) {
+    //         return true;
+    //     }
+    //     return false;
+    // }
+
+    // getUserType(isAdmin: boolean): string {
+    //         if (user.username == username) {
+    //             if (user.admin) {
+    //                 return "admin";
+    //             }
+    //         }
+    //     return "user";
+    // }
+
+    // getUserId(username: string): number {
+    //     for (let user of this.users) {
+    //         if (user.username == username) {
+    //             return user.id;
+    //         }
+    //     }
+    // }
 }

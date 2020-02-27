@@ -17,9 +17,16 @@ export class UserService {
     getUserById(id: number): Observable<User> {
         return this.httpClient.get<User>(this.url + id);
     }
-    
+
     getUserByEmail(email: string): Observable<User> {
-        return this.httpClient.get<User>(this.url+ "email/" + email);
+        return this.httpClient.get<User>(this.url + "email/" + email);
+    }
+
+    getUserByUsernameAndPassword(
+        username: string,
+        password: string
+    ): Observable<User> {
+        return this.httpClient.get<User>(this.url + "findByUsernameAndPassword/" + username+"/"+password);
     }
 
     registerUser(user: User): Observable<User> {
@@ -35,7 +42,7 @@ export class UserService {
     }
 
     activateUser(email: string): Observable<boolean> {
-        return this.httpClient.put<boolean>(this.url+"activate",email);
+        return this.httpClient.put<boolean>(this.url + "activate", email);
     }
 
     isAdmin(): boolean {
@@ -46,7 +53,7 @@ export class UserService {
             return true;
         } else {
             return false;
-        } 
+        }
     }
     isUser(): boolean {
         if (
@@ -56,10 +63,6 @@ export class UserService {
             return true;
         } else {
             return false;
-        } 
+        }
     }
-
-    
-
-    
 }
