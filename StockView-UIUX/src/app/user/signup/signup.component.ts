@@ -2,7 +2,7 @@ import { Component, OnInit } from "@angular/core";
 import { FormGroup, Validators, FormBuilder } from "@angular/forms";
 import { UserService } from "src/app/services/user.service";
 import { Router } from "@angular/router";
-import { User } from 'src/app/models/users';
+import { User } from "src/app/models/users";
 declare var $: any;
 
 @Component({
@@ -12,8 +12,8 @@ declare var $: any;
 })
 export class SignupComponent implements OnInit {
     signupForm: FormGroup;
-    users:User[];
-    usernameTaken:boolean = false;
+    users: User[];
+    usernameTaken: boolean = false;
     emailTaken: boolean = false;
     passwordsMatch: boolean = true;
     constructor(
@@ -22,9 +22,9 @@ export class SignupComponent implements OnInit {
         private router: Router
     ) {}
     ngOnInit() {
-        this.userService.getAllUsers().subscribe(data =>{
+        this.userService.getAllUsers().subscribe(data => {
             this.users = data;
-        })
+        });
         this.signupForm = this.formBuilder.group({
             id: [""],
             username: ["", Validators.required],
@@ -37,33 +37,48 @@ export class SignupComponent implements OnInit {
         });
     }
 
-    checkUsername(){
+    checkUsername() {
         this.usernameTaken = false;
-        for(let user of this.users){
-            if(user.username == this.signupForm.get("username").value){
+        for (let user of this.users) {
+            if (user.username == this.signupForm.get("username").value) {
                 this.usernameTaken = true;
                 break;
             }
         }
     }
 
-    checkEmail(){
+    checkEmail() {
+        // this.emailTaken = false;
+        // for(let user of this.users){
+        //     console.log('ggg');
+        //     if(user.email == this.signupForm.get("email").value){
+        //         this.signupForm.setErrors({
+        //             valid: false
+        //         });
+        //         this.emailTaken = true;
+        //         break;
+        //     }
+        // }
         this.emailTaken = false;
-        for(let user of this.users){
-            console.log('ggg');
-            if(user.email == this.signupForm.get("email").value){
-                this.signupForm.setErrors({
-                    valid: false
-                });
-                this.emailTaken = true;
-                console.log('here');
-                break;
-            }
-        }
+        this.userService
+            .getUserByEmail(this.signupForm.get("email").value)
+            .subscribe(data => {
+                if (data !== null) {
+                    this.signupForm.setErrors({
+                        valid: false
+                    });
+                    this.emailTaken = true;
+                }
+                else
+                    this.emailTaken = false;
+            });
     }
 
-    checkPasswordMatch(){
-        if(this.signupForm.get("password").value == this.signupForm.get("rePassword").value){
+    checkPasswordMatch() {
+        if (
+            this.signupForm.get("password").value ==
+            this.signupForm.get("rePassword").value
+        ) {
             this.passwordsMatch = true;
         } else {
             this.passwordsMatch = false;

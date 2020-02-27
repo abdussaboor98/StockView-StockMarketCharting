@@ -1,6 +1,6 @@
 <main class="container">
     <div class="display-4 text-center my-4">Import Data</div>
-    <form class="row justify-content-center" [formGroup]="excelUploadForm" (ngSubmit)="uploadData()">
+    <form class="row justify-content-center" [formGroup]="excelUploadForm" (ngSubmit)="uploadData()" enctype="multipart/form-data">
         <div class="card col-md-8 col-sm-10 col-11 mx-auto">
             <div class="card-body">
                 <span class="lead">Select excel file to be uploaded: </span>
