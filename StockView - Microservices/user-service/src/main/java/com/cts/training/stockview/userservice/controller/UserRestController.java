@@ -31,7 +31,7 @@ public class UserRestController {
 		if (list.size() > 0) {
 			return new ResponseEntity<List<User>>(list, HttpStatus.OK);
 		} else {
-			return new ResponseEntity<String>("No users found", HttpStatus.NOT_FOUND);
+			return new ResponseEntity<String>("No users found", HttpStatus.BAD_REQUEST);
 		}
 	}
 
@@ -41,7 +41,7 @@ public class UserRestController {
 			User user = userService.getUserById(id);
 			return new ResponseEntity<User>(user, HttpStatus.OK);
 		} catch (NoSuchElementException e) {
-			return new ResponseEntity<String>("No such user found\n" + e.getMessage(), HttpStatus.NOT_FOUND);
+			return new ResponseEntity<String>("No such user found\n" + e.getMessage(), HttpStatus.BAD_REQUEST);
 		}
 	}
 
@@ -51,7 +51,7 @@ public class UserRestController {
 			User user = userService.getUserByEmail(email);
 			return new ResponseEntity<User>(user, HttpStatus.OK);
 		} catch (NoSuchElementException e) {
-			return new ResponseEntity<String>("No such user found", HttpStatus.NOT_FOUND);
+			return new ResponseEntity<String>("No such user found", HttpStatus.BAD_REQUEST);
 		}
 	}
 
@@ -62,7 +62,7 @@ public class UserRestController {
 			User user = userService.getUserByUsernameAndPassword(username, password);
 			return new ResponseEntity<User>(user, HttpStatus.OK);
 		} catch (NoSuchElementException e) {
-			return new ResponseEntity<String>("No such user found", HttpStatus.NOT_FOUND);
+			return new ResponseEntity<String>("No such user found", HttpStatus.BAD_REQUEST);
 		}
 	}
 
@@ -72,8 +72,14 @@ public class UserRestController {
 	}
 
 	@PutMapping(value = "/users/activate")
-	public boolean activateUser(@RequestBody String email) {
-		return userService.activateUser(email);
+	public ResponseEntity<?> activateUser(@RequestBody String email) {
+		try {
+			Boolean status = userService.activateUser(email);
+			return new ResponseEntity<Boolean>(status, HttpStatus.OK);
+		} catch (NoSuchElementException e) {
+			return new ResponseEntity<String>("No such email assigned to user", HttpStatus.BAD_REQUEST);
+		}
+
 	}
 
 	@PutMapping(value = "/users", consumes = "application/json")
@@ -82,8 +88,13 @@ public class UserRestController {
 	}
 
 	@DeleteMapping(value = "/users/{id}")
-	public void deleteUser(@PathVariable int id) {
-		userService.deleteUser(id);
+	public ResponseEntity<?> deleteUser(@PathVariable int id) {
+		try {
+			userService.deleteUser(id);
+			return new ResponseEntity<String>("User (id:" + id + ") deleted successfully", HttpStatus.OK);
+		} catch (IllegalArgumentException e) {
+			return new ResponseEntity<String>("No such user found", HttpStatus.BAD_REQUEST);
+		}
 	}
 
 }

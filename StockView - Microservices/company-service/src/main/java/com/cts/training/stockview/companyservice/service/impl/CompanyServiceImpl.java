@@ -1,4 +1,4 @@
-package com.cts.training.stockview.companyservice.service;
+package com.cts.training.stockview.companyservice.service.impl;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -10,6 +10,7 @@ import com.cts.training.stockview.companyservice.entity.CompanyEntity;
 import com.cts.training.stockview.companyservice.entity.ListedInEntity;
 import com.cts.training.stockview.companyservice.repo.CompanyRepository;
 import com.cts.training.stockview.companyservice.repo.ListedInRepository;
+import com.cts.training.stockview.companyservice.service.CompanyService;
 
 public class CompanyServiceImpl implements CompanyService {
 

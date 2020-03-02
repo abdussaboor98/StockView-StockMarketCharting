@@ -71,7 +71,8 @@ public class UserServiceImpl implements UserService {
 		UserEntity userEntity = new UserEntity();
 		BeanUtils.copyProperties(user, userEntity);
 		double randomNum = Math.random();
-		
+		int otp = (int) Math.floor(randomNum*10000);
+		userEntity.setOtp(otp);
 		UserEntity userObj = userRepo.save(userEntity);
 		try {
 			MimeMessage mimeMessage = javaMailSender.createMimeMessage();
@@ -91,9 +92,9 @@ public class UserServiceImpl implements UserService {
 	}
 
 	@Override
-	public boolean activateUser(String email) {
+	public boolean activateUser(String email) throws NoSuchElementException {
 		System.out.println(email);
-		UserEntity user = userRepo.findByEmail(email).orElse(new UserEntity());
+		UserEntity user = userRepo.findByEmail(email).get();
 		System.out.println(user);
 		if (!user.isConfirmed()) {
 			System.out.println(user);
@@ -114,7 +115,7 @@ public class UserServiceImpl implements UserService {
 	}
 
 	@Override
-	public void deleteUser(int id) {
+	public void deleteUser(int id) throws IllegalArgumentException {
 		userRepo.deleteById(id);
 	}
 }
