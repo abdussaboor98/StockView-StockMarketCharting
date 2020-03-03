@@ -1,8 +1,11 @@
 package com.cts.training.stockview.companyservice.controller;
 
+import java.time.LocalDate;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -13,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.cts.training.stockview.companyservice.entity.CompanyEntity;
+import com.cts.training.stockview.companyservice.model.StockPriceRequest;
 import com.cts.training.stockview.companyservice.service.CompanyService;
 
 @CrossOrigin(origins = "*")
@@ -21,30 +25,40 @@ public class CompanyRestController {
 
 	@Autowired
 	private CompanyService companyService;
-	
-	@GetMapping(value = "/companies",produces = "application/json")
-	public List<CompanyEntity> getAllCompanys(){
-		return companyService.getAllCompanys();
+
+	@GetMapping(value = "/companies", produces = "application/json")
+	public ResponseEntity<?> getAllCompanys() {
+		List<CompanyEntity> companies = companyService.getAllCompanys();
+		if (companies.size() > 0) {
+			return new ResponseEntity<List<CompanyEntity>>(companies, HttpStatus.OK);
+		}
+		else
+			return new ResponseEntity<String>("No companies found", HttpStatus.BAD_REQUEST);
 	}
-	
+
 	@GetMapping(value = "/companies/{id}", produces = "application/json")
-	public CompanyEntity getCompanyById(@PathVariable("id") int id){
+	public ResponseEntity<?> getCompanyById(@PathVariable("id") int id) {
 		CompanyEntity company = companyService.getCompanyById(id);
-		return company;
+		return new ResponseEntity<CompanyEntity>(company,HttpStatus.OK);
 	}
-	
-	@PostMapping(value = "/companies",consumes = "application/json")
+
+	@PostMapping(value = "/companies", consumes = "application/json")
 	public CompanyEntity addCompany(@RequestBody CompanyEntity company) {
 		return companyService.addCompany(company);
 	}
-	
-	@PutMapping(value = "/companies",consumes = "application/json")
+
+	@PutMapping(value = "/companies", consumes = "application/json")
 	public CompanyEntity updateCompany(@RequestBody CompanyEntity company) {
 		return companyService.updateCompany(company);
 	}
-	
+
 	@DeleteMapping(value = "/companies/{id}")
 	public void deleteCompany(@PathVariable int id) {
 		companyService.deleteCompany(id);
+	}
+	
+	@GetMapping(value = "/companies/getCompanyStockPrice")
+	public ResponseEntity<?> getCompanyStockPrice(@RequestBody StockPriceRequest request) {
+		return new ResponseEntity<StockPriceRequest>(request,HttpStatus.OK);
 	}
 }

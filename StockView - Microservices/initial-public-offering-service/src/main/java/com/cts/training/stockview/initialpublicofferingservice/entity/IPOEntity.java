@@ -22,7 +22,7 @@ public class IPOEntity implements Serializable {
 	private String companyName;
 	private String stockExchange;
 	private long pricePerShare;
-	private long totalStocks;
+	private long totalShares;
 	private LocalDateTime openDateTime;
 	private String remarks;
 
@@ -36,7 +36,7 @@ public class IPOEntity implements Serializable {
 		this.companyName = companyName;
 		this.stockExchange = stockExchange;
 		this.pricePerShare = pricePerShare;
-		this.totalStocks = totalStocks;
+		this.totalShares = totalStocks;
 		this.openDateTime = openDateTime;
 		this.remarks = remarks;
 	}
@@ -73,12 +73,12 @@ public class IPOEntity implements Serializable {
 		this.pricePerShare = pricePerShare;
 	}
 
-	public long getTotalStocks() {
-		return totalStocks;
+	public long getTotalShares() {
+		return totalShares;
 	}
 
-	public void setTotalStocks(long totalStocks) {
-		this.totalStocks = totalStocks;
+	public void setTotalShares(long totalShares) {
+		this.totalShares = totalShares;
 	}
 
 	public LocalDateTime getOpenDateTime() {
@@ -100,7 +100,7 @@ public class IPOEntity implements Serializable {
 	@Override
 	public String toString() {
 		return "IPO [id=" + id + ", companyName=" + companyName + ", stockExchange=" + stockExchange
-				+ ", pricePerShare=" + pricePerShare + ", totalStocks=" + totalStocks + ", openDateTime=" + openDateTime
+				+ ", pricePerShare=" + pricePerShare + ", totalStocks=" + totalShares + ", openDateTime=" + openDateTime
 				+ ", remarks=" + remarks + "]";
 	}
 }

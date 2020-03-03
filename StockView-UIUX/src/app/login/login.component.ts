@@ -81,6 +81,10 @@ export class LoginComponent implements OnInit {
                     this.isValid = false;
                     this.disableButton = false;
                 }
+            },
+            error => {
+                this.isValid = false;
+                this.disableButton = false;
             });
     }
 

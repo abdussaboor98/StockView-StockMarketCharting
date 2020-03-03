@@ -27,7 +27,7 @@ public class CompanyEntity implements Serializable {
 	@GeneratedValue
 	private int id;
 	private String name;
-	private String ceoName;
+	private String ceo;
 
 	@ElementCollection(fetch = FetchType.EAGER)
 	@Fetch(value = FetchMode.SUBSELECT)
@@ -48,7 +48,7 @@ public class CompanyEntity implements Serializable {
 			String sector, String brief, double turnover) {
 		this.id = id;
 		this.name = name;
-		this.ceoName = ceoName;
+		this.ceo = ceoName;
 		this.directors = directors;
 		this.listedIn = listedIn;
 		this.sector = sector;
@@ -72,12 +72,12 @@ public class CompanyEntity implements Serializable {
 		this.name = name;
 	}
 
-	public String getCeoName() {
-		return ceoName;
+	public String getCeo() {
+		return ceo;
 	}
 
-	public void setCeoName(String ceoName) {
-		this.ceoName = ceoName;
+	public void setCeo(String ceo) {
+		this.ceo = ceo;
 	}
 
 	public List<String> getDirectors() {
@@ -122,7 +122,7 @@ public class CompanyEntity implements Serializable {
 
 	@Override
 	public String toString() {
-		return "CompanyEntity [id=" + id + ", name=" + name + ", ceoName=" + ceoName + ", directors=" + directors
+		return "CompanyEntity [id=" + id + ", name=" + name + ", ceoName=" + ceo + ", directors=" + directors
 				+ ", listedIn=" + listedIn + ", sector=" + sector + ", brief=" + brief + ", turnover=" + turnover + "]";
 	}
 

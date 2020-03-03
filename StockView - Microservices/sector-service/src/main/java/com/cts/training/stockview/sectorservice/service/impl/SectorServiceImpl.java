@@ -4,11 +4,14 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import com.cts.training.stockview.sectorservice.entity.SectorEntity;
 import com.cts.training.stockview.sectorservice.repo.SectorRepository;
+import com.cts.training.stockview.sectorservice.service.SectorService;
 
-public class SectorServiceImpl {
+@Service
+public class SectorServiceImpl implements SectorService {
 
 	@Autowired
 	private SectorRepository sectorRepo;

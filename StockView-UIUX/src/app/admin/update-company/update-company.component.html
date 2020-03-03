@@ -26,13 +26,11 @@
                         </div>
                     </div>
                     <div class="form-group">
-                        <label for="sector">Select Company/Sector:</label>
+                        <label for="sector">Sector:</label>
                         <div class="input-group">
-                            <select name="sector" id="sector" class="custom-select" formControlName="sector" required>
-                                <option value="none" selected disabled>Select sector...</option>
-                                <option value="Opt 1">Opt 1</option>
-                                <option value="Opt 2">Opt 2</option>
-                            </select>
+                            <div class="input-group">
+                                <input type="text" formControlName="sector" class="form-control">
+                            </div>
                         </div>
                     </div>
                     <div class="form-group">
@@ -63,19 +61,35 @@
                             </div>
                         </div>
                     </div>
-                    <div class="form-group" formArrayName="stockExchanges">
+                    <div class="form-group" formArrayName="listedIn">
                         <div class="row px-3">
                             <label for="stockExchange" class="form-control-label">Stock Exchanges(with stock
                                 code):</label>
                             <button type="button" class="btn btn-info ml-auto btn-sm mb-2"
                                 (click)="addStockExchange()">Add Exchange</button>
                         </div>
-                        <div *ngFor="let StockExG of updateCompanyForm.get('stockExchanges').controls; let i = index"
+                        <div *ngFor="let StockExG of updateCompanyForm.get('listedIn').controls; let i = index"
                             class="mb-2">
-                            <div class="input-group row mx-auto" [formGroupName]="i">
+                            <!-- <div class="input-group row mx-auto" [formGroupName]="i">
                                 <input type="text" name="stockExchange" id="stockExchange"
-                                    formControlName="stockExchange" class="form-control col-7"
+                                    formControlName="stockExchangeName" class="form-control col-7"
                                     placeholder="Enter the stock exchange..." required>
+                                <input type="text" name="stockCode" id="stockCode" class="form-control col-5"
+                                    placeholder="Enter the stock code..." required formControlName="stockCode">
+                                <div class="input-group-append">
+                                    <button *ngIf="i>0" class="btn btn-danger" (click)=(removeStockExchange(i))>
+                                        <fa-icon [icon]="faTrash"></fa-icon>
+                                    </button>
+                                    <button *ngIf="i == 0" class="btn btn-secondary" disabled>
+                                        <fa-icon [icon]="faTrash"></fa-icon>
+                                    </button>
+                                </div>
+                            </div> -->
+                            <div class="input-group row mx-auto" [formGroupName]="i">
+                                <select name="stockExchange" id="stockExchange" class="custom-select col-7" formControlName="stockExchangeName" required >
+                                    <option value="" selected disabled>Select stock exchange...</option>
+                                    <option *ngFor="let stockExchange of stockExchanges" [value]="stockExchange.name">{{stockExchange.name}}</option>
+                                </select>
                                 <input type="text" name="stockCode" id="stockCode" class="form-control col-5"
                                     placeholder="Enter the stock code..." required formControlName="stockCode">
                                 <div class="input-group-append">

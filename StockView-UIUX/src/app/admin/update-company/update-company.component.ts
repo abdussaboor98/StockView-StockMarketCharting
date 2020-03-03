@@ -1,7 +1,6 @@
 import { Component, OnInit } from "@angular/core";
 import {
     FormGroup,
-    FormControl,
     FormArray,
     Validators,
     FormBuilder
@@ -11,6 +10,8 @@ import { CompaniesService } from "src/app/services/companies.service";
 import { Company } from "src/app/models/company";
 import { faTrash } from "@fortawesome/free-solid-svg-icons";
 import { Router } from '@angular/router';
+import { StockExchange } from 'src/app/models/stockExchange';
+import { StockExchangesService } from 'src/app/services/stock-exchanges.service';
 
 @Component({
     selector: "app-update-company",
@@ -22,13 +23,15 @@ export class UpdateCompanyComponent implements OnInit {
     noOfDirectors: number;
     noOfExchanges: number;
     company: Company;
-
+    stockExchanges: StockExchange[];
     faTrash = faTrash;
+    
 
     constructor(
         private formBuilder: FormBuilder,
         private companiesService: CompaniesService,
-        private router: Router
+        private router: Router,
+        private stockExService: StockExchangesService
     ) {}
 
     ngOnInit() {
@@ -50,6 +53,9 @@ export class UpdateCompanyComponent implements OnInit {
                 }
                 this.updateCompanyForm.patchValue(data);
             });
+            this.stockExService.getAllExchanges().subscribe(data =>{
+                this.stockExchanges = data;
+            });
         }
 
         this.updateCompanyForm = this.formBuilder.group({
@@ -69,6 +75,10 @@ export class UpdateCompanyComponent implements OnInit {
             .updateCompany(this.updateCompanyForm.value)
             .subscribe(data => {
                 this.updateCompanyForm.reset();
+                this.goBack();
+            },
+            error =>{
+                alert("something went wrong:" + error);
             });
     }
 
@@ -86,13 +96,13 @@ export class UpdateCompanyComponent implements OnInit {
             stockExchangeName: ["", Validators.required],
             stockCode: ["", Validators.required]
         });
-        (<FormArray>this.updateCompanyForm.get("stockExchanges")).push(
+        (<FormArray>this.updateCompanyForm.get("listedIn")).push(
             stockExGroup
         );
     }
 
     removeStockExchange(i: number) {
-        (<FormArray>this.updateCompanyForm.get("stockExchanges")).removeAt(i);
+        (<FormArray>this.updateCompanyForm.get("listedIn")).removeAt(i);
     }
 
     

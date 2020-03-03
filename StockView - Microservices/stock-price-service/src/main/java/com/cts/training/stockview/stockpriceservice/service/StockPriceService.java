@@ -1,0 +1,19 @@
+package com.cts.training.stockview.stockpriceservice.service;
+
+import java.util.List;
+import java.util.NoSuchElementException;
+
+import com.cts.training.stockview.stockpriceservice.entity.StockPriceEntity;;
+
+public interface StockPriceService {
+
+	public List<StockPriceEntity> getAllStockPrices();
+
+	public StockPriceEntity getStockPriceById(int id) throws NoSuchElementException;
+
+	public StockPriceEntity addStockPrice(StockPriceEntity stockPriceEntity);
+
+	public StockPriceEntity updateStockPrice(StockPriceEntity stockPriceEntity);
+
+	public void deleteStockPrice(int id);
+}

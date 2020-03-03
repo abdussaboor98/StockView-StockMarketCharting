@@ -6,12 +6,14 @@ import java.util.Optional;
 
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import com.cts.training.stockview.stockexchangeservice.entity.StockExchangeEntity;
 import com.cts.training.stockview.stockexchangeservice.model.StockExchange;
 import com.cts.training.stockview.stockexchangeservice.repo.StockExchangeRepository;
 import com.cts.training.stockview.stockexchangeservice.service.StockExchangeService;
 
+@Service
 public class StockExchangeServiceImpl implements StockExchangeService{
 	
 	@Autowired

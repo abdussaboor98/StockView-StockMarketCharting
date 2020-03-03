@@ -44,6 +44,7 @@ export class AccountUpdateComponent implements OnInit {
             .updateUser(this.accountUpdateForm.value)
             .subscribe(data => {
                 this.accountUpdateForm.reset();
+                this.goBack();
             });
     }
 

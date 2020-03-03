@@ -7,7 +7,7 @@ import { IPO } from "../models/ipo";
     providedIn: "root"
 })
 export class IposService {
-    url = "http://localhost:8080/ipos/";
+    url = "http://localhost:8200/ipos/";
     constructor(private httpClient: HttpClient) {}
 
     getAllIPOs(): Observable<IPO[]> {
@@ -23,7 +23,7 @@ export class IposService {
     }
 
     updateIPO(ipo: IPO): Observable<IPO> {
-        return this.httpClient.put<IPO>(this.url + ipo.id, ipo);
+        return this.httpClient.put<IPO>(this.url, ipo);
     }
 
     deleteIPO(id: number): Observable<IPO> {

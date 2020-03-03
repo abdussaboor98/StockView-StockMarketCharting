@@ -23,8 +23,8 @@
                             <select name="stockExchange" id="stockExchange" formControlName="stockExchange"
                                 class="form-control" placeholder="Enter stock exchange..." required>
                                 <option value="" selected disabled>Select stock exchange</option>
-                                <option *ngFor="let stockEntry of stockExchanges" [value]="stockEntry.stockExchange">
-                                    {{stockEntry.stockExchange}} 
+                                <option *ngFor="let stockEntry of stockExchanges" [value]="stockEntry.stockExchangeName">
+                                    {{stockEntry.stockExchangeName}} 
                                 </option>
                             </select>
                         </div>

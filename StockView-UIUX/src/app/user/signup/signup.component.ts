@@ -71,6 +71,9 @@ export class SignupComponent implements OnInit {
                 }
                 else
                     this.emailTaken = false;
+            },error => {
+                this.emailTaken = false;
+                console.log(error);
             });
     }
 
