@@ -68,24 +68,6 @@ a.crad:hover {
     resize: none;
 }
 
-.add-btn {
-    height: 10vh;
-    width: 10vh;
-    right: 2rem;
-    bottom: 5rem;
-    position: fixed !important;
-    text-align: center;
-    line-height: 28px;
-    text-decoration: none;
-    text-align: center;
-    z-index: 1;
-}
-
-.add-btn::before {
-    border-radius: 100% !important;
-    z-index: -1;
-}
-
 @media (max-width: 991px) {
     .company-logo,
     .exchange-logo {
@@ -150,4 +132,83 @@ input.ng-invalid.ng-touched {
     right: -4px;
     bottom: -4px;
     border-radius: 0.25rem;
+}
+
+.btn.btn-secondary::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    /* z-index: -1; */
+    border: 2px solid var(--secondary);
+    transition: top, left, right, bottom, 100ms ease-out;
+}
+
+.btn.btn-secondary:hover::before,
+.btn.btn-secondary:focus::before{
+    top: -4px;
+    left: -4px;
+    right: -4px;
+    bottom: -4px;
+    border-radius: 0.25rem;
+}
+.btn.btn-danger::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    /* z-index: -1; */
+    border: 2px solid var(--danger);
+    transition: top, left, right, bottom, 100ms ease-out;
+}
+
+.btn.btn-danger:hover::before,
+.btn.btn-danger:focus::before{
+    top: -4px;
+    left: -4px;
+    right: -4px;
+    bottom: -4px;
+    border-radius: 0.25rem;
+}
+.btn.btn-info::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    /* z-index: -1; */
+    border: 2px solid var(--info);
+    transition: top, left, right, bottom, 100ms ease-out;
+}
+
+.btn.btn-info:hover::before,
+.btn.btn-info:focus::before{
+    top: -4px;
+    left: -4px;
+    right: -4px;
+    bottom: -4px;
+    border-radius: 0.25rem;
+}
+
+.add-btn {
+    height: 10vh;
+    width: 10vh;
+    right: 2rem;
+    bottom: 5rem;
+    position: fixed !important;
+    text-align: center;
+    line-height: 28px;
+    text-decoration: none;
+    text-align: center;
+    z-index: 1;
+}
+
+.add-btn::before {
+    border-radius: 100% !important;
+    z-index: -1;
 }
