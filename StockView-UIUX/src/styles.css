@@ -73,12 +73,17 @@ a.crad:hover {
     width: 10vh;
     right: 2rem;
     bottom: 5rem;
-    position: fixed;
+    position: fixed !important;
     text-align: center;
     line-height: 28px;
     text-decoration: none;
     text-align: center;
     z-index: 1;
+}
+
+.add-btn::before {
+    border-radius: 100% !important;
+    z-index: -1;
 }
 
 @media (max-width: 991px) {
@@ -121,3 +126,28 @@ a.crad:hover {
 input.ng-invalid.ng-touched {
     border: 1px solid red;
   }
+
+.btn {
+    position: relative;
+}
+
+.btn.btn-primary::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    /* z-index: -1; */
+    border: 2px solid var(--primary);
+    transition: top, left, right, bottom, 100ms ease-out;
+}
+
+.btn.btn-primary:hover::before,
+.btn.btn-primary:focus::before{
+    top: -4px;
+    left: -4px;
+    right: -4px;
+    bottom: -4px;
+    border-radius: 0.25rem;
+}

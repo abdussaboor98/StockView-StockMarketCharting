@@ -33,7 +33,6 @@ export class ViewUsersComponent implements OnInit {
             this.users = this.users.filter(user => user.id !== id);
         },error =>{
             console.log(error);
-            this.users = this.users.filter(user => user.id !== id);
         });
     }
 }

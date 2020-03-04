@@ -91,7 +91,7 @@ public class UserRestController {
 	public ResponseEntity<?> deleteUser(@PathVariable int id) {
 		try {
 			userService.deleteUser(id);
-			return new ResponseEntity<String>("User (id:" + id + ") deleted successfully", HttpStatus.OK);
+			return new ResponseEntity<String>(HttpStatus.NO_CONTENT);
 		} catch (IllegalArgumentException e) {
 			return new ResponseEntity<String>("No such user found", HttpStatus.BAD_REQUEST);
 		}
