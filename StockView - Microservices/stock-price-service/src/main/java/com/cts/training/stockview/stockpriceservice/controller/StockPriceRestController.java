@@ -25,7 +25,7 @@ public class StockPriceRestController {
 	@Autowired
 	private StockPriceService stockExchangeService;
 	
-	@GetMapping(value = "/stockExchanges",produces = "application/json")
+	@GetMapping(value = "/stockPrices",produces = "application/json")
 	public List<StockPriceEntity> getAllStockPrices(){
 		return stockExchangeService.getAllStockPrices();
 	}
@@ -40,7 +40,7 @@ public class StockPriceRestController {
 		return stockExchangeService.addStockPrice(stockExchange);
 	}
 	
-	@PostMapping(value = "stockPrice/uploadStocksSheet",consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
+	@PostMapping(value = "stockPrices/uploadStocksSheet",consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
 	public void uploadStocksSheet(@RequestParam("stocksSheet") MultipartFile file) {
 		System.out.println("File recieved: "+file.getOriginalFilename());
 		try {

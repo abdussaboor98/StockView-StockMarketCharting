@@ -65,7 +65,8 @@ const routes: Routes = [
     { path: "compare", component: CompareComponent, canActivate: [UserAuthGuard] },
     { path: "compare-result", component: CompareResultComponent, canActivate: [UserAuthGuard] },
     { path: "landing", component: LandingComponent, canActivate:[LoginGuard]},
-    { path: "user/activate", component: ActivateComponent, canActivate:[NoLoginGuard]}
+    { path: "user/activate", component: ActivateComponent, canActivate:[NoLoginGuard]},
+    { path: "result", component: CompareResultComponent}
 
 ];
 

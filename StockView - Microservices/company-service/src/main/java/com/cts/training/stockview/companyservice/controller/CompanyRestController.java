@@ -3,6 +3,8 @@ package com.cts.training.stockview.companyservice.controller;
 import java.time.LocalDate;
 import java.util.List;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -16,6 +18,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.cts.training.stockview.companyservice.entity.CompanyEntity;
+import com.cts.training.stockview.companyservice.feignproxy.IPOServiceProxy;
+import com.cts.training.stockview.companyservice.model.IPO;
 import com.cts.training.stockview.companyservice.model.StockPriceRequest;
 import com.cts.training.stockview.companyservice.service.CompanyService;
 
@@ -23,8 +27,13 @@ import com.cts.training.stockview.companyservice.service.CompanyService;
 @RestController
 public class CompanyRestController {
 
+	Logger logger = LoggerFactory.getLogger(this.getClass());
+	
 	@Autowired
 	private CompanyService companyService;
+	
+	@Autowired
+	private IPOServiceProxy ipoServiceProxy;
 
 	@GetMapping(value = "/companies", produces = "application/json")
 	public ResponseEntity<?> getAllCompanys() {
@@ -60,5 +69,12 @@ public class CompanyRestController {
 	@GetMapping(value = "/companies/getCompanyStockPrice")
 	public ResponseEntity<?> getCompanyStockPrice(@RequestBody StockPriceRequest request) {
 		return new ResponseEntity<StockPriceRequest>(request,HttpStatus.OK);
+	}
+	
+	@GetMapping("/companies/getipos")
+	public ResponseEntity<?> getIpos(){
+		ResponseEntity<?> response = ipoServiceProxy.getAllIPOs();
+		logger.info("All IPOs accessed --> {}",response);
+		return response;
 	}
 }

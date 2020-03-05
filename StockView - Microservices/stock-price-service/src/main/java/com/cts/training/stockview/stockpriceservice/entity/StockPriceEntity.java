@@ -90,7 +90,9 @@ public class StockPriceEntity implements Serializable {
 
 	@Override
 	public String toString() {
-		return "StockPrice [id=" + id + ", companyId=" + companyCode + ", currentPrice=" + currentPrice + ", dateTime="
-				+ date + "]";
+		return "StockPriceEntity [id=" + id + ", companyCode=" + companyCode + ", stockExchange=" + stockExchange
+				+ ", currentPrice=" + currentPrice + ", date=" + date + ", time=" + time + "]";
 	}
+
+	
 }
