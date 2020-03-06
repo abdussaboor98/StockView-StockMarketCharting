@@ -54,5 +54,9 @@ public class StockExchangeServiceImpl implements StockExchangeService{
 	public void deleteStockExchange(int id) {
 		stockExchangeRepo.deleteById(id);
 	}
+	
+	public List<String> getAllStockExchangesNames() {
+		return stockExchangeRepo.getAllStockExchangesNames();
+	}
 
 }

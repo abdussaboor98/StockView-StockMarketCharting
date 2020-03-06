@@ -50,6 +50,11 @@ public class CompanyRestController {
 		CompanyEntity company = companyService.getCompanyById(id);
 		return new ResponseEntity<CompanyEntity>(company,HttpStatus.OK);
 	}
+	
+	@GetMapping(value = "/companies/getCompanyByStockCodeAndExchangeName/{stockCode}/{stockExchangeName}", produces = "application/json")
+	public ResponseEntity<?> getCompanyByStockCodeAndExchangeName(@PathVariable("stockCode") String stockCode, @PathVariable("stockExchangeName") String stockExchangeName) {
+		return new ResponseEntity<Boolean>(companyService.getCompanyByStockCodeAndExchangeName(stockCode, stockExchangeName),HttpStatus.OK);
+	}
 
 	@PostMapping(value = "/companies", consumes = "application/json")
 	public CompanyEntity addCompany(@RequestBody CompanyEntity company) {

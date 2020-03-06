@@ -4,6 +4,8 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -34,6 +36,12 @@ public class StockExchangeRestController {
 	@GetMapping(value = "/stockExchanges/{id}", produces = "application/json")
 	public StockExchange getStockExchangeById(@PathVariable("id") int id){
 		return stockExchangeService.getStockExchangeById(id);
+	}
+	
+	@GetMapping(value = "/stockExchanges/getAllStockExchangesNames", produces = "application/json")
+	public ResponseEntity<?> getAllStockExchangesNames() {
+		List<String> names = stockExchangeService.getAllStockExchangesNames();
+		return new ResponseEntity<List<String>>(names, HttpStatus.OK);
 	}
 	
 	@PostMapping(value = "/stockExchanges",consumes = "application/json")

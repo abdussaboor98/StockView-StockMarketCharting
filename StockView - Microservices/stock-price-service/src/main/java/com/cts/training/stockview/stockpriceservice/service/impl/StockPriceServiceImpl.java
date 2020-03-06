@@ -5,6 +5,7 @@ import java.io.InputStream;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.ZoneId;
+import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.NoSuchElementException;
@@ -19,9 +20,12 @@ import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.cts.training.stockview.stockpriceservice.entity.StockPriceEntity;
+import com.cts.training.stockview.stockpriceservice.feignproxy.StockExchangeServiceProxy;
+import com.cts.training.stockview.stockpriceservice.model.ImportSummary;
 import com.cts.training.stockview.stockpriceservice.repo.StockPriceRepository;
 import com.cts.training.stockview.stockpriceservice.service.StockPriceService;
 
@@ -29,6 +33,12 @@ import com.cts.training.stockview.stockpriceservice.service.StockPriceService;
 public class StockPriceServiceImpl implements StockPriceService {
 	@Autowired
 	private StockPriceRepository stockPriceRepo;
+
+	@Autowired
+	private StockExchangeServiceProxy stockExchangeServiceProxy;
+
+//	@Autowired
+//	private CompanyServiceProxy companyServiceProxy;
 
 	@Override
 	public List<StockPriceEntity> getAllStockPrices() {
@@ -56,46 +66,59 @@ public class StockPriceServiceImpl implements StockPriceService {
 	}
 
 	@Override
-	public void addStockPricesFromExcelSheet(MultipartFile file) throws IOException {
+	public ImportSummary addStockPricesFromExcelSheet(MultipartFile file) throws IOException, Exception {
 		InputStream in = file.getInputStream();
 		int currentRowNum = 1;
 		int currentCellNum = 0;
+		List<String> duplicates = new ArrayList<String>();
 		List<StockPriceEntity> stockPricesEntities = new ArrayList<StockPriceEntity>();
-		try {
-			// if (file.getOriginalFilename().endsWith(".xls")) {
-			// HSSFWorkbook workbook = new HSSFWorkbook(in);
-			// HSSFSheet stockPricesSheet = workbook.getSheetAt(0);
-			// HSSFRow row = stockPricesSheet.getRow(1);
-			// System.out.println(row.getCell(0).getStringCellValue());
-			// } else if (file.getOriginalFilename().endsWith(".xlsx")) {
-			XSSFWorkbook workbook = new XSSFWorkbook(in);
+		// if (file.getOriginalFilename().endsWith(".xls")) {
+		// HSSFWorkbook workbook = new HSSFWorkbook(in);
+		// HSSFSheet stockPricesSheet = workbook.getSheetAt(0);
+		// HSSFRow row = stockPricesSheet.getRow(1);
+		// System.out.println(row.getCell(0).getStringCellValue());
+		// } else if (file.getOriginalFilename().endsWith(".xlsx")) {
+		try (XSSFWorkbook workbook = new XSSFWorkbook(in)) {
 			XSSFSheet stockPricesSheet = workbook.getSheetAt(0);
 			System.out.println(stockPricesSheet.getLastRowNum());
 			XSSFRow row = stockPricesSheet.getRow(currentRowNum);
-			while (row != null && row.getCell(0) != null) {
-				System.out.print(currentRowNum);
+			while (row != null && (row.getCell(0) != null || row.getFirstCellNum() >= 0)) {
 				String companyCode = row.getCell(currentCellNum++).getStringCellValue().trim();
 				String stockExchangeName = row.getCell(currentCellNum++).getStringCellValue().trim();
 				long stockPrice = (long) row.getCell(currentCellNum++).getNumericCellValue();
+				if (!stockExchangeServiceProxy.getAllStockExchangesNames().contains(stockExchangeName)						) {
+					throw new Exception("The file has unkown stock exchange value at " + (currentRowNum + 1) + ":"
+							+ (currentCellNum-1) + " (row:column). ");
+				}
+				if(!stockExchangeServiceProxy.getCompanyByStockCodeAndExchangeName(companyCode, stockExchangeName)) {
+					throw new Exception("The file has unkown company code value at " + (currentRowNum + 1) + ":"
+							+ (currentCellNum-2) + " (row:column). ");
+				}
 				LocalDate date = row.getCell(currentCellNum++).getDateCellValue().toInstant()
 						.atZone(ZoneId.of("+05:30")).toLocalDate();
 				LocalTime time = LocalTime.parse(row.getCell(currentCellNum++).getStringCellValue().trim());
-				if (!stockPriceRepo.getIfAlreadyExists(companyCode, date, time).isPresent()) {
+
+				if (!stockPriceRepo.getIfAlreadyExists(companyCode, stockExchangeName, date, time).isPresent()) {
 					StockPriceEntity stockPriceEntity = new StockPriceEntity(companyCode, stockExchangeName, stockPrice,
 							date, time);
 					stockPricesEntities.add(stockPriceEntity);
 				} else {
-					System.out.println("The record at row "+(currentRowNum+1)+" is duplicate.");
+					duplicates.add("The record at row " + (currentRowNum + 1) + " is duplicate.");
 				}
 				row = stockPricesSheet.getRow(++currentRowNum);
 				currentCellNum = 0;
 			}
-			// }
-		} catch (Exception e) {
-			e.printStackTrace();
-			System.out.println(currentRowNum + ":" + currentCellNum);
-		}
+		} catch (NullPointerException e) {
+			throw new Exception("The file has some missing value at " + (currentRowNum + 1) + ":" + (currentCellNum)
+					+ " (row:column). ");
+		} catch (IllegalStateException e) {
+			throw new Exception("The file has some wrong value at " + (currentRowNum + 1) + ":" + (currentCellNum)
+					+ " (row:column). ");
+		} catch (DateTimeParseException  e) {
+		throw new Exception("The file has wrong date/time format value at " + (currentRowNum + 1) + ":" + (currentCellNum)
+				+ " (row:column). ");
+	}
 		stockPriceRepo.saveAll(stockPricesEntities);
-
+		return new ImportSummary();
 	}
 }

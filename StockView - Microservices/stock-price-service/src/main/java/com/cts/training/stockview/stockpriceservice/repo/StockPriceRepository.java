@@ -11,6 +11,6 @@ import com.cts.training.stockview.stockpriceservice.entity.StockPriceEntity;
 
 public interface StockPriceRepository extends JpaRepository<StockPriceEntity, Integer>{
 	
-	@Query("From StockPriceEntity where companyCode = ?1 and date = ?2 and time = ?3")
-	public Optional<StockPriceEntity> getIfAlreadyExists(String companyCode,LocalDate data, LocalTime time);
+	@Query("From StockPriceEntity where companyCode = ?1 and stockExchange=?2 and date = ?3 and time = ?4")
+	public Optional<StockPriceEntity> getIfAlreadyExists(String companyCode,String stockExchange,LocalDate data, LocalTime time);
 }

@@ -6,7 +6,8 @@ import java.util.NoSuchElementException;
 
 import org.springframework.web.multipart.MultipartFile;
 
-import com.cts.training.stockview.stockpriceservice.entity.StockPriceEntity;;
+import com.cts.training.stockview.stockpriceservice.entity.StockPriceEntity;
+import com.cts.training.stockview.stockpriceservice.model.ImportSummary;;
 
 public interface StockPriceService {
 
@@ -16,7 +17,7 @@ public interface StockPriceService {
 
 	public StockPriceEntity addStockPrice(StockPriceEntity stockPriceEntity);
 	
-	public void addStockPricesFromExcelSheet(MultipartFile file) throws IOException;
+	public ImportSummary addStockPricesFromExcelSheet(MultipartFile file) throws IOException, Exception;
 
 	public StockPriceEntity updateStockPrice(StockPriceEntity stockPriceEntity);
 

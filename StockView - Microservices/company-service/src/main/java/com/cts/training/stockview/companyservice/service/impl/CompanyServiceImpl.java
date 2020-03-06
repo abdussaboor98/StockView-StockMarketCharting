@@ -57,4 +57,9 @@ public class CompanyServiceImpl implements CompanyService {
 	public void deleteCompany(int id) {
 		companyRepo.deleteById(id);
 	}
+
+	@Override
+	public boolean getCompanyByStockCodeAndExchangeName(String stockCode, String stockExchangeName) {
+		return companyRepo.findByListedIn_StockCode_AndListedIn_StockExchangeName(stockCode, stockExchangeName).isPresent();
+	}
 }

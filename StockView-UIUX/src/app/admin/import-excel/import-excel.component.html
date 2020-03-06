@@ -9,7 +9,7 @@
                         class="custom-file-input" (change)="onFileChange($event)">
                     <label for="excelFileUpload" class="custom-file-label"></label>
                 </div>
-                <button type="submit" class="btn btn-primary btn-block">Upload</button>
+                <button type="submit" class="btn btn-primary btn-block" [disabled]="excelUploadForm.invalid">Upload</button>
             </div>
         </div>
     </form>
@@ -19,6 +19,9 @@
             <button type="button" class="close" data-dismiss="alert">
                 <span aria-hidden="true">&times;</span>
             </button>
+        </div>
+        <div class="alert alert-danger col-md-8 col-sm-10 col-11 mx-auto fade show" [hidden]= "!isError">
+            {{errorMessage}}
         </div>
     </div>
 </main>

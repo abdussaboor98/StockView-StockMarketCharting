@@ -1,10 +1,5 @@
 import { Component, OnInit } from "@angular/core";
-import {
-    FormControl,
-    FormGroup,
-    FormBuilder,
-    Validators
-} from "@angular/forms";
+import { FormGroup, FormBuilder, Validators } from "@angular/forms";
 declare var $: any;
 
 import { faAt, faKey } from "@fortawesome/free-solid-svg-icons";
@@ -81,9 +76,8 @@ export class LoginComponent implements OnInit {
                             $("#login-modal").modal("hide");
                             this.loginForm.reset();
                             this.disableButton = false;
-                        }
-                        else {
-                            console.log('not confirmed');
+                        } else {
+                            console.log("not confirmed");
                             this.isVerified = false;
                             this.disableButton = false;
                         }
