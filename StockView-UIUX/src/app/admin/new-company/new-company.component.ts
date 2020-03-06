@@ -46,7 +46,9 @@ export class NewCompanyComponent implements OnInit {
             name: ["", Validators.required],
             sector: ["none", Validators.required],
             ceo: ["", Validators.required],
-            directors: this.formBuilder.array([this.formBuilder.control("")]),
+            directors: this.formBuilder.array(
+                [this.formBuilder.control("")]
+                ),
             listedIn: this.formBuilder.array([
                 this.formBuilder.group({
                     stockExchangeName: ["", Validators.required],
