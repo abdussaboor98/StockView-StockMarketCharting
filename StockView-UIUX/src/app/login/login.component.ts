@@ -21,6 +21,7 @@ export class LoginComponent implements OnInit {
     loginForm: FormGroup;
     disableButton: boolean;
     isValid: boolean = true;
+    isVerified: boolean = true;
     faAt = faAt;
     faKey = faKey;
     users: User[];
@@ -47,45 +48,55 @@ export class LoginComponent implements OnInit {
         let password = this.loginForm.get("password").value;
         this.disableButton = true;
         this.isValid = true;
+        this.isVerified = true;
         localStorage.removeItem("userId");
         localStorage.removeItem("userType");
         sessionStorage.removeItem("userId");
         sessionStorage.removeItem("userType");
         this.userService
             .getUserByUsernameAndPassword(username, password)
-            .subscribe(data => {
-                if (data!==null && data.confirmed) {
-                    if (this.loginForm.get("rememberMe").value) {
-                        localStorage.setItem(
-                            "userId",
-                            data.id.toString()
-                        );
-                        localStorage.setItem(
-                            "userType",
-                            data.admin ? "admin" : "user"
-                        );
+            .subscribe(
+                data => {
+                    if (data !== null) {
+                        if (data.confirmed) {
+                            if (this.loginForm.get("rememberMe").value) {
+                                localStorage.setItem(
+                                    "userId",
+                                    data.id.toString()
+                                );
+                                localStorage.setItem(
+                                    "userType",
+                                    data.admin ? "admin" : "user"
+                                );
+                            }
+                            sessionStorage.setItem(
+                                "userId",
+                                data.id.toString()
+                            );
+                            sessionStorage.setItem(
+                                "userType",
+                                data.admin ? "admin" : "user"
+                            );
+                            this.router.navigate(["landing"]);
+                            $("#login-modal").modal("hide");
+                            this.loginForm.reset();
+                            this.disableButton = false;
+                        }
+                        else {
+                            console.log('not confirmed');
+                            this.isVerified = false;
+                            this.disableButton = false;
+                        }
+                    } else {
+                        this.isValid = false;
+                        this.disableButton = false;
                     }
-                    sessionStorage.setItem(
-                        "userId",
-                        data.id.toString()
-                    );
-                    sessionStorage.setItem(
-                        "userType",
-                        data.admin ? "admin" : "user"
-                    );
-                    this.router.navigate(["landing"]);
-                    $("#login-modal").modal("hide");
-                    this.loginForm.reset();
-                    this.disableButton = false;
-                } else {
+                },
+                error => {
                     this.isValid = false;
                     this.disableButton = false;
                 }
-            },
-            error => {
-                this.isValid = false;
-                this.disableButton = false;
-            });
+            );
     }
 
     // validateUser(username: string, password: string, user: User): boolean {
