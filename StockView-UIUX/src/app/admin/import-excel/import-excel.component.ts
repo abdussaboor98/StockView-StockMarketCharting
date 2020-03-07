@@ -32,20 +32,20 @@ export class ImportExcelComponent implements OnInit {
         this.file = e.target.files[0];
     }
 
-    uploadData() {
+   uploadData() {
         this.isError = false;
         const uploadSheetData = new FormData();
         uploadSheetData.append("stocksSheet", this.file, this.file.name);
         this.stockPriceService.uploadStocksSheet(uploadSheetData).subscribe(
             data => {
                 console.log("Uploaded");
+                console.log(data);
             },
             error => {
                 if(typeof(error.error) == "string"){
                     this.isError = true;
                     this.errorMessage = error.error;
                 }
-                
             }
         );
     }

@@ -1,6 +1,5 @@
 package com.cts.training.stockview.stockpriceservice.service;
 
-import java.io.IOException;
 import java.util.List;
 import java.util.NoSuchElementException;
 
@@ -17,7 +16,7 @@ public interface StockPriceService {
 
 	public StockPriceEntity addStockPrice(StockPriceEntity stockPriceEntity);
 	
-	public ImportSummary addStockPricesFromExcelSheet(MultipartFile file) throws IOException, Exception;
+	public ImportSummary addStockPricesFromExcelSheet(MultipartFile file) throws Exception; 
 
 	public StockPriceEntity updateStockPrice(StockPriceEntity stockPriceEntity);
 

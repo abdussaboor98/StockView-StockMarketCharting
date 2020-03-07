@@ -12,11 +12,11 @@ export class StockPriceService {
 
   constructor(private httpClient:HttpClient) { }
 
-  uploadStocksSheet(formData: FormData): Observable<void>{
-    return this.httpClient.post<void>(this.httpUrl+"uploadStocksSheet",formData)
+  uploadStocksSheet(formData: FormData): Observable<object>{
+    return this.httpClient.post<object>(this.httpUrl+"uploadStocksSheet",formData);
   }
 
-  getAllStockPrices():Observable<StockPrice[]>{
-    return this.httpClient.get<StockPrice[]>(this.httpUrl);
-  }
+  // getAllStockPrices():Observable<StockPrice[]>{
+  //   return this.httpClient.get<StockPrice[]>(this.httpUrl);
+  // }
 }

@@ -59,7 +59,7 @@ public class CompanyServiceImpl implements CompanyService {
 	}
 
 	@Override
-	public boolean getCompanyByStockCodeAndExchangeName(String stockCode, String stockExchangeName) {
-		return companyRepo.findByListedIn_StockCode_AndListedIn_StockExchangeName(stockCode, stockExchangeName).isPresent();
+	public Optional<CompanyEntity> getCompanyByStockCodeAndExchangeName(String stockCode, String stockExchangeName) {
+		return companyRepo.findByListedIn_StockCode_AndListedIn_StockExchangeName(stockCode, stockExchangeName);
 	}
 }

@@ -3,6 +3,8 @@ package com.cts.training.stockview.stockpriceservice.controller;
 import java.io.IOException;
 import java.util.List;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -26,51 +28,50 @@ import com.cts.training.stockview.stockpriceservice.service.StockPriceService;
 @RestController
 public class StockPriceRestController {
 	@Autowired
-	private StockPriceService stockExchangeService;
+	private StockPriceService stockPriceService;
+	
+	Logger logger = LoggerFactory.getLogger(this.getClass()); 
 	
 	@GetMapping(value = "/stockPrices",produces = "application/json")
 	public List<StockPriceEntity> getAllStockPrices(){
-		return stockExchangeService.getAllStockPrices();
+		return stockPriceService.getAllStockPrices();
 	}
 	
 	@GetMapping(value = "/stockExchanges/{id}", produces = "application/json")
 	public StockPriceEntity getStockPriceById(@PathVariable("id") int id){
-		return stockExchangeService.getStockPriceById(id);
+		return stockPriceService.getStockPriceById(id);
 	}
 	
 	@PostMapping(value = "/stockExchanges",consumes = "application/json")
 	public StockPriceEntity addStockPrice(@RequestBody StockPriceEntity stockExchange) {
-		return stockExchangeService.addStockPrice(stockExchange);
+		return stockPriceService.addStockPrice(stockExchange);
 	}
 	
 	@PostMapping(value = "stockPrices/uploadStocksSheet",consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
 	public ResponseEntity<?> uploadStocksSheet(@RequestParam("stocksSheet") MultipartFile file) {
-		System.out.println("File recieved: " + file.getOriginalFilename());
+		logger.info("File recieved: {}",file.getOriginalFilename());
 		if (file.getOriginalFilename().endsWith(".xls") || file.getOriginalFilename().endsWith(".xlsx")) {
 			try {
-				ImportSummary res = stockExchangeService.addStockPricesFromExcelSheet(file);
-				return new ResponseEntity<ImportSummary>(new ImportSummary(),HttpStatus.OK);
+				return new ResponseEntity<ImportSummary>(stockPriceService.addStockPricesFromExcelSheet(file),HttpStatus.OK);
 			} catch (IOException e) {
 				e.printStackTrace();
 				return new ResponseEntity<String>("Error reading file.",HttpStatus.BAD_REQUEST);
 			} catch (Exception e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 				return new ResponseEntity<String>(e.getMessage(),HttpStatus.BAD_REQUEST);
 			}
 		} else {
 			return new ResponseEntity<String>("Wrong file extension. The file should be .xls or an .xlsx file.",HttpStatus.BAD_REQUEST);
 		}
-		
 	}
 
 	@PutMapping(value = "/stockExchanges",consumes = "application/json")
 	public StockPriceEntity updateStockPrice(@RequestBody StockPriceEntity stockExchange) {
-		return stockExchangeService.updateStockPrice(stockExchange);
+		return stockPriceService.updateStockPrice(stockExchange);
 	}
 	
 	@DeleteMapping(value = "/stockExchanges/{id}")
 	public void deleteStockPrice(@PathVariable int id) {
-		stockExchangeService.deleteStockPrice(id);
+		stockPriceService.deleteStockPrice(id);
 	}
 }

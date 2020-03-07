@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 
 @FeignClient("zuul-api-gateway-server")
-public interface StockExchangeServiceProxy {
+public interface ZuulGatewayProxy {
 
 	@GetMapping(value = "/stock-exchange-service/stockExchanges/getAllStockExchangesNames", produces = "application/json")
 	public List<String> getAllStockExchangesNames();

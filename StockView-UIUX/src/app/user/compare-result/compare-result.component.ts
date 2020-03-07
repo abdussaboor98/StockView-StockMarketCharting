@@ -2,6 +2,7 @@ import { Component, OnInit } from "@angular/core";
 import { Chart } from "chart.js";
 import { StockPriceService } from "src/app/services/stock-price.service";
 import { StockPrice } from "src/app/models/stockPrice";
+import * as Highcharts from 'highcharts';
 
 @Component({
     selector: "app-compare-result",
@@ -9,35 +10,38 @@ import { StockPrice } from "src/app/models/stockPrice";
     styleUrls: ["./compare-result.component.css"]
 })
 export class CompareResultComponent implements OnInit {
-    myChart;
     stockPrices: StockPrice[];
-    labels: any[] = [];
+    highcharts = Highcharts;
     data: any[] = [];
-    constructor(private stockPriceService: StockPriceService) {}
+    chartOptions: any;
+    constructor(private stockPriceService: StockPriceService) { }
 
     ngOnInit() {
-        this.stockPriceService.getAllStockPrices().subscribe(data => {
-            this.stockPrices = data;
-            for(let stockPrice of this.stockPrices){
-                this.labels.push(stockPrice.time);
-                this.data.push(stockPrice.currentPrice);
-            }
-            this.myChart = new Chart("outputChart", {
-            type: "bar",
-            data: {
-                labels: this.labels,
-                datasets: [
-                    {
-                        label: "Test",
-                        data: this.data,
-                        backgroundColor: "#000555",
-                        borderWidth: 1
-                    }
-                ]
-            }
-        });
-        });
+        this.data = [{
+            name: 'ItSolutionStuff.com',
+            data: [500, 700, 555, 444, 777, 877, 944, 567, 666, 789, 456, 654]
+        }, {
+            name: 'Nicesnippets.com',
+            data: [677, 455, 677, 877, 455, 778, 888, 567, 785, 488, 567, 654]
+        }];
 
         
+        this.chartOptions = {
+            chart: {
+                type: "column"
+            },
+            title: {
+                text: "Monthly Site Visitor"
+            },
+            xAxis: {
+                categories: ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"]
+            },
+            yAxis: {
+                title: {
+                    text: "Visitors"
+                }
+            },
+            series: this.data
+        };
     }
 }

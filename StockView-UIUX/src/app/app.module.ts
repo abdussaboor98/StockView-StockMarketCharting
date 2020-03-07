@@ -5,6 +5,7 @@ import { FontAwesomeModule } from "@fortawesome/angular-fontawesome";
 import { AppRoutingModule } from "./app-routing.module";
 import { HttpClientModule } from "@angular/common/http";
 
+import { HighchartsChartComponent } from 'highcharts-angular';
 import { AppComponent } from "./app.component";
 import { SignupComponent } from "./user/signup/signup.component";
 import { HomeComponent } from "./common/home/home.component";
@@ -44,6 +45,7 @@ import { ActivateComponent } from './user/activate/activate.component';
 @NgModule({
     declarations: [
         AppComponent,
+        HighchartsChartComponent,
         SignupComponent,
         HomeComponent,
         LoginComponent,

@@ -53,7 +53,7 @@ public class CompanyRestController {
 	
 	@GetMapping(value = "/companies/getCompanyByStockCodeAndExchangeName/{stockCode}/{stockExchangeName}", produces = "application/json")
 	public ResponseEntity<?> getCompanyByStockCodeAndExchangeName(@PathVariable("stockCode") String stockCode, @PathVariable("stockExchangeName") String stockExchangeName) {
-		return new ResponseEntity<Boolean>(companyService.getCompanyByStockCodeAndExchangeName(stockCode, stockExchangeName),HttpStatus.OK);
+		return new ResponseEntity<Boolean>(companyService.getCompanyByStockCodeAndExchangeName(stockCode, stockExchangeName).isPresent(),HttpStatus.OK);
 	}
 
 	@PostMapping(value = "/companies", consumes = "application/json")
