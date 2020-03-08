@@ -29,4 +29,8 @@ export class CompaniesService {
     updateCompany(company: Company): Observable<Company> {
         return this.httpClient.put<Company>(this.url, company);
     }
+
+    getCompaniesByStockExchange(stockExchange:string): Observable<Company[]>{
+        return this.httpClient.get<Company[]>(this.url+"getCompaniesByStockExchange/"+stockExchange);
+    }
 }

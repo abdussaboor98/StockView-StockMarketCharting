@@ -82,4 +82,14 @@ public class CompanyRestController {
 		logger.info("All IPOs accessed --> {}",response);
 		return response;
 	}
+	
+	@GetMapping(value = "/companies/getCompaniesByStockExchange/{stockExchange}")
+	public ResponseEntity<?> getCompaniesByStockExchange(@PathVariable String stockExchange) {
+		List<CompanyEntity> companies = companyService.getCompaniesByStockExchange(stockExchange);
+		if(companies.size() > 0) {
+			return new ResponseEntity<List<CompanyEntity>>(companies,HttpStatus.OK);
+		} else {
+			return new ResponseEntity<String>("No companies found", HttpStatus.BAD_REQUEST);
+		}
+	}
 }

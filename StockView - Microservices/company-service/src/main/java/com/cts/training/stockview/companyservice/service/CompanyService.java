@@ -18,4 +18,6 @@ public interface CompanyService {
 	public void deleteCompany(int id);
 
 	public Optional<CompanyEntity> getCompanyByStockCodeAndExchangeName(String stockCode, String stockExchangeName);
+
+	public List<CompanyEntity> getCompaniesByStockExchange(String stockExchange);
 }

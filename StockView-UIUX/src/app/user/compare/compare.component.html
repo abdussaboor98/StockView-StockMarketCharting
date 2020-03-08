@@ -1,49 +1,69 @@
 <main class="container">
     <div class="display-4 text-center my-4">Compare Companies</div>
     <div class="row justify-content-center">
-        <div class="card col-md-6 col-sm-10 mx-auto shadow">
+        <div class="card col-md-8 col-sm-10 mx-auto shadow">
             <div class="card-body">
-                <form [formGroup]="compareForm">
+                <div>
                     <div class="form-group">
-                        <label for="company-sector" >Select Company/Sector:</label>
-                            <select name="company-sector" id="company-sector" formControlName="companySector" class="custom-select" required>
-                                <option value="" selected disabled>Select comapny/sector...</option>
-                                <option value="">Company</option>
-                                <option value="">Sector</option>
-                            </select>
+                        <label for="company-sector">Select Company/Sector:</label>
+                        <select name="company-sector" id="company-sector" class="custom-select"
+                            (change)="enableSelection($event)">
+                            <option value="" selected disabled>Select comapny/sector...</option>
+                            <option value="company">Company</option>
+                            <option value="sector">Sector</option>
+                        </select>
                     </div>
-                    <div class="form-group">
-                        <label for="stock-ex" >Select stock exchange:</label>
-                            <select name="stock-ex" id="stock-ex" formControlName="stockEx" class="custom-select" required>
+                    <form *ngIf="companyComparision" [formGroup]="companyCompareForm">
+                        <div class="form-group">
+                            <label for="stock-ex">Select Stock exchange:</label>
+                            <select class="custom-select" formControlName="stockExchange" (change)="onStockExchangeSelect($event)">
                                 <option value="" selected disabled>Select stock exchange...</option>
-                                <option value="">One</option>
-                                <option value="">Two</option>
-                                <option value="">Three</option>
+                                <option *ngFor="let stockExchange of stockExchanges" [value]="stockExchange.name">
+                                    {{stockExchange.name}}</option>
                             </select>
-                    </div>
-                    <div class="form-group">
-                        <label for="name" >Company Name: </label>
-                            <input type="text" name="name" id="name" formControlName="name" class="form-control"
-                                placeholder="Enter company/sector name..." required>
-                    </div>
-                    <div class="row">
-                        <div class="col-6">
-                            <label for="from-date">From: </label>
-                                <input type="date" name="from-date" id="from-date" formControlName="fromDate" class="form-control"
-                                    placeholder="Confirm your password..." required>
                         </div>
-                        <div class="col-6">
-                            <label for="to-date" >To: </label>
-                                <input type="date" name="to-date" id="to-date" formControlName="toDate" class="form-control"
-                                    placeholder="Confirm your password..." required>
+                        <div formArrayName="companies"
+                            *ngFor="let companyField of companyCompareForm.controls.companies.controls;let i=index">
+                            <div class="form-group">
+                                <label for="name"><span *ngIf="i>0">2nd </span>Company Name: </label>
+                                <button *ngIf="i==0" class="btn btn-info btn-sm float-right"
+                                    (click)="onAddSecondCompany()" [disabled]="!canAddAnther">Add second
+                                    company</button>
+                                <select class="custom-select" [formControlName]="i">
+                                    <option value="" selected disabled>Select company...</option>
+                                    <option *ngFor="let company of companies" [value]="getCompanyCode(company)">
+                                        {{company.name}}</option>
+                                </select>
+                            </div>
                         </div>
-                    </div>
-                </form>
+                        <div formArrayName="periods"
+                            *ngFor="let periodGroup of companyCompareForm.controls.periods.controls;let i=index">
+                            <div class="clearfix">
+                                <button *ngIf="i==0" class="btn btn-info btn-sm float-right"
+                                    (click)="onAddSecondPeriod()" [disabled]="!canAddAnther">
+                                    Add period
+                                </button>
+                            </div>
+                            <div class="row" [formGroupName]="i">
+                                <div class="col-6">
+                                    <label for="from-date"><span *ngIf="i>0">2nd </span>From: </label>
+                                    <input type="date" name="from-date" id="from-date" formControlName="fromDate"
+                                        class="form-control" placeholder="Confirm your password..."
+                                        [max]="maxDate" [min]="minDate">
+                                </div>
+                                <div class="col-6">
+                                    <label for="to-date"><span *ngIf="i>0">2nd </span>To: </label>
+                                    <input type="date" name="to-date" id="to-date" formControlName="toDate"
+                                        class="form-control" placeholder="Confirm your password..."
+                                        [max]="maxDate" [min]="minDate">
+                                </div>
+                            </div>
+                        </div>
+
+                        <button type="submit" class="btn btn-primary btn-block mt-3">Compare</button>
+                    </form>
+                </div>
             </div>
         </div>
     </div>
-    <button type="submit" class="btn btn-primary btn-block mt-3 col-md-6 mx-auto">Compare</button>
-    <button type="button" class="btn btn-primary rounded-circle mx-auto add-btn shadow">
-        <fa-icon [icon]="faPlus" class="h2"></fa-icon>
-    </button>
 </main>

@@ -1,6 +1,7 @@
 package com.cts.training.stockview.stockpriceservice.controller;
 
 import java.io.IOException;
+import java.time.LocalDate;
 import java.util.List;
 
 import org.slf4j.Logger;
@@ -21,7 +22,9 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.cts.training.stockview.stockpriceservice.entity.StockPriceEntity;
+import com.cts.training.stockview.stockpriceservice.model.CompanyStockPriceRequest;
 import com.cts.training.stockview.stockpriceservice.model.ImportSummary;
+import com.cts.training.stockview.stockpriceservice.model.StockPricePerDay;
 import com.cts.training.stockview.stockpriceservice.service.StockPriceService;
 
 @CrossOrigin("*")
@@ -37,14 +40,52 @@ public class StockPriceRestController {
 		return stockPriceService.getAllStockPrices();
 	}
 	
-	@GetMapping(value = "/stockExchanges/{id}", produces = "application/json")
+	@GetMapping(value = "/stockPrices/{id}", produces = "application/json")
 	public StockPriceEntity getStockPriceById(@PathVariable("id") int id){
 		return stockPriceService.getStockPriceById(id);
 	}
 	
-	@PostMapping(value = "/stockExchanges",consumes = "application/json")
+	@PostMapping(value = "/stockPrices",consumes = "application/json")
 	public StockPriceEntity addStockPrice(@RequestBody StockPriceEntity stockExchange) {
 		return stockPriceService.addStockPrice(stockExchange);
+	}
+	
+//	@PostMapping(value = "/stockPrices/companyStockPriceBetween", produces = "application/json")
+//	public ResponseEntity<?> getCompanyStockPricePerDayBetween(@RequestBody CompanyStockPriceRequest request) {
+//		logger.info("Requset for --> {}",request);
+//		List<StockPricePerDay> list = stockPriceService.getCompanyStockPricePerDayBetween(request);
+//		logger.info("Response for --> {}",list);
+//		return new ResponseEntity<List<StockPricePerDay>>(list,HttpStatus.OK);
+//	}
+	
+	@GetMapping(value = "/stockPrices/companyStockPriceBetween/{companyCode}/{stockExchange}/{startDate}/{endDate}/{periodicity}", produces = "application/json")
+	public ResponseEntity<?> getCompanyStockPricePerDayBetween(@PathVariable String companyCode,@PathVariable String stockExchange,@PathVariable String startDate,@PathVariable  String endDate,@PathVariable int periodicity) {
+		
+		return new ResponseEntity<List<StockPricePerDay>>(stockPriceService.getCompanyStockPricePerDayBetween(companyCode,stockExchange,LocalDate.parse(startDate),LocalDate.parse(endDate)),HttpStatus.OK);
+	}
+	
+	@GetMapping(value = "/stockPrices/getMaxDate/{companyCode}/{stockExchange}", produces = "application/json")
+	public ResponseEntity<?> getMaxDate(@PathVariable String companyCode,@PathVariable String stockExchange) {
+		try {
+			logger.info("Request for MaxDate --> {}:{}",companyCode,stockExchange);
+			return new ResponseEntity<LocalDate>(stockPriceService.getMaxDate(companyCode,stockExchange), HttpStatus.OK);
+		}
+		catch(Exception e) {
+			logger.error("Error for MaxDate --> {}:{}\nError --> {}",companyCode,stockExchange,e);
+			return new ResponseEntity<String>("Some error occurred"+e.getMessage(), HttpStatus.BAD_REQUEST);
+		}
+	}
+	
+	@GetMapping(value = "/stockPrices/getMinDate/{companyCode}/{stockExchange}", produces = "application/json")
+	public ResponseEntity<?> getMinDate(@PathVariable String companyCode,@PathVariable String stockExchange) {
+		try {
+			logger.info("Request for MinDate --> {}:{}",companyCode,stockExchange);
+			return new ResponseEntity<LocalDate>(stockPriceService.getMinDate(companyCode,stockExchange), HttpStatus.OK);
+		}
+		catch(Exception e) {
+			logger.error("Error for MinDate --> {}:{}\nError --> {}",companyCode,stockExchange,e);
+			return new ResponseEntity<String>("Some error occurred"+e.getMessage(), HttpStatus.BAD_REQUEST);
+		}
 	}
 	
 	@PostMapping(value = "stockPrices/uploadStocksSheet",consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
@@ -65,12 +106,12 @@ public class StockPriceRestController {
 		}
 	}
 
-	@PutMapping(value = "/stockExchanges",consumes = "application/json")
+	@PutMapping(value = "/stockPrices",consumes = "application/json")
 	public StockPriceEntity updateStockPrice(@RequestBody StockPriceEntity stockExchange) {
 		return stockPriceService.updateStockPrice(stockExchange);
 	}
 	
-	@DeleteMapping(value = "/stockExchanges/{id}")
+	@DeleteMapping(value = "/stockPrices/{id}")
 	public void deleteStockPrice(@PathVariable int id) {
 		stockPriceService.deleteStockPrice(id);
 	}

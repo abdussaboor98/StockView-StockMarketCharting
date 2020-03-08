@@ -1,5 +1,4 @@
 import { Component, OnInit } from "@angular/core";
-import { Chart } from "chart.js";
 import { StockPriceService } from "src/app/services/stock-price.service";
 import { StockPrice } from "src/app/models/stockPrice";
 import * as Highcharts from 'highcharts';
@@ -13,16 +12,33 @@ export class CompareResultComponent implements OnInit {
     stockPrices: StockPrice[];
     highcharts = Highcharts;
     data: any[] = [];
+    prices:any[] = [];
+    xAxis: any[] = [];
     chartOptions: any;
     constructor(private stockPriceService: StockPriceService) { }
 
     ngOnInit() {
+
+        // this.stockPriceService.getCompanyStockPricesBetween(new CompanyStockPriceRequest("500112","BSE",new Date("2019-06-07"),new Date("2019-06-10"),7)).subscribe(data =>{
+        //     console.log(data);
+        // })
+        this.stockPriceService.getCompanyStockPricesBetween("500870","BSE",new Date("2019-06-07"),new Date("2019-06-15"),7).subscribe(data =>{
+            console.log(data);
+            for(let stockPrice of data){
+                console.log(stockPrice);
+                this.prices.push(stockPrice.avgPrice)
+                let utcDate = new Date(stockPrice.date)
+                this.xAxis.push(utcDate.getUTCDate()+"/"+(utcDate.getUTCMonth()+1)+"/"+utcDate.getUTCFullYear())
+            }
+        
+       
         this.data = [{
-            name: 'ItSolutionStuff.com',
-            data: [500, 700, 555, 444, 777, 877, 944, 567, 666, 789, 456, 654]
-        }, {
-            name: 'Nicesnippets.com',
-            data: [677, 455, 677, 877, 455, 778, 888, 567, 785, 488, 567, 654]
+            name: data[0].companyCode +" ("+data[0].stockExchange+")",
+            data: this.prices
+        },
+        {
+            name: data[0].companyCode +" ("+data[0].stockExchange+")",
+            data: this.prices
         }];
 
         
@@ -31,17 +47,18 @@ export class CompareResultComponent implements OnInit {
                 type: "column"
             },
             title: {
-                text: "Monthly Site Visitor"
+                text: "Stock Prices Comparisions"
             },
             xAxis: {
-                categories: ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"]
+                categories: this.xAxis
             },
             yAxis: {
                 title: {
-                    text: "Visitors"
+                    text: "Stock Prices in ₹"
                 }
             },
             series: this.data
         };
+     })
     }
 }
