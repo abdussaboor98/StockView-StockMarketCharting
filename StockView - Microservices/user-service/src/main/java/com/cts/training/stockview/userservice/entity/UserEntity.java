@@ -26,14 +26,14 @@ public class UserEntity implements Serializable {
 	private long phoneNo;
 	private boolean admin = false;
 	private boolean confirmed = false;
-	private int otp;
+	private String userType="ROLE_USER";
 
 	public UserEntity() {
 
 	}
 
 	public UserEntity(int id, String username, String email, String password, long phoneNo, boolean admin,
-			boolean confirmed, int otp) {
+			boolean confirmed, String role) {
 		super();
 		this.id = id;
 		this.username = username;
@@ -42,7 +42,7 @@ public class UserEntity implements Serializable {
 		this.phoneNo = phoneNo;
 		this.admin = admin;
 		this.confirmed = confirmed;
-		this.otp = otp;
+		this.userType = role;
 	}
 
 	public int getId() {
@@ -101,12 +101,19 @@ public class UserEntity implements Serializable {
 		this.confirmed = confirmed;
 	}
 
-	public int getOtp() {
-		return otp;
+	public String getUserType() {
+		return userType;
 	}
 
-	public void setOtp(int otp) {
-		this.otp = otp;
+	public void setUserType(String role) {
+		this.userType = role;
 	}
 
+	@Override
+	public String toString() {
+		return "UserEntity [id=" + id + ", username=" + username + ", email=" + email + ", password=" + password
+				+ ", phoneNo=" + phoneNo + ", admin=" + admin + ", confirmed=" + confirmed + ", role=" + userType + "]";
+	}
+
+	
 }

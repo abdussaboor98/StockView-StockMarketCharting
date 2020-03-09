@@ -22,8 +22,13 @@ export class StockPriceService {
     return this.httpClient.get<StockPricePerDay[]>(this.httpUrl+url);
   }
 
-  getMaxDate(companyCode: string, stockExchange: string): Observable<Date>{
-    let url = "maxDate/"+companyCode+"/"+stockExchange;
-    return this.httpClient.get<Date>(this.httpUrl+url)
+  getMaxDate(companyCode: string, stockExchange: string): Observable<string>{
+    let url = "getMaxDate/"+companyCode+"/"+stockExchange;
+    return this.httpClient.get<string>(this.httpUrl+url)
+  }
+
+  getMinDate(companyCode: string, stockExchange: string): Observable<string>{
+    let url = "getMinDate/"+companyCode+"/"+stockExchange;
+    return this.httpClient.get<string>(this.httpUrl+url)
   }
 }

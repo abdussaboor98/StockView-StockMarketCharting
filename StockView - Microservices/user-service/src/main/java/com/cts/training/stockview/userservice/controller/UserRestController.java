@@ -25,6 +25,11 @@ public class UserRestController {
 	@Autowired
 	private UserService userService;
 
+	@GetMapping(value = "/login")
+	public ResponseEntity<?> login() {
+		return new ResponseEntity<HttpStatus>(HttpStatus.OK);
+	}
+	
 	@GetMapping(value = "/users", produces = "application/json")
 	public ResponseEntity<?> getAllUsers() {
 		List<User> list = userService.getAllUsers();

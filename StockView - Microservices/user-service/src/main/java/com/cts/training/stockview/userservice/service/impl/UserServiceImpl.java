@@ -70,9 +70,6 @@ public class UserServiceImpl implements UserService {
 	public User addUser(User user) {
 		UserEntity userEntity = new UserEntity();
 		BeanUtils.copyProperties(user, userEntity);
-		double randomNum = Math.random();
-		int otp = (int) Math.floor(randomNum*10000);
-		userEntity.setOtp(otp);
 		UserEntity userObj = userRepo.save(userEntity);
 		try {
 			MimeMessage mimeMessage = javaMailSender.createMimeMessage();

@@ -23,8 +23,8 @@ export class CompareComponent implements OnInit {
     sectorComparision: boolean = false;
     canAddAnther: boolean = true;
 
-    maxDate: string = (new Date(Date.now())).toISOString().split('T')[0];
-    minDate: string = (new Date("2019-08-08")).toISOString().split('T')[0];
+    maxDate: string;
+    minDate: string;
 
 
     stockExchanges: StockExchange[];
@@ -40,7 +40,10 @@ export class CompareComponent implements OnInit {
         this.companyCompareForm = this.formBuilder.group({
             stockExchange: ["", Validators.required],
             companies: this.formBuilder.array([
-                this.formBuilder.control('', Validators.required)
+                this.formBuilder.group({
+                    stockExchange: ["", Validators.required],
+                    companyCode: ["",Validators.required]
+                })
             ]),
             periods: this.formBuilder.array([
                 this.formBuilder.group({
@@ -82,17 +85,34 @@ export class CompareComponent implements OnInit {
         this.canAddAnther = false;
     }
 
-    onStockExchangeSelect(e){
+    onStockExchangeSelect(e,index){
         this.companiesService.getCompaniesByStockExchange(e.target.value).subscribe( data =>{
             this.companies = data;
         });
+        console.log(index);
     }
 
     getCompanyCode(company:Company): string{
         for(let listedIn of company.listedIn) {
             if(listedIn.stockExchangeName == this.companyCompareForm.get("stockExchange").value){
-                return listedIn.stockCode
+                return listedIn.stockCode;
             }
         }
+    }
+
+    onGetMinMaxDates(e){
+        let companyCode = e.target.value;
+        let stockExchange = (<FormArray>this.companyCompareForm.get('companies')).
+        this.stockPriceService.getMinDate(companyCode,stockExchange).subscribe(data => {
+            this.minDate = data;
+        })
+        this.stockPriceService.getMaxDate(companyCode,stockExchange).subscribe(data => {
+            this.maxDate = data;
+        });
+        console.log(this.minDate);
+    }
+
+    onSubmit(){
+        console.log(this.companyCompareForm.value);
     }
 }
