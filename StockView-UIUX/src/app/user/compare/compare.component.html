@@ -15,29 +15,32 @@
                     </div>
                     <form *ngIf="companyComparision" [formGroup]="companyCompareForm" (ngSubmit)="onSubmit()">
                         <div formArrayName="companies"
-                            *ngFor="let companyField of companyCompareForm.controls.companies.controls;let i=index"  >
+                            *ngFor="let companyField of companyCompareForm.controls.companies.controls;let i=index">
                             <div [formGroupName]="i">
-                            <div class="form-group">
-                                <label for="stock-ex">Select Stock exchange:</label>
-                                <select class="custom-select" formControlName="stockExchange" (change)="onStockExchangeSelect($event,i)">
-                                    <option value="" selected disabled>Select stock exchange...</option>
-                                    <option *ngFor="let stockExchange of stockExchanges" [value]="stockExchange.name">
-                                        {{stockExchange.name}}</option>
-                                </select>
-                            </div>
-                            <div class="form-group">
-                                <label for="name"><span *ngIf="i>0">2nd </span>Company Name: </label>
-                                <button *ngIf="i==0" class="btn btn-info btn-sm float-right"
-                                    (click)="onAddSecondCompany()" [disabled]="!canAddAnther">Add second
-                                    company</button>
-                                <select class="custom-select" formControlName="companyCode" (change)="onGetMinMaxDates($event)">
-                                    <option value="" selected disabled>Select company...</option>
-                                    <option *ngFor="let company of companies" [value]="getCompanyCode(company)">
-                                        {{company.name}}</option>
-                                </select>
+                                <div class="form-group">
+                                    <label for="stock-ex">Select Stock exchange:</label>
+                                    <select class="custom-select" formControlName="stockExchange"
+                                        (change)="onStockExchangeSelect($event,i)">
+                                        <option value="" selected disabled>Select stock exchange...</option>
+                                        <option *ngFor="let stockExchange of stockExchanges"
+                                            [value]="stockExchange.name">
+                                            {{ stockExchange.name }}
+                                        </option>
+                                    </select>
+                                </div>
+                                <div class="form-group">
+                                    <label for="name"><span *ngIf="i>0">2nd </span>Company Name: </label>
+                                    <button *ngIf="i==0" class="btn btn-info btn-sm float-right"
+                                        (click)="onAddSecondCompany()" [disabled]="!canAddAnther">Add second
+                                        company</button>
+                                    <select class="custom-select" formControlName="companyCode">
+                                        <option value="" selected disabled>Select company...</option>
+                                        <option *ngFor="let company of companies[i]" [value]="getCompanyCode(company,i)">
+                                            {{company.name}}</option>
+                                    </select>
+                                </div>
                             </div>
                         </div>
-                    </div>
                         <div formArrayName="periods"
                             *ngFor="let periodGroup of companyCompareForm.controls.periods.controls;let i=index">
                             <div class="clearfix">
@@ -50,14 +53,14 @@
                                 <div class="col-6">
                                     <label for="from-date"><span *ngIf="i>0">2nd </span>From: </label>
                                     <input type="date" name="from-date" id="from-date" formControlName="fromDate"
-                                        class="form-control" placeholder="Confirm your password..."
-                                        [max]="maxDate" [min]="minDate">
+                                        class="form-control" placeholder="Confirm your password..." [max]="maxDate"
+                                        [min]="minDate">
                                 </div>
                                 <div class="col-6">
                                     <label for="to-date"><span *ngIf="i>0">2nd </span>To: </label>
                                     <input type="date" name="to-date" id="to-date" formControlName="toDate"
-                                        class="form-control" placeholder="Confirm your password..."
-                                        [max]="maxDate" [min]="minDate">
+                                        class="form-control" placeholder="Confirm your password..." [max]="maxDate"
+                                        [min]="minDate">
                                 </div>
                             </div>
                         </div>

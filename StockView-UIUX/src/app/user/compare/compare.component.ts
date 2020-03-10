@@ -6,6 +6,7 @@ import { StockExchange } from 'src/app/models/stockExchange';
 import { StockPriceService } from 'src/app/services/stock-price.service';
 import { CompaniesService } from 'src/app/services/companies.service';
 import { Company } from 'src/app/models/company';
+import { Router } from '@angular/router';
 
 @Component({
     selector: "app-compare",
@@ -17,7 +18,8 @@ export class CompareComponent implements OnInit {
     sectorCompareForm: FormGroup;
     faPlus = faPlus;
 
-    companies: Company[]
+    companies:Company[][]=[];
+    stockExchanges: StockExchange[];
 
     companyComparision: boolean = false;
     sectorComparision: boolean = false;
@@ -26,23 +28,21 @@ export class CompareComponent implements OnInit {
     maxDate: string;
     minDate: string;
 
-
-    stockExchanges: StockExchange[];
-
     constructor(
-        private formBuilder: FormBuilder, 
-        private stockExService: StockExchangesService, 
-        private stockPriceService: StockPriceService, 
-        private companiesService: CompaniesService
+        private formBuilder: FormBuilder,
+        private stockExService: StockExchangesService,
+        private companiesService: CompaniesService,
+        private router: Router
     ) { }
 
     ngOnInit() {
+        this.companies[0]=[];
+        this.companies[1]=[];
         this.companyCompareForm = this.formBuilder.group({
-            stockExchange: ["", Validators.required],
             companies: this.formBuilder.array([
                 this.formBuilder.group({
                     stockExchange: ["", Validators.required],
-                    companyCode: ["",Validators.required]
+                    companyCode: ["", Validators.required]
                 })
             ]),
             periods: this.formBuilder.array([
@@ -71,8 +71,11 @@ export class CompareComponent implements OnInit {
     }
 
     onAddSecondCompany() {
-        const control = this.formBuilder.control('', Validators.required);
-        (<FormArray>this.companyCompareForm.get('companies')).push(control);
+        const group =  this.formBuilder.group({
+            stockExchange: ["", Validators.required],
+            companyCode: ["", Validators.required]
+        });
+        (<FormArray>this.companyCompareForm.get('companies')).push(group);
         this.canAddAnther = false;
     }
 
@@ -85,34 +88,33 @@ export class CompareComponent implements OnInit {
         this.canAddAnther = false;
     }
 
-    onStockExchangeSelect(e,index){
-        this.companiesService.getCompaniesByStockExchange(e.target.value).subscribe( data =>{
-            this.companies = data;
+    onStockExchangeSelect(e, i:number) {
+        this.companiesService.getCompaniesByStockExchange(e.target.value).subscribe(data => {
+            this.companies[i] = data;
         });
-        console.log(index);
     }
 
-    getCompanyCode(company:Company): string{
-        for(let listedIn of company.listedIn) {
-            if(listedIn.stockExchangeName == this.companyCompareForm.get("stockExchange").value){
+    getCompanyCode(company: Company, i: number): string {
+        for (let listedIn of company.listedIn) {
+            if (listedIn.stockExchangeName == (<FormArray>this.companyCompareForm.get('companies')).at(i).get("stockExchange").value) {
                 return listedIn.stockCode;
             }
         }
     }
 
-    onGetMinMaxDates(e){
-        let companyCode = e.target.value;
-        let stockExchange = (<FormArray>this.companyCompareForm.get('companies')).
-        this.stockPriceService.getMinDate(companyCode,stockExchange).subscribe(data => {
-            this.minDate = data;
-        })
-        this.stockPriceService.getMaxDate(companyCode,stockExchange).subscribe(data => {
-            this.maxDate = data;
-        });
-        console.log(this.minDate);
-    }
+    // onGetMinMaxDates(e,i){
+    //     let companyCode = e.target.value;
+    //     let stockExchange = (<FormArray>this.companyCompareForm.get('companies')).get(i).get("stockExchange");
+    //     this.stockPriceService.getMinDate(companyCode,stockExchange).subscribe(data => {
+    //         this.minDate = data;
+    //     })
+    //     this.stockPriceService.getMaxDate(companyCode,stockExchange).subscribe(data => {
+    //         this.maxDate = data;
+    //     });
+    //     console.log(this.minDate);
+    // }
 
-    onSubmit(){
-        console.log(this.companyCompareForm.value);
+    onSubmit() {
+        this.router.navigate(['/result'],{queryParams : {formData: JSON.stringify(this.companyCompareForm.value)} });
     }
 }
