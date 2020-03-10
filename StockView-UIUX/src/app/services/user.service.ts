@@ -28,6 +28,9 @@ export class UserService {
     ): Observable<User> {
         return this.httpClient.get<User>(this.url + "findByUsernameAndPassword/" + username+"/"+password);
     }
+    getUserByUsername(username: string): Observable<User> {
+        return this.httpClient.get<User>(this.url + "findByUsername/" + username);
+    }
 
     registerUser(user: User): Observable<User> {
         return this.httpClient.post<User>(this.url, user);

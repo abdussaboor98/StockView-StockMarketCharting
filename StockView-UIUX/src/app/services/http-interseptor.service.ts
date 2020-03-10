@@ -2,9 +2,7 @@ import { Injectable } from '@angular/core';
 import { AuthServiceService } from './auth-service.service';
 import { HttpRequest, HttpHandler, HttpInterceptor } from '@angular/common/http';
 
-@Injectable({
-  providedIn: 'root'
-})
+@Injectable()
 export class HttpInterseptorService implements HttpInterceptor {
   constructor(public auth: AuthServiceService) { }
   // request generated will be auto intercepted and info about request is available in req object
@@ -16,7 +14,8 @@ export class HttpInterseptorService implements HttpInterceptor {
       let authenticationToken = this.auth.getAuthenticationToken();
       request = request.clone({
         setHeaders: {
-          Authorization: authenticationToken
+          "Authorization": authenticationToken,
+          "Access-Control-Allow-Origin": "*"
         }
       });
     }

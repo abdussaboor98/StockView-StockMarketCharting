@@ -65,6 +65,14 @@ public class UserServiceImpl implements UserService {
 		BeanUtils.copyProperties(user, userDTO);
 		return userDTO;
 	}
+	
+	@Override
+	public User getUserByUsername(String username) throws NoSuchElementException {
+		UserEntity user = userRepo.findByUsername(username).get();
+		User userDTO = new User();
+		BeanUtils.copyProperties(user, userDTO);
+		return userDTO;
+	}
 
 	@Override
 	public User addUser(User user) {

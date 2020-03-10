@@ -1,9 +1,16 @@
 package com.cts.training.stockview.userservice.controller;
 
+import java.nio.charset.StandardCharsets;
+import java.util.Base64;
 import java.util.List;
 import java.util.NoSuchElementException;
 
+import javax.servlet.http.HttpServletRequest;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -24,10 +31,34 @@ public class UserRestController {
 
 	@Autowired
 	private UserService userService;
-
-	@GetMapping(value = "/login")
-	public ResponseEntity<?> login() {
-		return new ResponseEntity<HttpStatus>(HttpStatus.OK);
+	
+	Logger logger = LoggerFactory.getLogger(this.getClass());
+	
+	@GetMapping("/login")
+	public ResponseEntity<?> login(HttpServletRequest request) {
+		String authorization = request.getHeader("Authorization");
+		logger.info("Login attempt with token --> {}", authorization);
+		String username = null;
+		String password = null;
+		if (authorization != null && authorization.startsWith("Basic")) {
+		    String base64Credentials = authorization.substring("Basic".length()).trim();
+		    byte[] credDecoded = Base64.getDecoder().decode(base64Credentials);
+		    String credentials = new String(credDecoded, StandardCharsets.UTF_8);
+		    username = credentials.split(":")[0];
+		    password = credentials.split(":")[1];
+		}
+		try {
+			User user = userService.getUserByUsernameAndPassword(username, password);
+			logger.info("User logged in using username --> {}", username);
+			HttpHeaders headers = new HttpHeaders();
+			headers.add("Access-Control-Allow-Origin", "*");
+			return new ResponseEntity<User>(user,headers,HttpStatus.OK);
+		} catch (Exception e ) {
+			System.out.println(e.getStackTrace());
+			logger.info("Unauthorized access Stack Trace--> {}", e.getStackTrace().toString());
+			return new ResponseEntity<String>("No user found",HttpStatus.OK);
+		}
+		
 	}
 	
 	@GetMapping(value = "/users", produces = "application/json")
@@ -65,6 +96,16 @@ public class UserRestController {
 			@PathVariable("password") String password) {
 		try {
 			User user = userService.getUserByUsernameAndPassword(username, password);
+			return new ResponseEntity<User>(user, HttpStatus.OK);
+		} catch (NoSuchElementException e) {
+			return new ResponseEntity<String>("No such user found", HttpStatus.BAD_REQUEST);
+		}
+	}
+	
+	@GetMapping(value = "/users/findByUsername/{username}")
+	public ResponseEntity<?> getUserByUsername(@PathVariable("username") String username) {
+		try {
+			User user = userService.getUserByUsername(username);
 			return new ResponseEntity<User>(user, HttpStatus.OK);
 		} catch (NoSuchElementException e) {
 			return new ResponseEntity<String>("No such user found", HttpStatus.BAD_REQUEST);

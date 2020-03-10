@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { faUser } from "@fortawesome/free-solid-svg-icons"
+import { AuthServiceService } from 'src/app/services/auth-service.service';
 
 @Component({
   selector: 'app-user-header',
@@ -10,17 +11,13 @@ import { faUser } from "@fortawesome/free-solid-svg-icons"
 export class UserHeaderComponent implements OnInit {
 
   faUser = faUser;
-  constructor(private router: Router) { }
+  constructor(private router: Router, private auth: AuthServiceService) { }
 
   ngOnInit() {
   }
 
   logout(){
-    console.log('logging out user');
-    localStorage.removeItem("userType");
-    sessionStorage.removeItem("userType");
-    localStorage.removeItem("userId");
-    sessionStorage.removeItem("userId");
+    this.auth.logout();
     this.router.navigate(["home"]);
   }
 }

@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { UserService } from './user.service';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { map } from 'rxjs/operators';
+import { User } from '../models/users';
 
 const url = "http://localhost:8765/user-service/login";
 
@@ -14,27 +15,21 @@ export class AuthServiceService {
   authenticate(username: string, password: string) {
     // create a security token
     let authenticationToken = "Basic " + window.btoa(username + ":" + password);
-    console.log(authenticationToken);
 
     let headers = new HttpHeaders({
       Authorization: authenticationToken
     });
     
     console.log("calling server")
-    // send the request
-    return this.http.get(url, { headers }).pipe(
-      // success function
-      map(successData => {
-        console.log("success ")
+    return this.http.get(url, {headers}).pipe(
+      map((data: User) => {
         sessionStorage.setItem("username", username);
-        // save the token
         sessionStorage.setItem("token", authenticationToken);
-        return successData;
+        sessionStorage.setItem("userType",data.admin ? "admin":"user"); 
+        return data;
       }),
-      // failure function
-      map(failureData => { 
-        console.log("failure")
-        return failureData;
+      map(error => {
+        return error;
       })
     );
   }
@@ -53,7 +48,8 @@ export class AuthServiceService {
   }
 
   logout() {
-    sessionStorage.removeItem('username');
-    sessionStorage.removeItem("token")
+    sessionStorage.removeItem("username");
+    sessionStorage.removeItem("token");
+    sessionStorage.removeItem("userType");
   }
 }

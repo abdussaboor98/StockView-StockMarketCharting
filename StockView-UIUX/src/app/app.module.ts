@@ -3,7 +3,7 @@ import { NgModule } from "@angular/core";
 import { ReactiveFormsModule } from "@angular/forms";
 import { FontAwesomeModule } from "@fortawesome/angular-fontawesome";
 import { AppRoutingModule } from "./app-routing.module";
-import { HttpClientModule } from "@angular/common/http";
+import { HttpClientModule, HTTP_INTERCEPTORS } from "@angular/common/http";
 
 import { HighchartsChartComponent } from 'highcharts-angular';
 import { AppComponent } from "./app.component";
@@ -41,6 +41,7 @@ import { LandingComponent } from './common/landing/landing.component';
 import { ViewIpoComponent } from './user/view-ipo/view-ipo.component';
 import { CompareResultComponent } from './user/compare-result/compare-result.component';
 import { ActivateComponent } from './user/activate/activate.component';
+import { HttpInterseptorService } from './services/http-interseptor.service';
 
 @NgModule({
     declarations: [
@@ -88,7 +89,13 @@ import { ActivateComponent } from './user/activate/activate.component';
         FontAwesomeModule,
         HttpClientModule
     ],
-    providers: [],
+    providers: [
+        {
+            provide: HTTP_INTERCEPTORS,
+            useClass: HttpInterseptorService,
+            multi: true
+        }
+    ],
     bootstrap: [AppComponent]
 })
 export class AppModule {}

@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { AuthServiceService } from 'src/app/services/auth-service.service';
 
 @Component({
   selector: 'app-admin-header',
@@ -8,18 +9,16 @@ import { Router } from '@angular/router';
 })
 export class AdminHeaderComponent implements OnInit {
 
-  constructor(private router: Router) { }
+  constructor(private router: Router, private auth: AuthServiceService) { }
 
   ngOnInit() {
   }
 
   logout(){
-    console.log('logging out admin');
-    localStorage.removeItem("userType");
-    sessionStorage.removeItem("userType");
-    localStorage.removeItem("userId");
-    sessionStorage.removeItem("userId");
+    console.log('Logging out');
+    this.auth.logout()
     this.router.navigate(["home"]);
+    console.log('Logging out');
   }
 
 }
