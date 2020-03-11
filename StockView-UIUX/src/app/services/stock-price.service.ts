@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { CompanyStockPriceRequest } from '../models/companyStockPriceRequest';
-import { StockPricePerDay } from '../models/stockPricePerDay';
+import { StockPriceData } from '../models/stockPriceData';
 
 @Injectable({
   providedIn: 'root'
@@ -17,9 +17,9 @@ export class StockPriceService {
     return this.httpClient.post<any>(this.httpUrl+"uploadStocksSheet",formData);
   }
 
-  getCompanyStockPricesBetween(companyCode: string, stockExchange: string, startDate: Date, endDate: Date): Observable<StockPricePerDay[]> {
-    let url = "companyStockPriceBetween/"+companyCode+"/"+stockExchange+"/"+startDate+"/"+endDate+"/"+(1);
-    return this.httpClient.get<StockPricePerDay[]>(this.httpUrl+url);
+  getCompanyStockPricesBetween(companyCode: string, stockExchange: string, startDate: Date, endDate: Date,periodicity: string): Observable<StockPriceData[]> {
+    let url = "companyStockPriceBetween/"+companyCode+"/"+stockExchange+"/"+startDate+"/"+endDate+"/"+periodicity;
+    return this.httpClient.get<StockPriceData[]>(this.httpUrl+url);
   }
 
   getMaxDate(companyCode: string, stockExchange: string): Observable<string>{

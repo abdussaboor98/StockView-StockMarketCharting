@@ -37,33 +37,32 @@ export class SignupComponent implements OnInit {
         });
     }
 
-    checkUsername() {
+    checkUsername(e) {
         this.usernameTaken = false;
-        for (let user of this.users) {
-            if (user.username == this.signupForm.get("username").value) {
-                this.usernameTaken = true;
-                break;
-            }
-        }
+        if(e.target.value !== "")
+        this.userService
+            .usernameExists(e.target.value)
+            .subscribe(data => {
+                if (data) {
+                    this.signupForm.setErrors({
+                        valid: false
+                    });
+                    this.usernameTaken = true;
+                }
+                else
+                    this.usernameTaken = false;
+            },error => {
+                this.usernameTaken = false;
+            });
     }
 
-    checkEmail() {
-        // this.emailTaken = false;
-        // for(let user of this.users){
-        //     console.log('ggg');
-        //     if(user.email == this.signupForm.get("email").value){
-        //         this.signupForm.setErrors({
-        //             valid: false
-        //         });
-        //         this.emailTaken = true;
-        //         break;
-        //     }
-        // }
+    checkEmail(e) {
         this.emailTaken = false;
+        if(e.target.value !== "")
         this.userService
-            .getUserByEmail(this.signupForm.get("email").value)
+            .emailExists(e.target.value)
             .subscribe(data => {
-                if (data !== null) {
+                if (data) {
                     this.signupForm.setErrors({
                         valid: false
                     });
@@ -73,7 +72,6 @@ export class SignupComponent implements OnInit {
                     this.emailTaken = false;
             },error => {
                 this.emailTaken = false;
-                console.log(error);
             });
     }
 

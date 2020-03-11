@@ -4,6 +4,8 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.time.LocalDate;
 import java.time.LocalTime;
+import java.time.Month;
+import java.time.Year;
 import java.time.ZoneId;
 import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
@@ -26,6 +28,7 @@ import com.cts.training.stockview.stockpriceservice.entity.StockPriceEntity;
 import com.cts.training.stockview.stockpriceservice.feignproxy.ZuulGatewayProxy;
 import com.cts.training.stockview.stockpriceservice.model.CompanyStockPriceRequest;
 import com.cts.training.stockview.stockpriceservice.model.ImportSummary;
+import com.cts.training.stockview.stockpriceservice.model.StockPriceOnPeriod;
 import com.cts.training.stockview.stockpriceservice.model.StockPricePerDay;
 import com.cts.training.stockview.stockpriceservice.repo.StockPriceRepository;
 import com.cts.training.stockview.stockpriceservice.service.StockPriceService;
@@ -62,7 +65,7 @@ public class StockPriceServiceImpl implements StockPriceService {
 	public void deleteStockPrice(int id) {
 		stockPriceRepo.deleteById(id);
 	}
-	
+
 	@Override
 	public ImportSummary addStockPricesFromExcelSheet(MultipartFile file) throws IOException, Exception {
 		InputStream in = file.getInputStream();
@@ -134,7 +137,8 @@ public class StockPriceServiceImpl implements StockPriceService {
 								+ (currentCellNum - 1) + " (row:column). ");
 					}
 					if (!serviceProxy.getCompanyByStockCodeAndExchangeName(companyCode, stockExchangeName)) {
-						System.out.println(serviceProxy.getCompanyByStockCodeAndExchangeName(companyCode, stockExchangeName));
+						System.out.println(
+								serviceProxy.getCompanyByStockCodeAndExchangeName(companyCode, stockExchangeName));
 						throw new Exception("The file has unkown company code value at " + (currentRowNum + 1) + ":"
 								+ (currentCellNum - 2) + " (row:column). ");
 					}
@@ -146,7 +150,8 @@ public class StockPriceServiceImpl implements StockPriceService {
 					endDate = date.isAfter(endDate) ? date : endDate;
 					System.out.println(row.getCell(4).getDateCellValue());
 					LocalTime time = row.getCell(currentCellNum++).getDateCellValue().toInstant()
-							.atZone(ZoneId.of("+05:30")).toLocalTime();;
+							.atZone(ZoneId.of("+05:30")).toLocalTime();
+					;
 
 					if (!stockPriceRepo.getIfAlreadyExists(companyCode, stockExchangeName, date, time).isPresent()) {
 						StockPriceEntity stockPriceEntity = new StockPriceEntity(companyCode, stockExchangeName,
@@ -173,24 +178,41 @@ public class StockPriceServiceImpl implements StockPriceService {
 		return new ImportSummary(stockPricesEntities.size(), startDate, endDate, companyCodes, stockExchanges,
 				duplicates);
 	}
-	
+
 //	@Override
 //	public List<StockPricePerDay> getCompanyStockPricePerDayBetween(CompanyStockPriceRequest stockPriceRequest) {
 //		return stockPriceRepo.getStockPriceBetweenDates(stockPriceRequest.getCompanyCode(), stockPriceRequest.getStockExchange(), stockPriceRequest.getStartDate(), stockPriceRequest.getEndDate());
 //	}
-	
+
 	@Override
-	public List<StockPricePerDay> getCompanyStockPricePerDayBetween(String companyCode,String stockExchange,LocalDate startDate, LocalDate endDate) {
-		return stockPriceRepo.getStockPriceBetweenDates(companyCode,stockExchange,startDate,endDate);
+	public List<StockPriceOnPeriod> getCompanyStockPriceBetween(String companyCode, String stockExchange,
+			LocalDate startDate, LocalDate endDate, String periodicity) {
+		if (periodicity.equalsIgnoreCase("month")) {
+			List<StockPriceOnPeriod> list = stockPriceRepo.getAverageStockPriceByMonth(companyCode, stockExchange, startDate, endDate);
+			list.forEach(member -> {
+				member.setDataPoint(Month.of(Integer.parseInt(member.getDataPoint())).name());
+			});
+			return list;
+		} else if (periodicity.equalsIgnoreCase("year")) {
+				List<StockPriceOnPeriod> list = stockPriceRepo.getAverageStockPriceByYear(companyCode, stockExchange, startDate, endDate);
+//				list.forEach(member -> {
+//					member.setDataPoint(Year.of(Integer.parseInt(member.getDataPoint())).name());
+//				});
+				return list;
+			} else {
+				return stockPriceRepo.getStockPriceBetweenDates(companyCode, stockExchange, startDate, endDate);
+			}
+			
+
 	}
 
 	@Override
-	public LocalDate getMaxDate(String companyCode,String stockExchange) {
+	public LocalDate getMaxDate(String companyCode, String stockExchange) {
 		return stockPriceRepo.getMaxDate(companyCode, stockExchange).get();
 	}
-	
+
 	@Override
-	public LocalDate getMinDate(String companyCode,String stockExchange) {
+	public LocalDate getMinDate(String companyCode, String stockExchange) {
 		return stockPriceRepo.getMinDate(companyCode, stockExchange).get();
 	}
 }

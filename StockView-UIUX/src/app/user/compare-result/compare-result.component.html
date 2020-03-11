@@ -1,12 +1,14 @@
 <main>
-    <div class="container">
-        <div *ngIf="singleChart && getFirstDataComplete && getSecondDataComplete" class="row justify-content-center">
-            <highcharts-chart class="m-5" 
-                [Highcharts]="chartOne" 
-                [options]="chartOneOptions">
-            </highcharts-chart>
-        </div>
-        <div *ngIf="doubleChart">
-        </div>
+    <div class="container-fluid">
+            <div *ngIf="singleChart && getFirstDataComplete && getSecondDataComplete"
+                class="row justify-content-center mt-5">
+                <highcharts-chart [Highcharts]="chartOne" [options]="chartOneOptions">
+                </highcharts-chart>
+            </div>
+            <div *ngIf="doubleChart && getFirstDataComplete && getSecondDataComplete"
+                class="row justify-content-center mt-5">
+                <highcharts-chart [Highcharts]="chartTwo" [options]="chartTwoOptions">
+                </highcharts-chart>
+            </div>
     </div>
 </main>

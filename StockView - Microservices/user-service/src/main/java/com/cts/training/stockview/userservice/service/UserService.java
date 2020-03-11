@@ -11,8 +11,6 @@ public interface UserService {
 
 	public User getUserById(int id);
 
-	public User getUserByEmail(String email);
-
 	public User getUserByUsernameAndPassword(String username, String password);
 
 	public User addUser(User user);
@@ -24,4 +22,8 @@ public interface UserService {
 	public void deleteUser(int id);
 
 	User getUserByUsername(String username);
+
+	boolean emailExists(String email) throws NoSuchElementException;
+
+	boolean usernameExists(String email) throws NoSuchElementException;
 }

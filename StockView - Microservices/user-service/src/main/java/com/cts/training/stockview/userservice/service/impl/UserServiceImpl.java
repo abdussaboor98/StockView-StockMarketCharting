@@ -50,12 +50,15 @@ public class UserServiceImpl implements UserService {
 	}
 
 	@Override
-	public User getUserByEmail(String email) throws NoSuchElementException {
-		UserEntity user = userRepo.findByEmail(email).get();
-		User userDTO = new User();
-		BeanUtils.copyProperties(user, userDTO);
-		return userDTO;
+	public boolean emailExists(String email) throws NoSuchElementException {
+		return userRepo.findByEmail(email).isPresent();
 
+	}
+	
+	@Override
+	public boolean usernameExists(String email) throws NoSuchElementException {
+		return userRepo.findByUsername(email).isPresent();
+		
 	}
 
 	@Override

@@ -20,7 +20,7 @@ public class StockPriceServiceApplication {
 		ConfigurableApplicationContext x = SpringApplication.run(StockPriceServiceApplication.class, args);
 		StockPriceRepository repo = x.getBean(StockPriceRepository.class);
 		
-		System.out.println(repo.getAverageStockPriceByMonth("500112", "BSE", LocalDate.of(2019, 07, 01), LocalDate.of(2019, 12, 31)));
+		System.out.println(repo.getAverageStockPriceByYear("500112", "BSE", LocalDate.of(2016, 07, 01), LocalDate.of(2019, 12, 31)));
 	}
 
 }

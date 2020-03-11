@@ -24,6 +24,7 @@ import org.springframework.web.multipart.MultipartFile;
 import com.cts.training.stockview.stockpriceservice.entity.StockPriceEntity;
 import com.cts.training.stockview.stockpriceservice.model.CompanyStockPriceRequest;
 import com.cts.training.stockview.stockpriceservice.model.ImportSummary;
+import com.cts.training.stockview.stockpriceservice.model.StockPriceOnPeriod;
 import com.cts.training.stockview.stockpriceservice.model.StockPricePerDay;
 import com.cts.training.stockview.stockpriceservice.service.StockPriceService;
 
@@ -59,9 +60,9 @@ public class StockPriceRestController {
 //	}
 	
 	@GetMapping(value = "/stockPrices/companyStockPriceBetween/{companyCode}/{stockExchange}/{startDate}/{endDate}/{periodicity}", produces = "application/json")
-	public ResponseEntity<?> getCompanyStockPricePerDayBetween(@PathVariable String companyCode,@PathVariable String stockExchange,@PathVariable String startDate,@PathVariable  String endDate,@PathVariable int periodicity) {
+	public ResponseEntity<?> getCompanyStockPricePerDayBetween(@PathVariable String companyCode,@PathVariable String stockExchange,@PathVariable String startDate,@PathVariable  String endDate,@PathVariable String periodicity) {
 		
-		return new ResponseEntity<List<StockPricePerDay>>(stockPriceService.getCompanyStockPricePerDayBetween(companyCode,stockExchange,LocalDate.parse(startDate),LocalDate.parse(endDate)),HttpStatus.OK);
+		return new ResponseEntity<List<StockPriceOnPeriod>>(stockPriceService.getCompanyStockPriceBetween(companyCode,stockExchange,LocalDate.parse(startDate),LocalDate.parse(endDate),periodicity),HttpStatus.OK);
 	}
 	
 	@GetMapping(value = "/stockPrices/getMaxDate/{companyCode}/{stockExchange}", produces = "application/json")

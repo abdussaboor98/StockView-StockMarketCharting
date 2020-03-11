@@ -7,13 +7,13 @@
                     <div class="form-group">
                         <label for="username" class="form-control-label">Name:</label>
                         <input type="text" name="username" id="username" class="form-control"
-                            placeholder="Enter username..." formControlName="username" (change)="checkUsername()">
+                            placeholder="Enter username..." formControlName="username" (change)="checkUsername($event)">
                             <span class="text-danger" *ngIf="usernameTaken"><small>This username is already taken.</small></span>
                     </div>
                     <div class="form-group">
                         <label for="email" class="form-control-label">E-mail:</label>
                         <input type="email" name="email" id="email" class="form-control"
-                            placeholder="Enter your email..." formControlName="email" (change)="checkEmail()" [ngClass]="{'ng-invalid':emailTaken}">
+                            placeholder="Enter your email..." formControlName="email" (change)="checkEmail($event)" [ngClass]="{'ng-invalid':emailTaken}">
                             <span class="text-danger" *ngIf="emailTaken"><small>This email is already in use.</small></span>
                             <span class="text-danger" *ngIf="!signupForm.get('email').valid && signupForm.get('email').touched"><small>Enter a valid email id</small></span>
                     </div>

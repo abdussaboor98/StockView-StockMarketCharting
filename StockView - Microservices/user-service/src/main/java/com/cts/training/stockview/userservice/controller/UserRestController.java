@@ -79,14 +79,14 @@ public class UserRestController {
 		}
 	}
 
-	@GetMapping(value = "/users/email/{email}")
-	public ResponseEntity<?> getUserByEmail(@PathVariable("email") String email) {
-		try {
-			User user = userService.getUserByEmail(email);
-			return new ResponseEntity<User>(user, HttpStatus.OK);
-		} catch (NoSuchElementException e) {
-			return new ResponseEntity<String>("No such user found", HttpStatus.BAD_REQUEST);
-		}
+	@GetMapping(value = "/users/open/emailExists/{email}")
+	public ResponseEntity<?> emailExist(@PathVariable("email") String email) {
+		return new ResponseEntity<Boolean>(userService.emailExists(email), HttpStatus.OK);
+	}
+	
+	@GetMapping(value = "/users/open/usernameExists/{username}")
+	public ResponseEntity<?> usernameExist(@PathVariable("username") String username) {
+		return new ResponseEntity<Boolean>(userService.usernameExists(username), HttpStatus.OK);
 	}
 
 	@GetMapping(value = "/users/findByUsernameAndPassword/{username}/{password}")

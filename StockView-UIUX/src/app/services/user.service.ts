@@ -18,10 +18,14 @@ export class UserService {
         return this.httpClient.get<User>(this.url + id);
     }
 
-    getUserByEmail(email: string): Observable<User> {
-        return this.httpClient.get<User>(this.url + "email/" + email);
+    emailExists(email: string): Observable<boolean> {
+        return this.httpClient.get<boolean>(this.url + "open/emailExists/" + email);
     }
 
+    usernameExists(username: string): Observable<boolean> {
+        return this.httpClient.get<boolean>(this.url + "open/usernameExists/" + username);
+    }
+ 
     getUserByUsernameAndPassword(
         username: string,
         password: string

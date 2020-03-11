@@ -41,8 +41,7 @@ export class LoginComponent implements OnInit {
     login() {
         let username = this.loginForm.get("username").value;
         let password = this.loginForm.get("password").value;
-        const result$ = this.auth.authenticate(username, password);
-        result$.subscribe(data => {
+        this.auth.authenticate(username, password).subscribe(data => {
             console.log(data);
             this.router.navigate(["landing"]);
             $("#login-modal").modal("hide");

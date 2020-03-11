@@ -7,9 +7,8 @@ import java.util.NoSuchElementException;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.cts.training.stockview.stockpriceservice.entity.StockPriceEntity;
-import com.cts.training.stockview.stockpriceservice.model.CompanyStockPriceRequest;
 import com.cts.training.stockview.stockpriceservice.model.ImportSummary;
-import com.cts.training.stockview.stockpriceservice.model.StockPricePerDay;;
+import com.cts.training.stockview.stockpriceservice.model.StockPriceOnPeriod;
 
 public interface StockPriceService {
 
@@ -20,10 +19,6 @@ public interface StockPriceService {
 	public StockPriceEntity addStockPrice(StockPriceEntity stockPriceEntity);
 	
 	public ImportSummary addStockPricesFromExcelSheet(MultipartFile file) throws Exception; 
-
-//	public List<StockPricePerDay> getCompanyStockPricePerDayBetween(CompanyStockPriceRequest stockPriceRequest);
-	
-	public List<StockPricePerDay> getCompanyStockPricePerDayBetween(String companyCode,String stockExchange,LocalDate startDate, LocalDate endDate);
 	
 	public StockPriceEntity updateStockPrice(StockPriceEntity stockPriceEntity);
 
@@ -32,4 +27,7 @@ public interface StockPriceService {
 	public LocalDate getMaxDate(String companyCode,String stockExchange);
 	
 	public LocalDate getMinDate(String companyCode,String stockExchange);
+
+	List<StockPriceOnPeriod> getCompanyStockPriceBetween(String companyCode, String stockExchange, LocalDate startDate,
+			LocalDate endDate, String periodicity);
 }
