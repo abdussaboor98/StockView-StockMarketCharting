@@ -25,6 +25,10 @@ export class UserService {
     usernameExists(username: string): Observable<boolean> {
         return this.httpClient.get<boolean>(this.url + "open/usernameExists/" + username);
     }
+
+    isUserActive(username: string): Observable<boolean> {
+        return this.httpClient.get<boolean>(this.url + "open/isUserActive/" + username);
+    }
  
     getUserByUsernameAndPassword(
         username: string,
@@ -37,7 +41,7 @@ export class UserService {
     }
 
     registerUser(user: User): Observable<User> {
-        return this.httpClient.post<User>(this.url, user);
+        return this.httpClient.post<User>(this.url+"open/addUser", user);
     }
 
     deleteUser(id: number): Observable<User> {
@@ -49,27 +53,6 @@ export class UserService {
     }
 
     activateUser(email: string): Observable<boolean> {
-        return this.httpClient.put<boolean>(this.url + "activate", email);
-    }
-
-    isAdmin(): boolean {
-        if (
-            localStorage.getItem("userType") == "admin" ||
-            sessionStorage.getItem("userType") == "admin"
-        ) {
-            return true;
-        } else {
-            return false;
-        }
-    }
-    isUser(): boolean {
-        if (
-            localStorage.getItem("userType") == "user" ||
-            sessionStorage.getItem("userType") == "user"
-        ) {
-            return true;
-        } else {
-            return false;
-        }
+        return this.httpClient.put<boolean>(this.url + "open/activate", email);
     }
 }

@@ -11,21 +11,15 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
-import com.cts.training.stockview.stockpriceservice.entity.StockPriceEntity;
-import com.cts.training.stockview.stockpriceservice.model.CompanyStockPriceRequest;
 import com.cts.training.stockview.stockpriceservice.model.ImportSummary;
 import com.cts.training.stockview.stockpriceservice.model.StockPriceOnPeriod;
-import com.cts.training.stockview.stockpriceservice.model.StockPricePerDay;
 import com.cts.training.stockview.stockpriceservice.service.StockPriceService;
 
 @CrossOrigin("*")
@@ -36,28 +30,6 @@ public class StockPriceRestController {
 	
 	Logger logger = LoggerFactory.getLogger(this.getClass()); 
 	
-	@GetMapping(value = "/stockPrices",produces = "application/json")
-	public List<StockPriceEntity> getAllStockPrices(){
-		return stockPriceService.getAllStockPrices();
-	}
-	
-	@GetMapping(value = "/stockPrices/{id}", produces = "application/json")
-	public StockPriceEntity getStockPriceById(@PathVariable("id") int id){
-		return stockPriceService.getStockPriceById(id);
-	}
-	
-	@PostMapping(value = "/stockPrices",consumes = "application/json")
-	public StockPriceEntity addStockPrice(@RequestBody StockPriceEntity stockExchange) {
-		return stockPriceService.addStockPrice(stockExchange);
-	}
-	
-//	@PostMapping(value = "/stockPrices/companyStockPriceBetween", produces = "application/json")
-//	public ResponseEntity<?> getCompanyStockPricePerDayBetween(@RequestBody CompanyStockPriceRequest request) {
-//		logger.info("Requset for --> {}",request);
-//		List<StockPricePerDay> list = stockPriceService.getCompanyStockPricePerDayBetween(request);
-//		logger.info("Response for --> {}",list);
-//		return new ResponseEntity<List<StockPricePerDay>>(list,HttpStatus.OK);
-//	}
 	
 	@GetMapping(value = "/stockPrices/companyStockPriceBetween/{companyCode}/{stockExchange}/{startDate}/{endDate}/{periodicity}", produces = "application/json")
 	public ResponseEntity<?> getCompanyStockPricePerDayBetween(@PathVariable String companyCode,@PathVariable String stockExchange,@PathVariable String startDate,@PathVariable  String endDate,@PathVariable String periodicity) {
@@ -89,7 +61,7 @@ public class StockPriceRestController {
 		}
 	}
 	
-	@PostMapping(value = "stockPrices/uploadStocksSheet",consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
+	@PostMapping(value = "/stockPrices/admin/uploadStocksSheet",consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
 	public ResponseEntity<?> uploadStocksSheet(@RequestParam("stocksSheet") MultipartFile file) {
 		logger.info("File recieved: {}",file.getOriginalFilename());
 		if (file.getOriginalFilename().endsWith(".xls") || file.getOriginalFilename().endsWith(".xlsx")) {
@@ -106,14 +78,29 @@ public class StockPriceRestController {
 			return new ResponseEntity<String>("Wrong file extension. The file should be .xls or an .xlsx file.",HttpStatus.BAD_REQUEST);
 		}
 	}
-
-	@PutMapping(value = "/stockPrices",consumes = "application/json")
-	public StockPriceEntity updateStockPrice(@RequestBody StockPriceEntity stockExchange) {
-		return stockPriceService.updateStockPrice(stockExchange);
-	}
 	
-	@DeleteMapping(value = "/stockPrices/{id}")
-	public void deleteStockPrice(@PathVariable int id) {
-		stockPriceService.deleteStockPrice(id);
-	}
+//	@GetMapping(value = "/stockPrices",produces = "application/json")
+//	public List<StockPriceEntity> getAllStockPrices(){
+//		return stockPriceService.getAllStockPrices();
+//	}
+//	
+//	@GetMapping(value = "/stockPrices/{id}", produces = "application/json")
+//	public StockPriceEntity getStockPriceById(@PathVariable("id") int id){
+//		return stockPriceService.getStockPriceById(id);
+//	}
+//	
+//	@PostMapping(value = "/stockPrices",consumes = "application/json")
+//	public StockPriceEntity addStockPrice(@RequestBody StockPriceEntity stockExchange) {
+//		return stockPriceService.addStockPrice(stockExchange);
+//	}
+
+//	@PutMapping(value = "/stockPrices",consumes = "application/json")
+//	public StockPriceEntity updateStockPrice(@RequestBody StockPriceEntity stockExchange) {
+//		return stockPriceService.updateStockPrice(stockExchange);
+//	}
+//	
+//	@DeleteMapping(value = "/stockPrices/{id}")
+//	public void deleteStockPrice(@PathVariable int id) {
+//		stockPriceService.deleteStockPrice(id);
+//	}
 }

@@ -17,10 +17,7 @@ import com.cts.training.stockview.stockpriceservice.repo.StockPriceRepository;
 public class StockPriceServiceApplication {
 
 	public static void main(String[] args) {
-		ConfigurableApplicationContext x = SpringApplication.run(StockPriceServiceApplication.class, args);
-		StockPriceRepository repo = x.getBean(StockPriceRepository.class);
-		
-		System.out.println(repo.getAverageStockPriceByYear("500112", "BSE", LocalDate.of(2016, 07, 01), LocalDate.of(2019, 12, 31)));
+		SpringApplication.run(StockPriceServiceApplication.class, args);
 	}
 
 }

@@ -3,6 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { CompanyStockPriceRequest } from '../models/companyStockPriceRequest';
 import { StockPriceData } from '../models/stockPriceData';
+import { UploadSummary } from '../models/uploadSummary';
 
 @Injectable({
   providedIn: 'root'
@@ -13,8 +14,8 @@ export class StockPriceService {
 
   constructor(private httpClient:HttpClient) { }
 
-  uploadStocksSheet(formData: FormData): Observable<any>{
-    return this.httpClient.post<any>(this.httpUrl+"uploadStocksSheet",formData);
+  uploadStocksSheet(formData: FormData): Observable<UploadSummary>{
+    return this.httpClient.post<any>(this.httpUrl+"admin/uploadStocksSheet",formData);
   }
 
   getCompanyStockPricesBetween(companyCode: string, stockExchange: string, startDate: Date, endDate: Date,periodicity: string): Observable<StockPriceData[]> {

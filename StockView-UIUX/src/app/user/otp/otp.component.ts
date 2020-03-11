@@ -19,7 +19,6 @@ export class OtpComponent implements OnInit {
     }
 
     verifyOTP() {
-        console.log(this.otpForm);
         $("#login-modal").modal("show");
         this.router.navigate(["home"]);
     }

@@ -4,7 +4,6 @@
         <table class="table table-stripped table-hover  text-center bg-light">
             <thead class="thead-light">
                 <tr>
-                    <th>ID</th>
                     <th>Company name</th>
                     <th>Stock Exchange</th>
                     <th>Price per share</th>
@@ -15,7 +14,6 @@
             </thead>
             <tbody>
                 <tr *ngFor="let ipo of ipos">
-                    <td> {{ipo.id}} </td>
                     <td> {{ipo.companyName}} </td>
                     <td> {{ipo.stockExchange}} </td>
                     <td> {{ipo.pricePerShare | currency: "INR"}} </td>
@@ -27,7 +25,4 @@
 
         </table>
     </div>
-    <button type="button" class="btn btn-primary rounded-circle mx-auto add-btn shadow" (click)="gotoNew()">
-        <fa-icon [icon]="faPlus" class="h2"></fa-icon>
-    </button>
 </main>

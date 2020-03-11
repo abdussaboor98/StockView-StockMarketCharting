@@ -34,31 +34,6 @@ public class UserRestController {
 	
 	Logger logger = LoggerFactory.getLogger(this.getClass());
 	
-	@GetMapping("/login")
-	public ResponseEntity<?> login(HttpServletRequest request) {
-		String authorization = request.getHeader("Authorization");
-		logger.info("Login attempt with token --> {}", authorization);
-		String username = null;
-		String password = null;
-		if (authorization != null && authorization.startsWith("Basic")) {
-		    String base64Credentials = authorization.substring("Basic".length()).trim();
-		    byte[] credDecoded = Base64.getDecoder().decode(base64Credentials);
-		    String credentials = new String(credDecoded, StandardCharsets.UTF_8);
-		    username = credentials.split(":")[0];
-		    password = credentials.split(":")[1];
-		}
-		try {
-			User user = userService.getUserByUsernameAndPassword(username, password);
-			logger.info("User logged in using username --> {}", username);
-			return new ResponseEntity<User>(user,HttpStatus.OK);
-		} catch (Exception e ) {
-			System.out.println(e.getStackTrace());
-			logger.info("Unauthorized access Stack Trace--> {}", e.getStackTrace().toString());
-			return new ResponseEntity<String>("No user found",HttpStatus.OK);
-		}
-		
-	}
-	
 	@GetMapping(value = "/users", produces = "application/json")
 	public ResponseEntity<?> getAllUsers() {
 		List<User> list = userService.getAllUsers();
@@ -88,6 +63,11 @@ public class UserRestController {
 	public ResponseEntity<?> usernameExist(@PathVariable("username") String username) {
 		return new ResponseEntity<Boolean>(userService.usernameExists(username), HttpStatus.OK);
 	}
+	
+	@GetMapping(value = "/users/open/isUserActive/{username}")
+	public ResponseEntity<?> isUserActive(@PathVariable("username") String username) {
+		return new ResponseEntity<Boolean>(userService.isUserActive(username), HttpStatus.OK);
+	}
 
 	@GetMapping(value = "/users/findByUsernameAndPassword/{username}/{password}")
 	public ResponseEntity<?> getUserByUsernameAndPassword(@PathVariable("username") String username,
@@ -110,12 +90,12 @@ public class UserRestController {
 		}
 	}
 
-	@PostMapping(value = "/users", consumes = "application/json")
+	@PostMapping(value = "/users/open/addUser", consumes = "application/json")
 	public ResponseEntity<User> addUser(@RequestBody User user) {
 		return new ResponseEntity<User>(userService.addUser(user), HttpStatus.OK);
 	}
 
-	@PutMapping(value = "/users/activate")
+	@PutMapping(value = "/users/open/activate")
 	public ResponseEntity<?> activateUser(@RequestBody String email) {
 		try {
 			Boolean status = userService.activateUser(email);

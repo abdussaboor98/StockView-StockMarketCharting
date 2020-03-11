@@ -26,10 +26,8 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.cts.training.stockview.stockpriceservice.entity.StockPriceEntity;
 import com.cts.training.stockview.stockpriceservice.feignproxy.ZuulGatewayProxy;
-import com.cts.training.stockview.stockpriceservice.model.CompanyStockPriceRequest;
 import com.cts.training.stockview.stockpriceservice.model.ImportSummary;
 import com.cts.training.stockview.stockpriceservice.model.StockPriceOnPeriod;
-import com.cts.training.stockview.stockpriceservice.model.StockPricePerDay;
 import com.cts.training.stockview.stockpriceservice.repo.StockPriceRepository;
 import com.cts.training.stockview.stockpriceservice.service.StockPriceService;
 
@@ -99,7 +97,6 @@ public class StockPriceServiceImpl implements StockPriceService {
 							.atZone(ZoneId.of("+05:30")).toLocalDate();
 					startDate = date.isBefore(startDate) ? date : startDate;
 					endDate = date.isAfter(endDate) ? date : endDate;
-					System.out.println(row.getCell(4).getCellType());
 					LocalTime time = LocalTime.parse(row.getCell(currentCellNum++).getStringCellValue().trim());
 
 					if (!stockPriceRepo.getIfAlreadyExists(companyCode, stockExchangeName, date, time).isPresent()) {
@@ -125,7 +122,6 @@ public class StockPriceServiceImpl implements StockPriceService {
 		} else if (file.getOriginalFilename().endsWith(".xlsx")) {
 			try (XSSFWorkbook workbook = new XSSFWorkbook(in)) {
 				XSSFSheet stockPricesSheet = workbook.getSheetAt(0);
-				System.out.println(stockPricesSheet.getLastRowNum());
 				XSSFRow row = stockPricesSheet.getRow(currentRowNum);
 				while (row != null && row.getCell(0) != null) {
 					String companyCode = row.getCell(currentCellNum++).getStringCellValue().trim();
@@ -137,8 +133,6 @@ public class StockPriceServiceImpl implements StockPriceService {
 								+ (currentCellNum - 1) + " (row:column). ");
 					}
 					if (!serviceProxy.getCompanyByStockCodeAndExchangeName(companyCode, stockExchangeName)) {
-						System.out.println(
-								serviceProxy.getCompanyByStockCodeAndExchangeName(companyCode, stockExchangeName));
 						throw new Exception("The file has unkown company code value at " + (currentRowNum + 1) + ":"
 								+ (currentCellNum - 2) + " (row:column). ");
 					}
@@ -148,7 +142,6 @@ public class StockPriceServiceImpl implements StockPriceService {
 							.atZone(ZoneId.of("+05:30")).toLocalDate();
 					startDate = date.isBefore(startDate) ? date : startDate;
 					endDate = date.isAfter(endDate) ? date : endDate;
-					System.out.println(row.getCell(4).getDateCellValue());
 					LocalTime time = row.getCell(currentCellNum++).getDateCellValue().toInstant()
 							.atZone(ZoneId.of("+05:30")).toLocalTime();
 					;
@@ -179,11 +172,6 @@ public class StockPriceServiceImpl implements StockPriceService {
 				duplicates);
 	}
 
-//	@Override
-//	public List<StockPricePerDay> getCompanyStockPricePerDayBetween(CompanyStockPriceRequest stockPriceRequest) {
-//		return stockPriceRepo.getStockPriceBetweenDates(stockPriceRequest.getCompanyCode(), stockPriceRequest.getStockExchange(), stockPriceRequest.getStartDate(), stockPriceRequest.getEndDate());
-//	}
-
 	@Override
 	public List<StockPriceOnPeriod> getCompanyStockPriceBetween(String companyCode, String stockExchange,
 			LocalDate startDate, LocalDate endDate, String periodicity) {
@@ -195,9 +183,6 @@ public class StockPriceServiceImpl implements StockPriceService {
 			return list;
 		} else if (periodicity.equalsIgnoreCase("year")) {
 				List<StockPriceOnPeriod> list = stockPriceRepo.getAverageStockPriceByYear(companyCode, stockExchange, startDate, endDate);
-//				list.forEach(member -> {
-//					member.setDataPoint(Year.of(Integer.parseInt(member.getDataPoint())).name());
-//				});
 				return list;
 			} else {
 				return stockPriceRepo.getStockPriceBetweenDates(companyCode, stockExchange, startDate, endDate);

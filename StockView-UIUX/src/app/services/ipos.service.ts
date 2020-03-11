@@ -19,14 +19,14 @@ export class IposService {
     }
 
     addNewIPO(ipo: IPO): Observable<IPO> {
-        return this.httpClient.post<IPO>(this.url, ipo);
+        return this.httpClient.post<IPO>(this.url+"admin/", ipo);
     }
 
     updateIPO(ipo: IPO): Observable<IPO> {
-        return this.httpClient.put<IPO>(this.url, ipo);
+        return this.httpClient.put<IPO>(this.url+"admin/", ipo);
     }
 
     deleteIPO(id: number): Observable<IPO> {
-        return this.httpClient.delete<IPO>(this.url + id);
+        return this.httpClient.delete<IPO>(this.url+"admin/" + id);
     }
 }

@@ -33,7 +33,7 @@ public class StockExchangeServiceImpl implements StockExchangeService{
 	public StockExchange getStockExchangeById(int id){
 		Optional<StockExchangeEntity> stockExchangeEntity = stockExchangeRepo.findById(id);
 		StockExchange stockExchange = new StockExchange();
-		BeanUtils.copyProperties(stockExchangeEntity.orElse(new StockExchangeEntity()), stockExchange);
+		BeanUtils.copyProperties(stockExchangeEntity.get(), stockExchange);
 		return stockExchange;
 	}
 

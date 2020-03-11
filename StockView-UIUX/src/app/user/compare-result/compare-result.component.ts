@@ -28,7 +28,6 @@ export class CompareResultComponent implements OnInit {
     ngOnInit() {
 
         this.compareData = JSON.parse(this.route.snapshot.queryParams.formData);
-        console.log(this.compareData);
         let series: any = []
         if (this.compareData.periods.length == 1) {
             this.singleChart = true;
@@ -78,7 +77,6 @@ export class CompareResultComponent implements OnInit {
                 },
                 series: series
             }
-            console.log(this.chartOneOptions);
 
         }
         if (this.compareData.periods.length > 1) {

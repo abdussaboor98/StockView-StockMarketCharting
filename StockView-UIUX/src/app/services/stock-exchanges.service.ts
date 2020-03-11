@@ -19,14 +19,14 @@ export class StockExchangesService {
     }
 
     addStockExchange(stockEx: StockExchange): Observable<StockExchange> {
-        return this.httpClient.post<StockExchange>(this.url, stockEx);
+        return this.httpClient.post<StockExchange>(this.url+"admin/", stockEx);
     }
 
     updateStockExchange(stockEx: StockExchange): Observable<StockExchange> {
-        return this.httpClient.put<StockExchange>(this.url,stockEx);
+        return this.httpClient.put<StockExchange>(this.url+"admin/",stockEx);
     }
 
     deleteStockExchange(id: number): Observable<StockExchange> {
-        return this.httpClient.delete<StockExchange>(this.url + id);
+        return this.httpClient.delete<StockExchange>(this.url+"admin/" + id);
     }
 }

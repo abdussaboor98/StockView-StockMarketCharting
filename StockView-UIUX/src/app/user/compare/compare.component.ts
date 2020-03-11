@@ -25,13 +25,14 @@ export class CompareComponent implements OnInit {
     sectorComparision: boolean = false;
     canAddAnther: boolean = true;
 
-    maxDate: string;
-    minDate: string;
+    maxDate: string = (new Date()).toISOString().split("T")[0];
+    minDate: string = (new Date(2016,1,1)).toISOString().split("T")[0];
 
     constructor(
         private formBuilder: FormBuilder,
         private stockExService: StockExchangesService,
         private companiesService: CompaniesService,
+        private stockPriceService: StockPriceService,
         private router: Router
     ) { }
 
@@ -112,7 +113,6 @@ export class CompareComponent implements OnInit {
     //     this.stockPriceService.getMaxDate(companyCode,stockExchange).subscribe(data => {
     //         this.maxDate = data;
     //     });
-    //     console.log(this.minDate);
     // }
 
     onSubmit() {

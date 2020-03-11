@@ -34,24 +34,31 @@ public class IPORestController {
 	}
 
 	@GetMapping(value = "/ipos/{id}", produces = "application/json")
-	public IPOEntity getIPOById(@PathVariable("id") int id) {
-		IPOEntity ipo = ipoService.getIPOById(id);
-		return ipo;
+	public ResponseEntity<?> getIPOById(@PathVariable("id") int id) {
+		IPOEntity ipo;
+		try {
+			ipo = ipoService.getIPOById(id);
+			return new ResponseEntity<IPOEntity>(ipo,HttpStatus.OK);
+		} catch (Exception e) {
+			return new ResponseEntity<String>("No such ipo found",HttpStatus.BAD_REQUEST);
+		}
+		
 	}
 
-	@PostMapping(value = "/ipos", consumes = "application/json")
-	public IPOEntity addIPO(@RequestBody IPOEntity ipo) {
-		return ipoService.addIPO(ipo);
+	@PostMapping(value = "/ipos/admin", consumes = "application/json")
+	public ResponseEntity<?> addIPO(@RequestBody IPOEntity ipo) {
+		return new ResponseEntity<IPOEntity>(ipoService.addIPO(ipo),HttpStatus.OK);
 	}
 
-	@PutMapping(value = "/ipos", consumes = "application/json")
-	public IPOEntity updateIPO(@RequestBody IPOEntity ipo) {
-		return ipoService.updateIPO(ipo);
+	@PutMapping(value = "/ipos/admin", consumes = "application/json")
+	public ResponseEntity<?> updateIPO(@RequestBody IPOEntity ipo) {
+		return  new ResponseEntity<IPOEntity>(ipoService.updateIPO(ipo),HttpStatus.OK);
 	}
 
-	@DeleteMapping(value = "/ipos/{id}")
-	public void deleteIPO(@PathVariable int id) {
+	@DeleteMapping(value = "/ipos/admin/{id}")
+	public ResponseEntity<?> deleteIPO(@PathVariable int id) {
 		ipoService.deleteIPO(id);
+		return new ResponseEntity<HttpStatus>(HttpStatus.NO_CONTENT);
 	}
 
 }

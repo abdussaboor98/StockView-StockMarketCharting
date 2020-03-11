@@ -23,15 +23,15 @@ export class CompaniesService {
     }
 
     addCompany(company: Company): Observable<Company> {
-        return this.httpClient.post<Company>(this.url, company);
+        return this.httpClient.post<Company>(this.url+"admin/", company);
     }
 
     deleteCompany(id: number): Observable<Company> {
-        return this.httpClient.delete<Company>(this.url + id);
+        return this.httpClient.delete<Company>(this.url+"admin/" + id);
     }
 
     updateCompany(company: Company): Observable<Company> {
-        return this.httpClient.put<Company>(this.url, company);
+        return this.httpClient.put<Company>(this.url+"admin/", company);
     }
 
     getCompaniesByStockExchange(stockExchange:string): Observable<Company[]>{

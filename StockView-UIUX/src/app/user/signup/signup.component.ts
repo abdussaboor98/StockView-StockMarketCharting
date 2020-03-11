@@ -1,8 +1,9 @@
 import { Component, OnInit } from "@angular/core";
-import { FormGroup, Validators, FormBuilder } from "@angular/forms";
+import { FormGroup, Validators, FormBuilder, ReactiveFormsModule } from "@angular/forms";
 import { UserService } from "src/app/services/user.service";
 import { Router } from "@angular/router";
 import { User } from "src/app/models/users";
+import { hasLowercase, hasNumeric, hasUppercase, hasSepcialCharacter } from 'src/app/shared/passwordValidator';
 declare var $: any;
 
 @Component({
@@ -29,7 +30,7 @@ export class SignupComponent implements OnInit {
             id: [""],
             username: ["", Validators.required],
             email: ["", [Validators.required, Validators.email]],
-            password: ["", Validators.required],
+            password: ["", [Validators.required,Validators.minLength(8),hasLowercase,hasNumeric,hasUppercase,hasUppercase,hasSepcialCharacter]],
             rePassword: ["", Validators.required],
             phoneNo: ["", Validators.required],
             admin: [false],
@@ -61,7 +62,7 @@ export class SignupComponent implements OnInit {
         if(e.target.value !== "")
         this.userService
             .emailExists(e.target.value)
-            .subscribe(data => {
+            .subscribe(data => { 
                 if (data) {
                     this.signupForm.setErrors({
                         valid: false
@@ -87,15 +88,14 @@ export class SignupComponent implements OnInit {
     }
 
     onSubmit() {
-        console.log(this.signupForm.value);
         this.userService.registerUser(this.signupForm.value).subscribe(data => {
             this.signupForm.reset();
             $("#successModal").modal("show");
         });
     }
 
-    gotoOTP() {
-        this.router.navigate(["otp"]);
+    gotoHomme() {
+        this.router.navigate(["home"]);
         $("#successModal").modal("hide");
     }
 }

@@ -5,6 +5,6 @@ export class User {
     password: string;
     rePassword: string;
     phoneNo: number;
-    admin: boolean;
     confirmed: boolean;
+    userType: string;
 }

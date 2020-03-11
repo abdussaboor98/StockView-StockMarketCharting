@@ -16,13 +16,10 @@ export class AccountUpdateComponent implements OnInit {
         private router: Router
     ) {}
     ngOnInit() {
-        let id: string;
-        if(sessionStorage.getItem("userId") !== null)
-            id = sessionStorage.getItem("userId");
-        else
-            id = localStorage.getItem("userId");
-        if (+id > 0) {
-            this.userService.getUserById(+id).subscribe(data => {
+        let username: string;
+        username = sessionStorage.getItem("username");
+        if (username) {
+            this.userService.getUserByUsername(username).subscribe(data => {
                 this.accountUpdateForm.patchValue(data);
             });
         } else this.router.navigate(["/landing"]);
@@ -39,7 +36,6 @@ export class AccountUpdateComponent implements OnInit {
     }
 
     onSubmit() {
-        console.log(this.accountUpdateForm.value);
         this.userService
             .updateUser(this.accountUpdateForm.value)
             .subscribe(data => {

@@ -56,19 +56,20 @@ public class CompanyRestController {
 		return new ResponseEntity<Boolean>(companyService.getCompanyByStockCodeAndExchangeName(stockCode, stockExchangeName).isPresent(),HttpStatus.OK);
 	}
 
-	@PostMapping(value = "/companies", consumes = "application/json")
-	public CompanyEntity addCompany(@RequestBody CompanyEntity company) {
-		return companyService.addCompany(company);
+	@PostMapping(value = "/companies/admin", consumes = "application/json")
+	public ResponseEntity<?> addCompany(@RequestBody CompanyEntity company) {
+		return new ResponseEntity<CompanyEntity>(companyService.addCompany(company),HttpStatus.OK);
 	}
 
-	@PutMapping(value = "/companies", consumes = "application/json")
-	public CompanyEntity updateCompany(@RequestBody CompanyEntity company) {
-		return companyService.updateCompany(company);
+	@PutMapping(value = "/companies/admin", consumes = "application/json")
+	public ResponseEntity<?> updateCompany(@RequestBody CompanyEntity company) {
+		return new ResponseEntity<CompanyEntity>(companyService.updateCompany(company),HttpStatus.OK);
 	}
 
-	@DeleteMapping(value = "/companies/{id}")
-	public void deleteCompany(@PathVariable int id) {
+	@DeleteMapping(value = "/companies/admin/{id}")
+	public ResponseEntity<?> deleteCompany(@PathVariable int id) {
 		companyService.deleteCompany(id);
+		return new ResponseEntity<HttpStatus>(HttpStatus.NO_CONTENT);
 	}
 	
 	@GetMapping(value = "/companies/getCompanyStockPrice")

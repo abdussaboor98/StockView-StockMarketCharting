@@ -14,8 +14,5 @@ public interface CompanyRepository extends JpaRepository<CompanyEntity, Integer>
 	
 	public List<CompanyEntity> findByListedIn_StockExchangeName(String stockExchange);
 	
-//	@Query("From CompanyEntity WHERE name LIKE ?!")
-//	public List<CompanyEntity> findAllByNameContainingPattern(String pattern);
-	
 	public List<CompanyEntity> findAllByNameContaining(String pattern);
 }

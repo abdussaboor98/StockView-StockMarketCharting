@@ -14,7 +14,6 @@ export class ViewExchangesComponent implements OnInit {
     ngOnInit() {
         this.stockExService.getAllExchanges().subscribe(data => {
             this.stockExchanges = data;
-            console.log(this.stockExchanges);
         });
     }
 }

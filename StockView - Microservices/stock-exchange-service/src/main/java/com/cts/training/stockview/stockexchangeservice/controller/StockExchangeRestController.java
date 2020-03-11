@@ -29,13 +29,25 @@ public class StockExchangeRestController {
 	private StockExchangeService stockExchangeService;
 	
 	@GetMapping(value = "/stockExchanges",produces = "application/json")
-	public List<StockExchange> getAllStockExchanges(){
-		return stockExchangeService.getAllStockExchanges();
+	public ResponseEntity<?> getAllStockExchanges(){
+		List<StockExchange> stockExchanges =  stockExchangeService.getAllStockExchanges();
+		if(stockExchanges.size()>0) {
+			return new ResponseEntity<List<StockExchange>>(stockExchanges,HttpStatus.OK);
+		}
+		else {
+			return new ResponseEntity<String>("No stock exchanges",HttpStatus.BAD_REQUEST);
+		}
 	}
 	
 	@GetMapping(value = "/stockExchanges/{id}", produces = "application/json")
-	public StockExchange getStockExchangeById(@PathVariable("id") int id){
-		return stockExchangeService.getStockExchangeById(id);
+	public ResponseEntity<?> getStockExchangeById(@PathVariable("id") int id){
+		try {
+			StockExchange stockExchange = stockExchangeService.getStockExchangeById(id);
+			return new ResponseEntity<StockExchange>(stockExchange,HttpStatus.OK);
+		} catch (Exception e) {
+			e.printStackTrace();
+			return new ResponseEntity<String>("No stock exchange",HttpStatus.BAD_REQUEST);
+		}
 	}
 	
 	@GetMapping(value = "/stockExchanges/getAllStockExchangesNames", produces = "application/json")
@@ -44,19 +56,20 @@ public class StockExchangeRestController {
 		return new ResponseEntity<List<String>>(names, HttpStatus.OK);
 	}
 	
-	@PostMapping(value = "/stockExchanges",consumes = "application/json")
-	public StockExchange addStockExchange(@RequestBody StockExchange stockExchange) {
-		return stockExchangeService.addStockExchange(stockExchange);
+	@PostMapping(value = "/stockExchanges/admin",consumes = "application/json")
+	public ResponseEntity<?> addStockExchange(@RequestBody StockExchange stockExchange) {
+		return new ResponseEntity<StockExchange>(stockExchangeService.addStockExchange(stockExchange),HttpStatus.OK);
 	}
 	
-	@PutMapping(value = "/stockExchanges",consumes = "application/json")
-	public StockExchange updateStockExchange(@RequestBody StockExchange stockExchange) {
-		return stockExchangeService.updateStockExchange(stockExchange);
+	@PutMapping(value = "/stockExchanges/admin",consumes = "application/json")
+	public ResponseEntity<?> updateStockExchange(@RequestBody StockExchange stockExchange) {
+		return new ResponseEntity<StockExchange>(stockExchangeService.updateStockExchange(stockExchange),HttpStatus.OK);
 	}
 	
-	@DeleteMapping(value = "/stockExchanges/{id}")
-	public void deleteStockExchange(@PathVariable int id) {
+	@DeleteMapping(value = "/stockExchanges/admin/{id}")
+	public ResponseEntity<?> deleteStockExchange(@PathVariable int id) {
 		stockExchangeService.deleteStockExchange(id);
+		return new ResponseEntity<HttpStatus>(HttpStatus.NO_CONTENT);
 	}
 	
 }

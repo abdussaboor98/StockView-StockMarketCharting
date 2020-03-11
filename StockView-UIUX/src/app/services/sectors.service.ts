@@ -19,14 +19,14 @@ export class SectorsService {
     }
 
     addNewSector(sector: Sector): Observable<Sector> {
-        return this.httpClient.post<Sector>(this.url, sector);
+        return this.httpClient.post<Sector>(this.url+"admin/", sector);
     }
 
     updateSector(sector: Sector): Observable<Sector> {
-        return this.httpClient.put<Sector>(this.url, sector);
+        return this.httpClient.put<Sector>(this.url+"admin/", sector);
     }
 
     deleteSector(id: number): Observable<Sector> {
-        return this.httpClient.delete<Sector>(this.url + id);
+        return this.httpClient.delete<Sector>(this.url+"admin/" + id);
     }
 }

@@ -6,23 +6,23 @@ public class User {
 	private String email;
 	private String password;
 	private long phoneNo;
-	private boolean admin = false;
-	private boolean confirmed = false;
+	private boolean confirmed;
+	private String userType;
 
 	public User() {
 
 	}
 
-	public User(int id, String username, String email, String password, long phoneNo, boolean admin,
-			boolean confirmed) {
+	public User(int id, String username, String email, String password, long phoneNo, boolean confirmed,
+			String userType) {
 		super();
 		this.id = id;
 		this.username = username;
 		this.email = email;
 		this.password = password;
 		this.phoneNo = phoneNo;
-		this.admin = admin;
 		this.confirmed = confirmed;
+		this.userType = userType;
 	}
 
 	public int getId() {
@@ -65,14 +65,6 @@ public class User {
 		this.phoneNo = phoneNo;
 	}
 
-	public boolean isAdmin() {
-		return admin;
-	}
-
-	public void setAdmin(boolean admin) {
-		this.admin = admin;
-	}
-
 	public boolean isConfirmed() {
 		return confirmed;
 	}
@@ -81,10 +73,17 @@ public class User {
 		this.confirmed = confirmed;
 	}
 
-	@Override
-	public String toString() {
-		return "UserDTO [id=" + id + ", username=" + username + ", email=" + email + ", password=" + password
-				+ ", phoneNo=" + phoneNo + ", admin=" + admin + ", confirmed=" + confirmed + "]";
+	public String getUserType() {
+		return userType;
 	}
 
+	public void setUserType(String userType) {
+		this.userType = userType;
+	}
+
+	@Override
+	public String toString() {
+		return "User [id=" + id + ", username=" + username + ", email=" + email + ", password=" + password
+				+ ", phoneNo=" + phoneNo + ", confirmed=" + confirmed + ", userType=" + userType + "]";
+	}
 }

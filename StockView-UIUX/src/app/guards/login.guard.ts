@@ -7,14 +7,14 @@ import {
     Router
 } from "@angular/router";
 import { Observable } from "rxjs";
-import { UserService } from '../services/user.service';
+import { AuthServiceService } from '../services/auth-service.service';
 declare var $:any;
 
 @Injectable({
     providedIn: "root"
 })
 export class LoginGuard implements CanActivate {
-    constructor(private userService: UserService, private router: Router) {}
+    constructor(private authService: AuthServiceService, private router: Router) {}
 
     canActivate(
         next: ActivatedRouteSnapshot,
@@ -24,7 +24,7 @@ export class LoginGuard implements CanActivate {
         | Promise<boolean | UrlTree>
         | boolean
         | UrlTree {
-        if (this.userService.isAdmin() || this.userService.isUser()) {
+        if (this.authService.isUserLoggedIn()) {
             return true;
         } else {
             alert("You need to login first!");

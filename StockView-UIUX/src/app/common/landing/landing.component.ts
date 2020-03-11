@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { UserService } from 'src/app/services/user.service';
+import { AuthServiceService } from 'src/app/services/auth-service.service';
 
 @Component({
   selector: 'app-landing',
@@ -8,8 +8,8 @@ import { UserService } from 'src/app/services/user.service';
 })
 export class LandingComponent implements OnInit {
   isAdmin: boolean;
-  constructor(private userService: UserService) {
-    this.isAdmin = userService.isAdmin();
+  constructor(private auth: AuthServiceService) {
+    this.isAdmin = auth.isAdmin();
    } 
 
   ngOnInit() {

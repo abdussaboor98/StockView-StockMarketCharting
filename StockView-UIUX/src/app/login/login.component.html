@@ -19,7 +19,7 @@
                     <div class="input-group">
                         <div class="input-group-prepend">
                             <span class="input-group-text">
-                                <fa-icon [icon]="faAt"></fa-icon>
+                                <fa-icon [icon]="faUser"></fa-icon>
                             </span>
                         </div>
                         <input type="text" name="username" id="username" class="form-control" autofocus autocomplete
@@ -34,8 +34,9 @@
                                 <fa-icon [icon]="faKey"></fa-icon>
                             </span>
                         </div>
-                        <input type="password" name="password" id="password" class="form-control"
+                        <input [type]="showPassword? 'text':'password'" name="password" id="password" class="form-control"
                             formControlName="password">
+                        <span class="show-password" (click)="onTogglePassword()"><fa-icon [icon]="showPassword? faEye:faEyeSlash" [ngClass]="{'text-muted':!showPassword,'text-primary':showPassword}"></fa-icon></span>
 
                     </div>
 

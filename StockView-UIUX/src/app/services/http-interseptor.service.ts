@@ -7,7 +7,6 @@ export class HttpInterseptorService implements HttpInterceptor {
   constructor(public auth: AuthServiceService) { }
   // request generated will be auto intercepted and info about request is available in req object
   intercept(request: HttpRequest<any>, next: HttpHandler) {
-    console.log("Inside interceptor");
     if (this.auth.getAuthenticationToken()) {
       // request object cannot be directly manipulated
       // it has to be cloned

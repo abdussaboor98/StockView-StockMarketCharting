@@ -7,14 +7,14 @@ import {
     Router
 } from "@angular/router";
 import { Observable } from "rxjs";
-import { UserService } from "../services/user.service";
+import { AuthServiceService } from '../services/auth-service.service';
 declare var $: any;
 
 @Injectable({
     providedIn: "root"
 })
 export class UserAuthGuard implements CanActivate {
-    constructor(private userService: UserService, private router: Router) {}
+    constructor(private authService: AuthServiceService, private router: Router) {}
 
     canActivate(
         next: ActivatedRouteSnapshot,
@@ -24,10 +24,10 @@ export class UserAuthGuard implements CanActivate {
         | Promise<boolean | UrlTree>
         | boolean
         | UrlTree {
-        if (this.userService.isUser()) {
+        if (this.authService.isUser()) {
             return true;
         } 
-        else if (this.userService.isAdmin()) {
+        else if (this.authService.isAdmin()) {
             alert("You do not have access to this page!");
             this.router.navigate(["landing"]);
             return false;

@@ -36,8 +36,6 @@ public class UserServiceImpl implements UserService {
 			BeanUtils.copyProperties(entity, userDTO);
 			usersDTO.add(userDTO);
 		}
-		System.out.println("Entity: " + entities);
-		System.out.println("DTO: " + usersDTO);
 		return usersDTO;
 	}
 
@@ -57,8 +55,12 @@ public class UserServiceImpl implements UserService {
 	
 	@Override
 	public boolean usernameExists(String email) throws NoSuchElementException {
-		return userRepo.findByUsername(email).isPresent();
-		
+		return userRepo.findByUsername(email).isPresent();	
+	}
+	
+	@Override
+	public Boolean isUserActive(String username) {
+		return userRepo.isUserActive(username);
 	}
 
 	@Override
@@ -81,6 +83,8 @@ public class UserServiceImpl implements UserService {
 	public User addUser(User user) {
 		UserEntity userEntity = new UserEntity();
 		BeanUtils.copyProperties(user, userEntity);
+		userEntity.setUserType("ROLE_USER");
+		userEntity.setConfirmed(false);
 		UserEntity userObj = userRepo.save(userEntity);
 		try {
 			MimeMessage mimeMessage = javaMailSender.createMimeMessage();
@@ -101,11 +105,8 @@ public class UserServiceImpl implements UserService {
 
 	@Override
 	public boolean activateUser(String email) throws NoSuchElementException {
-		System.out.println(email);
 		UserEntity user = userRepo.findByEmail(email).get();
-		System.out.println(user);
 		if (!user.isConfirmed()) {
-			System.out.println(user);
 			user.setConfirmed(true);
 			userRepo.save(user);
 			return true;
@@ -118,6 +119,7 @@ public class UserServiceImpl implements UserService {
 	public User updateUser(User user) {
 		UserEntity userEntity = new UserEntity();
 		BeanUtils.copyProperties(user, userEntity);
+		userEntity.setUserType("ROLE_USER");
 		BeanUtils.copyProperties(userRepo.save(userEntity), user);
 		return user;
 	}

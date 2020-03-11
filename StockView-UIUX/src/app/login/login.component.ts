@@ -1,8 +1,8 @@
-import { Component, OnInit } from "@angular/core";
+import { Component, OnInit, AfterViewInit } from "@angular/core";
 import { FormGroup, FormBuilder, Validators } from "@angular/forms";
 declare var $: any;
 
-import { faAt, faKey } from "@fortawesome/free-solid-svg-icons";
+import { faUser, faKey, faEye, faEyeSlash } from "@fortawesome/free-solid-svg-icons";
 import { UserService } from "../services/user.service";
 import { Router } from "@angular/router";
 import { User } from "../models/users";
@@ -19,8 +19,11 @@ export class LoginComponent implements OnInit {
     disableButton: boolean;
     isValid: boolean = true;
     isVerified: boolean = true;
-    faAt = faAt;
+    faUser = faUser;
     faKey = faKey;
+    faEye = faEye;
+    faEyeSlash = faEyeSlash;
+    showPassword: boolean = false;
     users: User[];
     constructor(
         private formBuilder: FormBuilder,
@@ -41,92 +44,34 @@ export class LoginComponent implements OnInit {
     login() {
         let username = this.loginForm.get("username").value;
         let password = this.loginForm.get("password").value;
+        this.disableButton = true;
+        this.isValid = true;
+        this.isVerified = true;
         this.auth.authenticate(username, password).subscribe(data => {
-            console.log(data);
             this.router.navigate(["landing"]);
             $("#login-modal").modal("hide");
             this.loginForm.reset();
             this.disableButton = false;
-        })
-        
+        },
+            error => {
+                this.disableButton = false;
+                this.userService.usernameExists(username).subscribe(data => {
+                    if (data) {
+                        this.userService.isUserActive(username).subscribe(data => {
+                            if(data)
+                               this.isVerified = false; 
+                            else
+                                this.isValid = false;
+                        })
+                    }
+                    else {
+                        this.isValid = false;
+                    }
+                })
+            })
+
     }
-
-    // login() {
-    //     let username = this.loginForm.get("username").value;
-    //     let password = this.loginForm.get("password").value;
-    //     this.disableButton = true;
-    //     this.isValid = true;
-    //     this.isVerified = true;
-    //     localStorage.removeItem("userId");
-    //     localStorage.removeItem("userType");
-    //     sessionStorage.removeItem("userId");
-    //     sessionStorage.removeItem("userType");
-    //     this.userService
-    //         .getUserByUsernameAndPassword(username, password)
-    //         .subscribe(
-    //             data => {
-    //                 if (data !== null) {
-    //                     if (data.confirmed) {
-    //                         if (this.loginForm.get("rememberMe").value) {
-    //                             localStorage.setItem(
-    //                                 "userId",
-    //                                 data.id.toString()
-    //                             );
-    //                             localStorage.setItem(
-    //                                 "userType",
-    //                                 data.admin ? "admin" : "user"
-    //                             );
-    //                         }
-    //                         sessionStorage.setItem(
-    //                             "userId",
-    //                             data.id.toString()
-    //                         );
-    //                         sessionStorage.setItem(
-    //                             "userType",
-    //                             data.admin ? "admin" : "user"
-    //                         );
-    //                         this.router.navigate(["landing"]);
-    //                         $("#login-modal").modal("hide");
-    //                         this.loginForm.reset();
-    //                         this.disableButton = false;
-    //                     } else {
-    //                         console.log("not confirmed");
-    //                         this.isVerified = false;
-    //                         this.disableButton = false;
-    //                     }
-    //                 } else {
-    //                     this.isValid = false;
-    //                     this.disableButton = false;
-    //                 }
-    //             },
-    //             error => {
-    //                 this.isValid = false;
-    //                 this.disableButton = false;
-    //             }
-    //         );
-    // }
-
-    // validateUser(username: string, password: string, user: User): boolean {
-    //     if (user.username == username && user.password == password) {
-    //         return true;
-    //     }
-    //     return false;
-    // }
-
-    // getUserType(isAdmin: boolean): string {
-    //         if (user.username == username) {
-    //             if (user.admin) {
-    //                 return "admin";
-    //             }
-    //         }
-    //     return "user";
-    // }
-
-    // getUserId(username: string): number {
-    //     for (let user of this.users) {
-    //         if (user.username == username) {
-    //             return user.id;
-    //         }
-    //     }
-    // }
+    onTogglePassword(){
+        this.showPassword = !this.showPassword
+    }
 }

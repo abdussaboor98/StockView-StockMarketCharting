@@ -1,0 +1,13 @@
+#password {
+    position: relative;
+}
+
+.show-password {
+    position: absolute;
+    right: 0.7rem;
+    top: 0.4rem;
+}
+
+.show-password:hover {
+    cursor: pointer;
+}

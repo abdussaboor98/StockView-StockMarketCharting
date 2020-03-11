@@ -24,25 +24,23 @@ public class UserEntity implements Serializable {
 	private String email;
 	private String password;
 	private long phoneNo;
-	private boolean admin = false;
-	private boolean confirmed = false;
-	private String userType="ROLE_USER";
+	private boolean confirmed;
+	private String userType = "ROLE_USER";
 
 	public UserEntity() {
 
 	}
 
-	public UserEntity(int id, String username, String email, String password, long phoneNo, boolean admin,
-			boolean confirmed, String role) {
+	public UserEntity(int id, String username, String email, String password, long phoneNo, boolean confirmed,
+			String userType) {
 		super();
 		this.id = id;
 		this.username = username;
 		this.email = email;
 		this.password = password;
 		this.phoneNo = phoneNo;
-		this.admin = admin;
 		this.confirmed = confirmed;
-		this.userType = role;
+		this.userType = userType;
 	}
 
 	public int getId() {
@@ -85,14 +83,6 @@ public class UserEntity implements Serializable {
 		this.phoneNo = phoneNo;
 	}
 
-	public boolean isAdmin() {
-		return admin;
-	}
-
-	public void setAdmin(boolean admin) {
-		this.admin = admin;
-	}
-
 	public boolean isConfirmed() {
 		return confirmed;
 	}
@@ -105,15 +95,17 @@ public class UserEntity implements Serializable {
 		return userType;
 	}
 
-	public void setUserType(String role) {
-		this.userType = role;
+	public void setUserType(String userType) {
+		this.userType = userType;
+	}
+
+	public static long getSerialversionuid() {
+		return serialVersionUID;
 	}
 
 	@Override
 	public String toString() {
 		return "UserEntity [id=" + id + ", username=" + username + ", email=" + email + ", password=" + password
-				+ ", phoneNo=" + phoneNo + ", admin=" + admin + ", confirmed=" + confirmed + ", role=" + userType + "]";
+				+ ", phoneNo=" + phoneNo + ", confirmed=" + confirmed + ", userType=" + userType + "]";
 	}
-
-	
 }

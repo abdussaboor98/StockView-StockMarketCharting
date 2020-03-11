@@ -15,10 +15,8 @@ export class AdminHeaderComponent implements OnInit {
   }
 
   logout(){
-    console.log('Logging out');
     this.auth.logout()
     this.router.navigate(["home"]);
-    console.log('Logging out');
   }
 
 }

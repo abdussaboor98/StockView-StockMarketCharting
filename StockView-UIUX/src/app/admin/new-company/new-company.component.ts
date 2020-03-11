@@ -61,7 +61,6 @@ export class NewCompanyComponent implements OnInit {
     }
 
     onSubmit() {
-        console.log(this.newCompanyForm.value);
         this.companiesService
             .addCompany(this.newCompanyForm.value)
             .subscribe(data => {

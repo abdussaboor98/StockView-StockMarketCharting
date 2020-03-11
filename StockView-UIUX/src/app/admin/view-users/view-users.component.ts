@@ -32,7 +32,6 @@ export class ViewUsersComponent implements OnInit {
         this.userService.deleteUser(id).subscribe(data => {
             this.users = this.users.filter(user => user.id !== id);
         },error =>{
-            console.log(error);
         });
     }
 }

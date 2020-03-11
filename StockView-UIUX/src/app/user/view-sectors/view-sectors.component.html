@@ -4,21 +4,16 @@
         <table class="table table-stripped table-hover bg-light text-center">
             <thead class="thead-light">
                 <tr>
-                    <th>ID</th>
                     <th>Sector name</th>
                     <th>Brief</th>
                 </tr>
             </thead>
             <tbody>
                 <tr *ngFor="let sector of sectors">
-                    <td> {{sector.id}} </td>
                     <td> {{sector.name}} </td>
                     <td> {{sector.brief}} </td>
                 </tr>
             </tbody>
         </table>
     </div>
-    <button type="button" class="btn btn-primary rounded-circle mx-auto add-btn" (click)="gotoNew()">
-        <fa-icon [icon]="faPlus" class="h2"></fa-icon>
-    </button>
 </main>

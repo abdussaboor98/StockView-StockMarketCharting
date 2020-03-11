@@ -26,4 +26,6 @@ public interface UserService {
 	boolean emailExists(String email) throws NoSuchElementException;
 
 	boolean usernameExists(String email) throws NoSuchElementException;
+
+	public Boolean isUserActive(String username);
 }

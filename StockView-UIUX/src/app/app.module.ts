@@ -42,6 +42,8 @@ import { ViewIpoComponent } from './user/view-ipo/view-ipo.component';
 import { CompareResultComponent } from './user/compare-result/compare-result.component';
 import { ActivateComponent } from './user/activate/activate.component';
 import { HttpInterseptorService } from './services/http-interseptor.service';
+import { PasswordStrengthComponent } from './user/signup/password-strength/password-strength.component';
+import { ShowPasswordDirective } from './directives/show-password.directive';
 
 @NgModule({
     declarations: [
@@ -80,7 +82,8 @@ import { HttpInterseptorService } from './services/http-interseptor.service';
         LandingComponent,
         ViewIpoComponent,
         CompareResultComponent,
-        ActivateComponent
+        ActivateComponent,
+        PasswordStrengthComponent
     ],
     imports: [
         BrowserModule,

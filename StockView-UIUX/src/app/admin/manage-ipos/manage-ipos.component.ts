@@ -25,7 +25,6 @@ export class ManageIposComponent implements OnInit {
     ngOnInit() {
         this.iposService.getAllIPOs().subscribe(data => {
             this.ipos = data;
-            console.log(data);
         })
     }
 

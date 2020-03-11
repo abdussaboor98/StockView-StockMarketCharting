@@ -6,8 +6,9 @@ import {
     AbstractControl
 } from "@angular/forms";
 import bsCustomFileInput from "bs-custom-file-input";
-import { ComponentFixtureNoNgZone } from "@angular/core/testing";
 import { StockPriceService } from "src/app/services/stock-price.service";
+import { UploadSummary } from 'src/app/models/uploadSummary';
+declare var $:any;
 
 @Component({
     selector: "app-import-excel",
@@ -20,6 +21,7 @@ export class ImportExcelComponent implements OnInit {
     file: File;
     isError: boolean = false;
     errorMessage: string = "";
+    uploadSummary: UploadSummary;
 
     ngOnInit() {
         bsCustomFileInput.init();
@@ -38,8 +40,8 @@ export class ImportExcelComponent implements OnInit {
         uploadSheetData.append("stocksSheet", this.file, this.file.name);
         this.stockPriceService.uploadStocksSheet(uploadSheetData).subscribe(
             data => {
-                console.log("Uploaded");
-                console.log(data);
+                this.uploadSummary = data;
+                $("#uploadSummaryModal").modal("show");
             },
             error => {
                 if(typeof(error.error) == "string"){

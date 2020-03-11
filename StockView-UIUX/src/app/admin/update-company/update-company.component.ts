@@ -37,12 +37,10 @@ export class UpdateCompanyComponent implements OnInit {
     ngOnInit() {
         bsCustomFileInput.init();
         const id = localStorage.getItem("companyId");
-        console.log(id);
         if (+id > 0) {
             this.companiesService.getCompayById(+id).subscribe(data => {
                 this.noOfDirectors = data.directors.length;
                 this.noOfExchanges = data.listedIn.length;
-                console.log(this.noOfDirectors + " " + this.noOfExchanges);
                 while (this.noOfDirectors > 0) {
                     this.addDirector();
                     this.noOfDirectors--;

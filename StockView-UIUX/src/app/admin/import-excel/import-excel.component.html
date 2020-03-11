@@ -1,27 +1,77 @@
 <main class="container">
     <div class="display-4 text-center my-4">Import Data</div>
-    <form class="row justify-content-center" [formGroup]="excelUploadForm" (ngSubmit)="uploadData()" enctype="multipart/form-data">
+    <form class="row justify-content-center" [formGroup]="excelUploadForm" (ngSubmit)="uploadData()"
+        enctype="multipart/form-data">
         <div class="card col-md-8 col-sm-10 col-11 mx-auto">
             <div class="card-body">
                 <span class="lead">Select excel file to be uploaded: </span>
                 <div class="custom-file my-3">
                     <input type="file" name="excelFileUpload" id="excelFileUpload" formControlName="excelFileUpload"
                         class="custom-file-input" (change)="onFileChange($event)">
-                    <label for="excelFileUpload" class="custom-file-label"></label> 
+                    <label for="excelFileUpload" class="custom-file-label"></label>
                 </div>
-                <button type="submit" class="btn btn-primary btn-block" [disabled]="excelUploadForm.invalid">Upload</button>
+                <button type="submit" class="btn btn-primary btn-block"
+                    [disabled]="excelUploadForm.invalid">Upload</button>
             </div>
         </div>
     </form>
     <div class="row justify-content-center my-2">
         <div class="alert alert-info col-md-8 col-sm-10 col-11 mx-auto">
-            Download sample excel file <a hrefs="#" class="alert-link">here</a>.
-            <button type="button" class="close" data-dismiss="alert">
-                <span aria-hidden="true">&times;</span>
-            </button>
+            Download sample excel file <a href="../../../assets/sample_stock_data.xlsx" class="alert-link">here</a>.
         </div>
-        <div class="alert alert-danger col-md-8 col-sm-10 col-11 mx-auto fade show" [hidden]= "!isError">
+        <div class="alert alert-danger col-md-8 col-sm-10 col-11 mx-auto fade show" [hidden]="!isError">
             {{errorMessage}}
         </div>
     </div>
 </main>
+
+<div class="modal fade" id="uploadSummaryModal" tabindex="-1" role="dialog" data-backdrop="static"> 
+    <div class="modal-dialog" role="document" >
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Upload Summary</h5>
+                <button type="button" class="close" data-dismiss="modal">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body" *ngIf="uploadSummary">
+                <div class="row">
+                    <div class="col-6 pl-5">Records saved:</div>
+                    <div class="col-6"> {{ uploadSummary.numberOfRecordsInserted }} </div>
+                </div>
+                <div class="row">
+                    <div class="col-6 pl-5">Starting date:</div>
+                    <div class="col-6"> {{ uploadSummary.startDate | date }} </div>
+                </div>
+                <div class="row">
+                    <div class="col-6 pl-5">Ending date:</div>
+                    <div class="col-6"> {{ uploadSummary.endDate | date }} </div>
+                </div>
+                <div class="row">
+                    <div class="col-6 pl-5">Company Codes:</div>
+                    <div class="col-6">
+                        <span class="w-100" *ngFor="let code of uploadSummary.companyCodes"> {{ code }} </span>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-6 pl-5">Stock Exchange:</div>
+                    <div class="col-6">
+                        <span class="w-100" *ngFor="let stockExchange of uploadSummary.stockExchanges">
+                            {{ stockExchange }} </span>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-12 pl-5">Duplicates:</div>
+                    <div class="border px-5 mx-5 w-75 py-1 my-2">
+                        <small *ngFor="let duplicate of uploadSummary.duplicates">
+                            <span> 
+                                {{ duplicate }}
+                            </span>
+                            <br>
+                        </small>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
