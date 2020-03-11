@@ -14,8 +14,7 @@ export class HttpInterseptorService implements HttpInterceptor {
       let authenticationToken = this.auth.getAuthenticationToken();
       request = request.clone({
         setHeaders: {
-          "Authorization": authenticationToken,
-          "Access-Control-Allow-Origin": "*"
+          "Authorization": authenticationToken
         }
       });
     }

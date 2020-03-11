@@ -12,12 +12,10 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.crypto.password.PasswordEncoder;
-import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.cors.CorsConfiguration;
-import org.springframework.web.cors.CorsConfigurationSource;
-import org.springframework.web.cors.reactive.UrlBasedCorsConfigurationSource;
+import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
+import org.springframework.web.filter.CorsFilter;
 
-@CrossOrigin(origins="*")
 @Configuration
 @EnableWebSecurity
 public class SpringSecurityConfiguration extends WebSecurityConfigurerAdapter {
@@ -27,11 +25,16 @@ public class SpringSecurityConfiguration extends WebSecurityConfigurerAdapter {
 	
 	@Override
     protected void configure(HttpSecurity http) throws Exception {
-      http.csrf().disable()
+      http.cors().and().csrf().disable()
       	.authorizeRequests()
         .antMatchers("/").permitAll() 
         .antMatchers("/user-service/login").permitAll()
-        .antMatchers("/user-service/**").access("hasRole('USER')")
+        .antMatchers("/user-service/users/**").hasAnyRole("USER,ADMIN")
+        .antMatchers("/company-service/**").hasAnyRole("USER,ADMIN")
+        .antMatchers("/initial-public-offering-service/**").hasAnyRole("USER,ADMIN")
+        .antMatchers("/sector-service/**").hasAnyRole("USER,ADMIN")
+        .antMatchers("/stock-exchange-service/**").hasAnyRole("USER,ADMIN")
+        .antMatchers("/stock-price-service/**").hasAnyRole("USER,ADMIN")
         .and()
         .httpBasic();
     }
@@ -56,13 +59,19 @@ public class SpringSecurityConfiguration extends WebSecurityConfigurerAdapter {
 			});
 	}
 	
-//	@Bean
-//    CorsConfigurationSource corsConfigurationSource() {
-//        CorsConfiguration configuration = new CorsConfiguration();
-//        configuration.setAllowedOrigins(Arrays.asList("*"));
-//        configuration.setAllowedMethods(Arrays.asList("GET","POST","PUT","DELETE"));
-//        UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
-//        source.registerCorsConfiguration("/**", configuration);
-//        return (CorsConfigurationSource) source;
-//    }
+	@Bean
+    public CorsFilter corsFilter() {
+        UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
+        CorsConfiguration config = new CorsConfiguration();
+        config.setAllowCredentials(true);
+        config.addAllowedOrigin("*");
+        config.addAllowedHeader("*");
+        config.addAllowedMethod("OPTIONS");
+        config.addAllowedMethod("GET");
+        config.addAllowedMethod("POST");
+        config.addAllowedMethod("PUT");
+        config.addAllowedMethod("DELETE");
+        source.registerCorsConfiguration("/**", config);
+        return new CorsFilter(source);
+    }
 }

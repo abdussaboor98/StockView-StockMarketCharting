@@ -50,7 +50,8 @@ export class CompareComponent implements OnInit {
                     fromDate: ["", Validators.required],
                     toDate: ["", Validators.required]
                 })
-            ])
+            ]),
+            periodicity: ["",Validators.required]
         })
 
         this.stockExService.getAllExchanges().subscribe(data => {

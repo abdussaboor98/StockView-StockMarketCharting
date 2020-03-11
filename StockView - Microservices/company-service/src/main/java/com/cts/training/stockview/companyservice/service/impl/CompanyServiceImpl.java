@@ -67,4 +67,10 @@ public class CompanyServiceImpl implements CompanyService {
 	public List<CompanyEntity> getCompaniesByStockExchange(String stockExchange) {
 		return companyRepo.findByListedIn_StockExchangeName(stockExchange);
 	}
+
+	@Override
+	public List<CompanyEntity> getCompaniesByPattern(String pattern) {
+//		pattern = pattern + "%";
+		return companyRepo.findAllByNameContaining(pattern);
+	}
 }

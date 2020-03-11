@@ -13,9 +13,15 @@ export class ViewCompaniesComponent implements OnInit {
   constructor(private companiesService: CompaniesService) { }
 
   ngOnInit() {
-    this.companiesService.getAllCompanies().subscribe(data => {
-      this.companies = data;
-  });
+  //   this.companiesService.getAllCompanies().subscribe(data => {
+  //     this.companies = data;
+  // });
+  }
+
+  onInputChange(e){
+    this.companiesService.getAllCompaniesByPattern(e.target.value).subscribe(data => {
+          this.companies = data;
+    });
   }
 
 }

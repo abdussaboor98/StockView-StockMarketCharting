@@ -7,11 +7,15 @@ import { Observable } from "rxjs";
     providedIn: "root"
 })
 export class CompaniesService {
-    url = "http://localhost:8100/companies/";
+    url = "http://localhost:8765/company-service/companies/";
     constructor(private httpClient: HttpClient) {}
 
     getAllCompanies(): Observable<Company[]> {
         return this.httpClient.get<Company[]>(this.url);
+    }
+
+    getAllCompaniesByPattern(pattern: string): Observable<Company[]> {
+        return this.httpClient.get<Company[]>(this.url+"getCompaniesByPattern/"+pattern);
     }
 
     getCompayById(id: number): Observable<Company> {

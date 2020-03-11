@@ -92,4 +92,10 @@ public class CompanyRestController {
 			return new ResponseEntity<String>("No companies found", HttpStatus.BAD_REQUEST);
 		}
 	}
+	
+	@GetMapping(value = "/companies/getCompaniesByPattern/{pattern}")
+	public ResponseEntity<?> getCompaniesByPattern(@PathVariable String pattern) {
+		List<CompanyEntity> companies = companyService.getCompaniesByPattern(pattern);
+		return new ResponseEntity<List<CompanyEntity>>(companies,HttpStatus.OK);
+	}
 }

@@ -7,7 +7,7 @@ import { User } from "../models/users";
     providedIn: "root"
 })
 export class UserService {
-    url = "http://localhost:8000/users/";
+    url = "http://localhost:8765/user-service/users/";
     constructor(private httpClient: HttpClient) {}
 
     getAllUsers(): Observable<User[]> {

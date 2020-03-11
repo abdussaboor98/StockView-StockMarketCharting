@@ -20,4 +20,6 @@ public interface CompanyService {
 	public Optional<CompanyEntity> getCompanyByStockCodeAndExchangeName(String stockCode, String stockExchangeName);
 
 	public List<CompanyEntity> getCompaniesByStockExchange(String stockExchange);
+
+	public List<CompanyEntity> getCompaniesByPattern(String pattern);
 }

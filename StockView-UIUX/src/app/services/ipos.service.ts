@@ -7,7 +7,7 @@ import { IPO } from "../models/ipo";
     providedIn: "root"
 })
 export class IposService {
-    url = "http://localhost:8200/ipos/";
+    url = "http://localhost:8765/initial-public-offering-service/ipos/";
     constructor(private httpClient: HttpClient) {}
 
     getAllIPOs(): Observable<IPO[]> {

@@ -9,7 +9,7 @@ import { StockPricePerDay } from '../models/stockPricePerDay';
 })
 export class StockPriceService {
 
-  httpUrl = "http://localhost:8500/stockPrices/"
+  httpUrl = "http://localhost:8765/stock-price-service/stockPrices/"
 
   constructor(private httpClient:HttpClient) { }
 
@@ -17,8 +17,8 @@ export class StockPriceService {
     return this.httpClient.post<any>(this.httpUrl+"uploadStocksSheet",formData);
   }
 
-  getCompanyStockPricesBetween(companyCode: string, stockExchange: string, startDate: Date, endDate: Date, periodicity: number): Observable<StockPricePerDay[]> {
-    let url = "companyStockPriceBetween/"+companyCode+"/"+stockExchange+"/"+startDate.toISOString().split('T')[0]+"/"+endDate.toISOString().split('T')[0]+"/"+periodicity;
+  getCompanyStockPricesBetween(companyCode: string, stockExchange: string, startDate: Date, endDate: Date): Observable<StockPricePerDay[]> {
+    let url = "companyStockPriceBetween/"+companyCode+"/"+stockExchange+"/"+startDate+"/"+endDate+"/"+(1);
     return this.httpClient.get<StockPricePerDay[]>(this.httpUrl+url);
   }
 

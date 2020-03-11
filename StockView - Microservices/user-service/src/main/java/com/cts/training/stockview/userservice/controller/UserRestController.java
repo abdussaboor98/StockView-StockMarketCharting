@@ -50,9 +50,7 @@ public class UserRestController {
 		try {
 			User user = userService.getUserByUsernameAndPassword(username, password);
 			logger.info("User logged in using username --> {}", username);
-			HttpHeaders headers = new HttpHeaders();
-			headers.add("Access-Control-Allow-Origin", "*");
-			return new ResponseEntity<User>(user,headers,HttpStatus.OK);
+			return new ResponseEntity<User>(user,HttpStatus.OK);
 		} catch (Exception e ) {
 			System.out.println(e.getStackTrace());
 			logger.info("Unauthorized access Stack Trace--> {}", e.getStackTrace().toString());
