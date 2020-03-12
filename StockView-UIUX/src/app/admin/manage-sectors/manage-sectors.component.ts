@@ -36,8 +36,6 @@ export class ManageSectorsComponent implements OnInit {
     }
 
     updateSector(id: number) {
-        sessionStorage.removeItem("sectorId");
-        sessionStorage.setItem("sectorId", id.toString());
-        this.router.navigate(["update-sector"]);
+        this.router.navigate(["update-sector",id]);
     }
 }

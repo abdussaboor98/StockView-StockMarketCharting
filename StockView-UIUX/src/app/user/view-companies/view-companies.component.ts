@@ -10,6 +10,7 @@ import { Company } from 'src/app/models/company';
 export class ViewCompaniesComponent implements OnInit {
 
   companies: Company[];
+  companyToDisplay: Company;
   constructor(private companiesService: CompaniesService) { }
 
   ngOnInit() {
@@ -22,6 +23,14 @@ export class ViewCompaniesComponent implements OnInit {
     this.companiesService.getAllCompaniesByPattern(e.target.value).subscribe(data => {
           this.companies = data;
     });
+  }
+
+  onValueChange(e){
+    this.companies.forEach(company => {
+      if(e.target.value == company.name){
+        this.companyToDisplay = company;
+      }
+    })
   }
 
 }

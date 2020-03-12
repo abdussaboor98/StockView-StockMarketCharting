@@ -39,21 +39,24 @@ public class CompanyEntity implements Serializable {
 	private String sector;
 	private String brief;
 	private double turnover;
+	private boolean active;
 
 	public CompanyEntity() {
 
 	}
 
-	public CompanyEntity(int id, String name, String ceoName, List<String> directors, List<ListedInEntity> listedIn,
-			String sector, String brief, double turnover) {
+	public CompanyEntity(int id, String name, String ceo, List<String> directors, List<ListedInEntity> listedIn,
+			String sector, String brief, double turnover, boolean active) {
+		super();
 		this.id = id;
 		this.name = name;
-		this.ceo = ceoName;
+		this.ceo = ceo;
 		this.directors = directors;
 		this.listedIn = listedIn;
 		this.sector = sector;
 		this.brief = brief;
 		this.turnover = turnover;
+		this.active = active;
 	}
 
 	public int getId() {
@@ -120,10 +123,19 @@ public class CompanyEntity implements Serializable {
 		this.turnover = turnover;
 	}
 
-	@Override
-	public String toString() {
-		return "CompanyEntity [id=" + id + ", name=" + name + ", ceoName=" + ceo + ", directors=" + directors
-				+ ", listedIn=" + listedIn + ", sector=" + sector + ", brief=" + brief + ", turnover=" + turnover + "]";
+	public boolean isActive() {
+		return active;
 	}
 
+	public void setActive(boolean active) {
+		this.active = active;
+	}
+
+	@Override
+	public String toString() {
+		return "CompanyEntity [id=" + id + ", name=" + name + ", ceo=" + ceo + ", directors=" + directors
+				+ ", listedIn=" + listedIn + ", sector=" + sector + ", brief=" + brief + ", turnover=" + turnover
+				+ ", active=" + active + "]";
+	}
+	
 }

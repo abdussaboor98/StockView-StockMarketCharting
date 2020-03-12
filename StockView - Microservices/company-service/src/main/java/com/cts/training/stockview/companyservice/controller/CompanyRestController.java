@@ -65,6 +65,28 @@ public class CompanyRestController {
 	public ResponseEntity<?> updateCompany(@RequestBody CompanyEntity company) {
 		return new ResponseEntity<CompanyEntity>(companyService.updateCompany(company),HttpStatus.OK);
 	}
+	
+	@PutMapping(value = "/companies/admin/deactivate", consumes = "application/json")
+	public ResponseEntity<?> deactivateCompany(@RequestBody int id) {
+		try {
+			CompanyEntity company = companyService.deactivateCompany(id);
+			return new ResponseEntity<CompanyEntity>(company,HttpStatus.OK);
+		} catch (Exception e) {
+			e.printStackTrace();
+			return new ResponseEntity<String>("No such company found",HttpStatus.OK);
+		}
+	}
+	
+	@PutMapping(value = "/companies/admin/activate", consumes = "application/json")
+	public ResponseEntity<?> activateCompany(@RequestBody int id) {
+		try {
+			CompanyEntity company = companyService.activateCompany(id);
+			return new ResponseEntity<CompanyEntity>(company,HttpStatus.OK);
+		} catch (Exception e) {
+			e.printStackTrace();
+			return new ResponseEntity<String>("No such company found",HttpStatus.OK);
+		}
+	}
 
 	@DeleteMapping(value = "/companies/admin/{id}")
 	public ResponseEntity<?> deleteCompany(@PathVariable int id) {

@@ -22,4 +22,8 @@ public interface CompanyService {
 	public List<CompanyEntity> getCompaniesByStockExchange(String stockExchange);
 
 	public List<CompanyEntity> getCompaniesByPattern(String pattern);
+
+	public CompanyEntity deactivateCompany(int id);
+
+	public CompanyEntity activateCompany(int id);
 }

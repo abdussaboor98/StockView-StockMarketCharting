@@ -43,7 +43,6 @@ import { CompareResultComponent } from './user/compare-result/compare-result.com
 import { ActivateComponent } from './user/activate/activate.component';
 import { HttpInterseptorService } from './services/http-interseptor.service';
 import { PasswordStrengthComponent } from './user/signup/password-strength/password-strength.component';
-import { ShowPasswordDirective } from './directives/show-password.directive';
 
 @NgModule({
     declarations: [

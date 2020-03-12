@@ -49,7 +49,6 @@ export class CompareResultComponent implements OnInit {
                 let companyTwoData: any[] = [];
                 data.forEach((stockPrice: StockPriceData) => {
                     if (categories.includes(stockPrice.dataPoint)) {
-                        categories.push(stockPrice.dataPoint);
                         companyTwoData.push(stockPrice.dataValue)
                     }
                 })

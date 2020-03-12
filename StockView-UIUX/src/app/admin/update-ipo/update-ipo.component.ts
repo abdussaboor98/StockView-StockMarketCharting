@@ -1,7 +1,7 @@
 import { Component, OnInit, OnDestroy } from "@angular/core";
 import { FormBuilder, FormGroup, Validators } from "@angular/forms";
 import { IposService } from "src/app/services/ipos.service";
-import { Router } from "@angular/router";
+import { Router, ActivatedRoute } from "@angular/router";
 
 @Component({
     selector: "app-update-ipo",
@@ -13,11 +13,12 @@ export class UpdateIpoComponent implements OnInit, OnDestroy {
     constructor(
         private formBuilder: FormBuilder,
         private iposService: IposService,
-        private router: Router
+        private router: Router,
+        private route: ActivatedRoute
     ) {}
 
     ngOnInit() {
-        const id = sessionStorage.getItem("ipoId");
+        const id = this.route.snapshot.params.id
         if (+id > 0) {
             this.iposService.getIPOById(+id).subscribe(data => {
                 this.updateIPOForm.patchValue(data);

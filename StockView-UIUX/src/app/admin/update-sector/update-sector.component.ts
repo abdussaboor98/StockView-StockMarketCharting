@@ -1,5 +1,5 @@
 import { Component, OnInit } from "@angular/core";
-import { Router } from "@angular/router";
+import { Router, ActivatedRoute } from "@angular/router";
 import { FormBuilder, FormGroup, Validators } from "@angular/forms";
 import { SectorsService } from "src/app/services/sectors.service";
 
@@ -13,11 +13,12 @@ export class UpdateSectorComponent implements OnInit {
     constructor(
         private sectorsService: SectorsService,
         private formBuilder: FormBuilder,
-        private router: Router
+        private router: Router,
+        private route: ActivatedRoute
     ) {}
 
     ngOnInit() {
-        const id = sessionStorage.getItem("sectorId");
+        const id = this.route.snapshot.params.id        
         if (+id > 0) {
             this.sectorsService.getSectorById(+id).subscribe(data => {
                 this.updateSectorForm.patchValue(data);

@@ -1,7 +1,7 @@
 import { Component, OnInit } from "@angular/core";
 import { FormGroup, FormBuilder, Validators } from "@angular/forms";
 import { StockExchangesService } from "src/app/services/stock-exchanges.service";
-import { Router } from "@angular/router";
+import { Router, ActivatedRoute } from "@angular/router";
 
 @Component({
     selector: "app-update-exchange",
@@ -13,11 +13,12 @@ export class UpdateExchangeComponent implements OnInit {
     constructor(
         private formBuilder: FormBuilder,
         private stockExService: StockExchangesService,
-        private router: Router
+        private router: Router,
+        private route: ActivatedRoute
     ) {}
 
     ngOnInit() {
-        const stockExId = localStorage.getItem("stockExId");
+        const stockExId = this.route.snapshot.params.id
         if (+stockExId > 0) {
             this.stockExService.getExchangeById(+stockExId).subscribe(data => {
                 this.updateExchangeForm.patchValue(data);

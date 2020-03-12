@@ -2,12 +2,13 @@ import { Injectable } from "@angular/core";
 import { HttpClient } from "@angular/common/http";
 import { Company } from "../models/company";
 import { Observable } from "rxjs";
+import { environment } from 'src/environments/environment';
 
 @Injectable({
     providedIn: "root"
 })
 export class CompaniesService {
-    url = "http://localhost:8765/company-service/companies/";
+    url = environment.host + "company-service/companies/";
     constructor(private httpClient: HttpClient) {}
 
     getAllCompanies(): Observable<Company[]> {
@@ -28,6 +29,14 @@ export class CompaniesService {
 
     deleteCompany(id: number): Observable<Company> {
         return this.httpClient.delete<Company>(this.url+"admin/" + id);
+    }
+
+    deactivateCompany(id: number): Observable<Company> {
+        return this.httpClient.put<Company>(this.url+"admin/deactivate/",id);
+    }
+
+    activateCompany(id: number): Observable<Company> {
+        return this.httpClient.put<Company>(this.url+"admin/activate/",id);
     }
 
     updateCompany(company: Company): Observable<Company> {

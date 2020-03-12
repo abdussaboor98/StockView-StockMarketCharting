@@ -40,6 +40,7 @@ public class CompanyServiceImpl implements CompanyService {
 			list.add(listedInRepo.save(enity));
 		}
 		company.setListedIn(list);
+		company.setActive(true);
 		return companyRepo.save(company);
 	}
 
@@ -72,5 +73,19 @@ public class CompanyServiceImpl implements CompanyService {
 	public List<CompanyEntity> getCompaniesByPattern(String pattern) {
 //		pattern = pattern + "%";
 		return companyRepo.findAllByNameContaining(pattern);
+	}
+
+	@Override
+	public CompanyEntity deactivateCompany(int id) {
+		CompanyEntity company = companyRepo.findById(id).get();
+		company.setActive(false);
+		return companyRepo.save(company);
+	} 
+	
+	@Override
+	public CompanyEntity activateCompany(int id) {
+		CompanyEntity company = companyRepo.findById(id).get();
+		company.setActive(true);
+		return companyRepo.save(company);
 	}
 }

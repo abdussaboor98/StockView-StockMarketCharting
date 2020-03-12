@@ -19,14 +19,14 @@ public class StockPriceOnPeriod {
 		this.dataPoint = dataPoint;
 		this.dataValue = dataValue;
 	}
-	
+
 	public StockPriceOnPeriod(String companyCode, String stockExchange, int dataPoint, double dataValue) {
 		this.companyCode = companyCode;
 		this.stockExchange = stockExchange;
-		this.dataPoint = ((Integer)dataPoint).toString();
+		this.dataPoint = ((Integer) dataPoint).toString();
 		this.dataValue = dataValue;
 	}
-	
+
 	public StockPriceOnPeriod(String companyCode, String stockExchange, LocalDate dataPoint, double dataValue) {
 		this.companyCode = companyCode;
 		this.stockExchange = stockExchange;

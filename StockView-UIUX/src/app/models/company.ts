@@ -7,6 +7,7 @@ export class Company {
     listedIn: ListedIn[];
     turnover: number;
     brief: string;
+    active: boolean;
 }
 
 class ListedIn {

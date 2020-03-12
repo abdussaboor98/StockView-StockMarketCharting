@@ -12,7 +12,7 @@
                     <th>Stock Exchanges</th>
                     <th>Turnover</th>
                     <th>Brief</th>
-                    <th colspan="2" class="text-center">Actions</th>
+                    <th colspan="3" class="text-center">Actions</th>
                 </thead>
                 <tbody>
                     <tr *ngFor="let company of companies">
@@ -32,18 +32,26 @@
                         </td>
                         <td> {{company.turnover}} </td>
                         <td> {{company.brief}} </td>
-                        <td><button type="button" class="btn btn-info" (click)="updateCompany(company.id)">
+                        <td>
+                            <button type="button" class="btn btn-info" (click)="updateCompany(company.id)">
                                 <fa-icon [icon]="faEdit"></fa-icon>
                             </button>
                         </td>
-                        <td><button type="button" class="btn btn-danger" (click)="deleteCompany(company.id)">
+                        <td>
+                            <button type="button" class="btn btn-danger" *ngIf="company.active"
+                                (click)="onDeactivateCompany(company.id)">
+                                <fa-icon [icon]="faTimesCircle"></fa-icon>
+                            </button>
+                            <button type="button" class="btn btn-primary" *ngIf="!company.active"
+                                (click)="onActivateCompany(company.id)">
+                                <fa-icon [icon]="faCheckCircle"></fa-icon>
+                            </button>
+                        </td>
+                        <td>
+                            <button type="button" class="btn btn-danger" (click)="deleteCompany(company.id)">
                                 <fa-icon [icon]="faTrash"></fa-icon>
                             </button>
                         </td>
-                        <!-- <td><button type="button" class="btn btn-primary">
-                                <fa-icon [icon]="faEye"></fa-icon>
-                            </button>
-                        </td> -->
                     </tr>
                 </tbody>
             </table>

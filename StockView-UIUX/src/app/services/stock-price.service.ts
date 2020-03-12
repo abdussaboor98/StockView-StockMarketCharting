@@ -4,18 +4,19 @@ import { Observable } from 'rxjs';
 import { CompanyStockPriceRequest } from '../models/companyStockPriceRequest';
 import { StockPriceData } from '../models/stockPriceData';
 import { UploadSummary } from '../models/uploadSummary';
+import { environment } from 'src/environments/environment';
 
 @Injectable({
   providedIn: 'root'
 })
 export class StockPriceService {
 
-  httpUrl = "http://localhost:8765/stock-price-service/stockPrices/"
+  httpUrl = environment.host + "stock-price-service/stockPrices/"
 
   constructor(private httpClient:HttpClient) { }
 
   uploadStocksSheet(formData: FormData): Observable<UploadSummary>{
-    return this.httpClient.post<any>(this.httpUrl+"admin/uploadStocksSheet",formData);
+    return this.httpClient.post<any>(this.httpUrl + "admin/uploadStocksSheet",formData);
   }
 
   getCompanyStockPricesBetween(companyCode: string, stockExchange: string, startDate: Date, endDate: Date,periodicity: string): Observable<StockPriceData[]> {

@@ -1,12 +1,18 @@
 import { Component, OnInit } from "@angular/core";
-import { FormGroup, FormBuilder, Validators, AbstractControl, FormArray } from "@angular/forms";
-import { faPlus } from "@fortawesome/free-solid-svg-icons"
-import { StockExchangesService } from 'src/app/services/stock-exchanges.service';
-import { StockExchange } from 'src/app/models/stockExchange';
-import { StockPriceService } from 'src/app/services/stock-price.service';
-import { CompaniesService } from 'src/app/services/companies.service';
-import { Company } from 'src/app/models/company';
-import { Router } from '@angular/router';
+import {
+    FormGroup,
+    FormBuilder,
+    Validators,
+    AbstractControl,
+    FormArray
+} from "@angular/forms";
+import { faPlus } from "@fortawesome/free-solid-svg-icons";
+import { StockExchangesService } from "src/app/services/stock-exchanges.service";
+import { StockExchange } from "src/app/models/stockExchange";
+import { StockPriceService } from "src/app/services/stock-price.service";
+import { CompaniesService } from "src/app/services/companies.service";
+import { Company } from "src/app/models/company";
+import { Router } from "@angular/router";
 
 @Component({
     selector: "app-compare",
@@ -18,15 +24,15 @@ export class CompareComponent implements OnInit {
     sectorCompareForm: FormGroup;
     faPlus = faPlus;
 
-    companies:Company[][]=[];
+    companies: Company[][] = [];
     stockExchanges: StockExchange[];
 
     companyComparision: boolean = false;
     sectorComparision: boolean = false;
     canAddAnther: boolean = true;
 
-    maxDate: string = (new Date()).toISOString().split("T")[0];
-    minDate: string = (new Date(2016,1,1)).toISOString().split("T")[0];
+    maxDate: string = new Date().toISOString().split("T")[0];
+    minDate: string = new Date(2016, 1, 1).toISOString().split("T")[0];
 
     constructor(
         private formBuilder: FormBuilder,
@@ -34,11 +40,11 @@ export class CompareComponent implements OnInit {
         private companiesService: CompaniesService,
         private stockPriceService: StockPriceService,
         private router: Router
-    ) { }
+    ) {}
 
     ngOnInit() {
-        this.companies[0]=[];
-        this.companies[1]=[];
+        this.companies[0] = [];
+        this.companies[1] = [];
         this.companyCompareForm = this.formBuilder.group({
             companies: this.formBuilder.array([
                 this.formBuilder.group({
@@ -52,8 +58,8 @@ export class CompareComponent implements OnInit {
                     toDate: ["", Validators.required]
                 })
             ]),
-            periodicity: ["",Validators.required]
-        })
+            periodicity: ["", Validators.required]
+        });
 
         this.stockExService.getAllExchanges().subscribe(data => {
             this.stockExchanges = data;
@@ -69,15 +75,14 @@ export class CompareComponent implements OnInit {
             this.companyComparision = false;
             this.sectorComparision = true;
         }
-
     }
 
     onAddSecondCompany() {
-        const group =  this.formBuilder.group({
+        const group = this.formBuilder.group({
             stockExchange: ["", Validators.required],
             companyCode: ["", Validators.required]
         });
-        (<FormArray>this.companyCompareForm.get('companies')).push(group);
+        (<FormArray>this.companyCompareForm.get("companies")).push(group);
         this.canAddAnther = false;
     }
 
@@ -86,19 +91,26 @@ export class CompareComponent implements OnInit {
             fromDate: ["", Validators.required],
             toDate: ["", Validators.required]
         });
-        (<FormArray>this.companyCompareForm.get('periods')).push(group);
+        (<FormArray>this.companyCompareForm.get("periods")).push(group);
         this.canAddAnther = false;
     }
 
-    onStockExchangeSelect(e, i:number) {
-        this.companiesService.getCompaniesByStockExchange(e.target.value).subscribe(data => {
-            this.companies[i] = data;
-        });
+    onStockExchangeSelect(e, i: number) {
+        this.companiesService
+            .getCompaniesByStockExchange(e.target.value)
+            .subscribe(data => {
+                this.companies[i] = data;
+            });
     }
 
     getCompanyCode(company: Company, i: number): string {
         for (let listedIn of company.listedIn) {
-            if (listedIn.stockExchangeName == (<FormArray>this.companyCompareForm.get('companies')).at(i).get("stockExchange").value) {
+            if (
+                listedIn.stockExchangeName ==
+                (<FormArray>this.companyCompareForm.get("companies"))
+                    .at(i)
+                    .get("stockExchange").value
+            ) {
                 return listedIn.stockCode;
             }
         }
@@ -116,6 +128,10 @@ export class CompareComponent implements OnInit {
     // }
 
     onSubmit() {
-        this.router.navigate(['/result'],{queryParams : {formData: JSON.stringify(this.companyCompareForm.value)} });
+        this.router.navigate(["/result"], { // "/result" --> highcharts page
+            queryParams: {
+                formData: JSON.stringify(this.companyCompareForm.value) // form value
+            }
+        });
     }
 }

@@ -1,12 +1,53 @@
 <main class="container">
     <div class="display-4 text-center my-4">Companies</div>
     <div class="form-group">
-        <input type="text" class="form-control" (input)="onInputChange($event)" list="suggestedCompanies">
+        <input type="text" class="form-control" (input)="onInputChange($event)" list="suggestedCompanies" (change)="onValueChange($event)">
         <datalist id="suggestedCompanies">
             <option *ngFor="let company of companies" [value]="company.name" ></option>
         </datalist>
     </div>
-    <div class="row justify-content-center">
+    <div *ngIf="companyToDisplay" class="card w-md-75 w-100 mx-auto mt-5">
+        <div class="card-body"> 
+            <div class="row mx-5">
+                <div class="row">
+                    <img src="../../../assets/ph.svg" alt="Profile image" class="rounded-circle profile mt-2 p-0">
+                    <h5 class="display-4 ml-3 m-0 align-self-end d-md-block d-none"> {{companyToDisplay.name}} </h5>
+                    <h4 class="ml-3 m-0 align-self-end d-block d-md-none"> {{companyToDisplay.name}} </h4>
+                </div>
+            </div>
+            <div class="row mt-5 mx-5">
+                <span class="col-4">Sector:</span>
+                <span class="col-auto"> {{companyToDisplay.sector}} </span>
+            </div>
+            <div class="row mt-4 mx-5">
+                <span class="col-4">CEO:</span>
+                <span class="col-auto"> {{companyToDisplay.ceo}} </span>
+            </div>
+            <div class="row mt-4 mx-5">
+                <span class="col-4">Board of Directors:</span>
+                <span class="col-auto">
+                    <span *ngFor="let director of companyToDisplay.directors"> {{ director }} <br> </span>
+                </span>
+            </div>
+            <div class="row mt-4 mx-5">
+                <span class="col-4">Stock Exchanges:</span>
+                <span class="col-auto"> 
+                    <span *ngFor="let exchange of companyToDisplay.listedIn">
+                        {{exchange.stockExchangeName}} : {{exchange.stockCode}} <br>
+                    </span> 
+                </span>
+            </div>
+            <div class="row mt-4 mx-5">
+                <span class="col-4">Turnover: </span>
+                <span class="col-auto"> {{companyToDisplay.turnover}} </span>
+            </div>
+            <div class="row mt-4 mx-5">
+                <span class="col-4">Brief:</span>
+                <span class="col-auto"> {{companyToDisplay.brief}} </span>
+            </div>
+        </div>
+    </div>
+    <!-- <div class="row justify-content-center">
         <div class="table-responsive">
             <table class="table table-stripped table-hover text-center bg-light">
                 <thead class="thead-light">
@@ -41,5 +82,5 @@
                 </tbody>
             </table>
         </div>
-    </div>
+    </div> -->
 </main>

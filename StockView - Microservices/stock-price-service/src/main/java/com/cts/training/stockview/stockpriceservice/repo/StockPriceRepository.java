@@ -18,26 +18,27 @@ public interface StockPriceRepository extends JpaRepository<StockPriceEntity, In
 			LocalTime time);
 
 	@Query("SELECT new com.cts.training.stockview.stockpriceservice.model.StockPriceOnPeriod(companyCode,stockExchange,date,AVG(currentPrice)) "
-			+"FROM StockPriceEntity "
-			+"WHERE companyCode=?1 AND stockExchange=?2 AND date BETWEEN ?3 AND ?4 "
-			+"GROUP BY date")
-	public List<StockPriceOnPeriod> getStockPriceBetweenDates(String companyCode,String stockExchange,LocalDate startDate, LocalDate endDate);
-	
+			+ "FROM StockPriceEntity " 
+			+ "WHERE companyCode=?1 AND stockExchange=?2 AND date BETWEEN ?3 AND ?4 "
+			+ "GROUP BY date")
+	public List<StockPriceOnPeriod> getStockPriceBetweenDates(String companyCode, String stockExchange,
+			LocalDate startDate, LocalDate endDate);
+
 	@Query("SELECT MAX(date) FROM StockPriceEntity WHERE companyCode=?1 AND stockExchange=?2")
-	public Optional<LocalDate> getMaxDate(String companyCode,String stockExchange);
-	
+	public Optional<LocalDate> getMaxDate(String companyCode, String stockExchange);
+
 	@Query("SELECT MIN(date) FROM StockPriceEntity WHERE companyCode=?1 AND stockExchange=?2")
-	public Optional<LocalDate> getMinDate(String companyCode,String stockExchange);
-	
+	public Optional<LocalDate> getMinDate(String companyCode, String stockExchange);
+
 	@Query("SELECT new com.cts.training.stockview.stockpriceservice.model.StockPriceOnPeriod(companyCode, stockExchange, MONTH(date) ,AVG(currentPrice)) "
-			+"FROM StockPriceEntity "
-			+"WHERE companyCode=?1 AND stockExchange=?2 AND date BETWEEN ?3 AND ?4 "
-			+"GROUP BY MONTH(date)")
-	public List<StockPriceOnPeriod> getAverageStockPriceByMonth(String companyCode,String stockExchange,LocalDate startDate, LocalDate endDate);
-	
+			+ "FROM StockPriceEntity " + "WHERE companyCode=?1 AND stockExchange=?2 AND date BETWEEN ?3 AND ?4 "
+			+ "GROUP BY MONTH(date)")
+	public List<StockPriceOnPeriod> getAverageStockPriceByMonth(String companyCode, String stockExchange,
+			LocalDate startDate, LocalDate endDate);
+
 	@Query("SELECT new com.cts.training.stockview.stockpriceservice.model.StockPriceOnPeriod(companyCode, stockExchange, YEAR(date) ,AVG(currentPrice)) "
-			+"FROM StockPriceEntity "
-			+"WHERE companyCode=?1 AND stockExchange=?2 AND date BETWEEN ?3 AND ?4 "
-			+"GROUP BY YEAR(date)")
-	public List<StockPriceOnPeriod> getAverageStockPriceByYear(String companyCode,String stockExchange,LocalDate startDate, LocalDate endDate);
+			+ "FROM StockPriceEntity " + "WHERE companyCode=?1 AND stockExchange=?2 AND date BETWEEN ?3 AND ?4 "
+			+ "GROUP BY YEAR(date)")
+	public List<StockPriceOnPeriod> getAverageStockPriceByYear(String companyCode, String stockExchange,
+			LocalDate startDate, LocalDate endDate);
 }

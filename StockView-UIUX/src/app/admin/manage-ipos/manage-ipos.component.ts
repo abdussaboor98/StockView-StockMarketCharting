@@ -39,8 +39,8 @@ export class ManageIposComponent implements OnInit {
     }
 
     updateIPO(id: number){
-        sessionStorage.removeItem('ipoId');
-        sessionStorage.setItem('ipoId',id.toString());
-        this.router.navigate(['update-ipo']);
+        // sessionStorage.removeItem('ipoId');
+        // sessionStorage.setItem('ipoId',id.toString());
+        this.router.navigate(['update-ipo',id]);
     }
 }
