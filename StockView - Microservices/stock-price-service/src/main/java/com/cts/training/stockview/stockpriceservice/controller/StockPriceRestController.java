@@ -27,58 +27,63 @@ import com.cts.training.stockview.stockpriceservice.service.StockPriceService;
 public class StockPriceRestController {
 	@Autowired
 	private StockPriceService stockPriceService;
-	
-	Logger logger = LoggerFactory.getLogger(this.getClass()); 
-	
-	
-	@GetMapping(value = "/stockPrices/companyStockPriceBetween/{companyCode}/{stockExchange}/{startDate}/{endDate}/{periodicity}", produces = "application/json")
-	public ResponseEntity<?> getCompanyStockPricePerDayBetween(@PathVariable String companyCode,@PathVariable String stockExchange,@PathVariable String startDate,@PathVariable  String endDate,@PathVariable String periodicity) {
-		
-		return new ResponseEntity<List<StockPriceOnPeriod>>(stockPriceService.getCompanyStockPriceBetween(companyCode,stockExchange,LocalDate.parse(startDate),LocalDate.parse(endDate),periodicity),HttpStatus.OK);
+
+	Logger logger = LoggerFactory.getLogger(this.getClass());
+
+	@GetMapping(value = "/stockPrices/companyStockPriceBetween/{companyCode}/{stockExchange}/{startDate}/{endDate}/{periodicity}", 
+			produces = "application/json")
+	public ResponseEntity<?> getCompanyStockPricePerDayBetween(@PathVariable String companyCode,
+			@PathVariable String stockExchange, @PathVariable String startDate, @PathVariable String endDate,
+			@PathVariable String periodicity) {
+
+		return new ResponseEntity<List<StockPriceOnPeriod>>(stockPriceService.getCompanyStockPriceBetween(companyCode,
+				stockExchange, LocalDate.parse(startDate), LocalDate.parse(endDate), periodicity), HttpStatus.OK);
 	}
-	
+
 	@GetMapping(value = "/stockPrices/getMaxDate/{companyCode}/{stockExchange}", produces = "application/json")
-	public ResponseEntity<?> getMaxDate(@PathVariable String companyCode,@PathVariable String stockExchange) {
+	public ResponseEntity<?> getMaxDate(@PathVariable String companyCode, @PathVariable String stockExchange) {
 		try {
-			logger.info("Request for MaxDate --> {}:{}",companyCode,stockExchange);
-			return new ResponseEntity<LocalDate>(stockPriceService.getMaxDate(companyCode,stockExchange), HttpStatus.OK);
-		}
-		catch(Exception e) {
-			logger.error("Error for MaxDate --> {}:{}\nError --> {}",companyCode,stockExchange,e);
-			return new ResponseEntity<String>("Some error occurred"+e.getMessage(), HttpStatus.BAD_REQUEST);
+			logger.info("Request for MaxDate --> {}:{}", companyCode, stockExchange);
+			return new ResponseEntity<LocalDate>(stockPriceService.getMaxDate(companyCode, stockExchange),
+					HttpStatus.OK);
+		} catch (Exception e) {
+			logger.error("Error for MaxDate --> {}:{}\nError --> {}", companyCode, stockExchange, e);
+			return new ResponseEntity<String>("Some error occurred" + e.getMessage(), HttpStatus.BAD_REQUEST);
 		}
 	}
-	
+
 	@GetMapping(value = "/stockPrices/getMinDate/{companyCode}/{stockExchange}", produces = "application/json")
-	public ResponseEntity<?> getMinDate(@PathVariable String companyCode,@PathVariable String stockExchange) {
+	public ResponseEntity<?> getMinDate(@PathVariable String companyCode, @PathVariable String stockExchange) {
 		try {
-			logger.info("Request for MinDate --> {}:{}",companyCode,stockExchange);
-			return new ResponseEntity<LocalDate>(stockPriceService.getMinDate(companyCode,stockExchange), HttpStatus.OK);
-		}
-		catch(Exception e) {
-			logger.error("Error for MinDate --> {}:{}\nError --> {}",companyCode,stockExchange,e);
-			return new ResponseEntity<String>("Some error occurred"+e.getMessage(), HttpStatus.BAD_REQUEST);
+			logger.info("Request for MinDate --> {}:{}", companyCode, stockExchange);
+			return new ResponseEntity<LocalDate>(stockPriceService.getMinDate(companyCode, stockExchange),
+					HttpStatus.OK);
+		} catch (Exception e) {
+			logger.error("Error for MinDate --> {}:{}\nError --> {}", companyCode, stockExchange, e);
+			return new ResponseEntity<String>("Some error occurred" + e.getMessage(), HttpStatus.BAD_REQUEST);
 		}
 	}
-	
-	@PostMapping(value = "/stockPrices/admin/uploadStocksSheet",consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
+
+	@PostMapping(value = "/stockPrices/admin/uploadStocksSheet", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
 	public ResponseEntity<?> uploadStocksSheet(@RequestParam("stocksSheet") MultipartFile file) {
-		logger.info("File recieved: {}",file.getOriginalFilename());
+		logger.info("File recieved: {}", file.getOriginalFilename());
 		if (file.getOriginalFilename().endsWith(".xls") || file.getOriginalFilename().endsWith(".xlsx")) {
 			try {
-				return new ResponseEntity<ImportSummary>(stockPriceService.addStockPricesFromExcelSheet(file),HttpStatus.OK);
+				return new ResponseEntity<ImportSummary>(stockPriceService.addStockPricesFromExcelSheet(file),
+						HttpStatus.OK);
 			} catch (IOException e) {
 				e.printStackTrace();
-				return new ResponseEntity<String>("Error reading file.",HttpStatus.BAD_REQUEST);
+				return new ResponseEntity<String>("Error reading file.", HttpStatus.BAD_REQUEST);
 			} catch (Exception e) {
 				e.printStackTrace();
-				return new ResponseEntity<String>(e.getMessage(),HttpStatus.BAD_REQUEST);
+				return new ResponseEntity<String>(e.getMessage(), HttpStatus.BAD_REQUEST);
 			}
 		} else {
-			return new ResponseEntity<String>("Wrong file extension. The file should be .xls or an .xlsx file.",HttpStatus.BAD_REQUEST);
+			return new ResponseEntity<String>("Wrong file extension. The file should be .xls or an .xlsx file.",
+					HttpStatus.BAD_REQUEST);
 		}
 	}
-	
+
 //	@GetMapping(value = "/stockPrices",produces = "application/json")
 //	public List<StockPriceEntity> getAllStockPrices(){
 //		return stockPriceService.getAllStockPrices();
