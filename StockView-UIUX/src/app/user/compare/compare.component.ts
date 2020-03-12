@@ -128,9 +128,9 @@ export class CompareComponent implements OnInit {
     // }
 
     onSubmit() {
-        this.router.navigate(["/result"], { // "/result" --> highcharts page
+        this.router.navigate(["/result"], {
             queryParams: {
-                formData: JSON.stringify(this.companyCompareForm.value) // form value
+                formData: JSON.stringify(this.companyCompareForm.value)
             }
         });
     }

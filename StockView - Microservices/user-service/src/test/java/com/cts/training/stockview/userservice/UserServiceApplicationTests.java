@@ -35,7 +35,6 @@ class UserServiceApplicationTests {
 		HttpEntity<String> entity = new HttpEntity<String>(null,headers);
 		ResponseEntity<String> response = restTemplate.exchange(url,HttpMethod.GET,entity,String.class);
 		String expected="{\"id\":181,\"username\":\"admin\",\"email\":\"admin@demo.com\",\"password\":\"admin\",\"phoneNo\":1234567890,\"admin\":true,\"confirmed\":true}";
-		System.out.println("Response :: "+response);
 		assertTrue(response.getBody().contains(expected));
 	}
 	@Test
@@ -45,7 +44,6 @@ class UserServiceApplicationTests {
 		HttpEntity<String> entity = new HttpEntity<String>(null,headers);
 		ResponseEntity<String> response = restTemplate.exchange(url,HttpMethod.GET,entity,String.class);
 		String expected="{\"id\":181,\"username\":\"admin\",\"email\":\"admin@demo.com\",\"password\":\"admin\",\"phoneNo\":1234567890,\"admin\":true,\"confirmed\":true}";
-		System.out.println("Response :: "+response);
 		assertTrue(response.getBody().contains(expected));
 	}
 	
@@ -57,7 +55,6 @@ class UserServiceApplicationTests {
 		HttpEntity<User> entity = new HttpEntity<User>(user,headers);
 		ResponseEntity<User> response = restTemplate.exchange(url,HttpMethod.POST,entity,User.class);
 		String expected="username\":\"test\",\"email\":\"test@yopmail.com\",\"password\":\"aaa\",\"phoneNo\":1111111,\"admin\":false,\"confirmed\":false}";
-		System.out.println("Response :: "+response);
 		assertTrue(response.getBody().getUsername().equals("test"));
 		
 	}

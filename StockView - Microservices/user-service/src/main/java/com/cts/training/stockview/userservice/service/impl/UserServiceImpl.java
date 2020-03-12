@@ -14,6 +14,7 @@ import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.stereotype.Service;
 
 import com.cts.training.stockview.userservice.entity.UserEntity;
+import com.cts.training.stockview.userservice.model.PasswordChangeRequest;
 import com.cts.training.stockview.userservice.model.User;
 import com.cts.training.stockview.userservice.repo.UserRepository;
 import com.cts.training.stockview.userservice.service.UserService;
@@ -128,4 +129,16 @@ public class UserServiceImpl implements UserService {
 	public void deleteUser(int id) throws IllegalArgumentException {
 		userRepo.deleteById(id);
 	}
+
+	@Override
+	public boolean updatePassword(PasswordChangeRequest request) {
+		UserEntity user = userRepo.findByUsername(request.getUsername()).get();
+		if(user.getPassword().equals(request.getOldPassword()) && request.getNewPassword().equals(request.getReNewPassword())) {
+			user.setPassword(request.getNewPassword());
+			userRepo.save(user);
+			return true;
+		} 
+		else
+			return false;
+	}	
 }

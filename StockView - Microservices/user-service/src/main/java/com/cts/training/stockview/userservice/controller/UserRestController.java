@@ -22,6 +22,7 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.cts.training.stockview.userservice.model.PasswordChangeRequest;
 import com.cts.training.stockview.userservice.model.User;
 import com.cts.training.stockview.userservice.service.UserService;
 
@@ -119,6 +120,19 @@ public class UserRestController {
 		} catch (IllegalArgumentException e) {
 			return new ResponseEntity<String>("No such user found", HttpStatus.BAD_REQUEST);
 		}
+	}
+	
+	@PutMapping("/users/updatePassword")
+	public ResponseEntity<?> updatePassword(@RequestBody PasswordChangeRequest request){
+		boolean status;
+		try {
+			status = userService.updatePassword(request);
+			return new ResponseEntity<Boolean>(status,HttpStatus.OK);
+		} catch (Exception e) {
+			e.printStackTrace();
+			return new ResponseEntity<HttpStatus>(HttpStatus.OK);
+		}
+		
 	}
 
 }

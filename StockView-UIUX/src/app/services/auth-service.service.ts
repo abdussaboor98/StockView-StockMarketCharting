@@ -5,14 +5,12 @@ import { map } from 'rxjs/operators';
 import { User } from '../models/users';
 import { environment } from 'src/environments/environment';
 
-const url = environment.host+"user-service/login";
-
 @Injectable({
     providedIn: 'root'
 })
 export class AuthServiceService {
     constructor(private userService: UserService, private http: HttpClient) { }
-
+    url = environment.host + "user-service/login";
     authenticate(username: string, password: string) {
         // create a security token
         let authenticationToken = "Basic " + window.btoa(username + ":" + password);
@@ -21,7 +19,7 @@ export class AuthServiceService {
             Authorization: authenticationToken
         });
 
-        return this.http.get(url, { headers }).pipe(
+        return this.http.get(this.url, { headers }).pipe(
             map((data: User) => {
                 sessionStorage.setItem("username", username);
                 sessionStorage.setItem("token", authenticationToken);

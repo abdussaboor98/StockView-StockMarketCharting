@@ -3,6 +3,7 @@ import { HttpClient } from "@angular/common/http";
 import { Observable } from "rxjs";
 import { User } from "../models/users";
 import { environment } from 'src/environments/environment';
+import { PasswordChange } from '../models/passwordChange';
 
 @Injectable({
     providedIn: "root"
@@ -51,6 +52,10 @@ export class UserService {
 
     updateUser(user: User): Observable<User> {
         return this.httpClient.put<User>(this.url, user);
+    }
+
+    updatePassword(request: PasswordChange): Observable<boolean> {
+        return this.httpClient.put<boolean>(this.url+"updatePassword", request);
     }
 
     activateUser(email: string): Observable<boolean> {

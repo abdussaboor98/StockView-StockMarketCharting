@@ -3,6 +3,7 @@ package com.cts.training.stockview.userservice.service;
 import java.util.List;
 import java.util.NoSuchElementException;
 
+import com.cts.training.stockview.userservice.model.PasswordChangeRequest;
 import com.cts.training.stockview.userservice.model.User;
 
 public interface UserService {
@@ -28,4 +29,6 @@ public interface UserService {
 	boolean usernameExists(String email) throws NoSuchElementException;
 
 	public Boolean isUserActive(String username);
+
+	public boolean updatePassword(PasswordChangeRequest request);
 }

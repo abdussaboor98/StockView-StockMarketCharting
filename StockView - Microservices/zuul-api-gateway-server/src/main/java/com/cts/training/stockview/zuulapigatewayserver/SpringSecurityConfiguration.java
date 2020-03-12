@@ -28,6 +28,8 @@ public class SpringSecurityConfiguration extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
       http.cors().and().csrf().disable()
       	.authorizeRequests()
+      	.antMatchers("/user-service/users/open/**").permitAll()
+      	.antMatchers("/user-service/login").permitAll()
         .antMatchers("/company-service/companies/admin/**").hasRole("ADMIN")
         .antMatchers("/initial-public-offering-service/ipos/admin/**").hasRole("ADMIN")
         .antMatchers("/sector-service/sectors/admin/**").hasRole("ADMIN")
@@ -40,8 +42,6 @@ public class SpringSecurityConfiguration extends WebSecurityConfigurerAdapter {
         .antMatchers("/stock-price-service/**").hasAnyRole("USER,ADMIN")
         .antMatchers("/user-service/users/**").hasAnyRole("USER,ADMIN")
         .antMatchers("/").permitAll() 
-        .antMatchers("/user-service/login").permitAll()
-        .antMatchers("/user-service/users/open/**").permitAll()
         .and()
         .httpBasic();
     }

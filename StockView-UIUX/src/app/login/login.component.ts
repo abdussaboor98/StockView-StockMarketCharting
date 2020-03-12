@@ -7,7 +7,6 @@ import { UserService } from "../services/user.service";
 import { Router } from "@angular/router";
 import { User } from "../models/users";
 import { AuthServiceService } from '../services/auth-service.service';
-import { map } from 'rxjs/operators';
 
 @Component({
     selector: "app-login",
@@ -54,24 +53,24 @@ export class LoginComponent implements OnInit {
             this.disableButton = false;
         },
             error => {
-                this.disableButton = false;
                 this.userService.usernameExists(username).subscribe(data => {
                     if (data) {
                         this.userService.isUserActive(username).subscribe(data => {
-                            if(data)
-                               this.isVerified = false; 
-                            else
+                            if (data)
                                 this.isValid = false;
+                            else
+                                this.isVerified = false;
                         })
                     }
                     else {
                         this.isValid = false;
                     }
+                    this.disableButton = false;
                 })
             })
 
     }
-    onTogglePassword(){
+    onTogglePassword() {
         this.showPassword = !this.showPassword
     }
 }

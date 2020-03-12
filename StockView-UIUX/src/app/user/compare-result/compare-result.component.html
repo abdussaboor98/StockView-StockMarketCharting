@@ -1,11 +1,16 @@
 <main>
+    <div class="w-100 h-100" *ngIf="!(getFirstDataComplete && getSecondDataComplete)">
+        <div class="loader">
+            <img src="../../../assets/loading.gif" alt=""/>
+        </div>
+    </div>
     <div class="container-fluid">
-            <div *ngIf="singleChart && (getFirstDataComplete && getSecondDataComplete)"
+            <div *ngIf="singleChart && getSecondDataComplete"
                 class="row justify-content-center mt-5">
                 <highcharts-chart [Highcharts]="chartOne" [options]="chartOneOptions">
                 </highcharts-chart>
             </div>
-            <div *ngIf="doubleChart && getFirstDataComplete && getSecondDataComplete"
+            <div *ngIf="doubleChart && (getFirstDataComplete && getSecondDataComplete)"
                 class="row justify-content-center mt-5">
                 <highcharts-chart [Highcharts]="chartTwo" [options]="chartTwoOptions">
                 </highcharts-chart>

@@ -36,7 +36,6 @@ public class CompanyServiceImpl implements CompanyService {
 	public CompanyEntity addCompany(CompanyEntity company) {
 		List<ListedInEntity> list = new ArrayList<ListedInEntity>();
 		for (ListedInEntity enity : company.getListedIn()) {
-			System.out.println(enity);
 			list.add(listedInRepo.save(enity));
 		}
 		company.setListedIn(list);

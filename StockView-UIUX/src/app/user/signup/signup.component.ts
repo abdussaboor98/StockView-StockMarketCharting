@@ -3,7 +3,7 @@ import { FormGroup, Validators, FormBuilder, ReactiveFormsModule } from "@angula
 import { UserService } from "src/app/services/user.service";
 import { Router } from "@angular/router";
 import { User } from "src/app/models/users";
-import { hasLowercase, hasNumeric, hasUppercase, hasSepcialCharacter } from 'src/app/shared/passwordValidator';
+import { hasLowercase, hasNumeric, hasUppercase, hasSepcialCharacter, passwordMatchValidator } from 'src/app/shared/passwordValidator';
 declare var $: any;
 
 @Component({
@@ -13,7 +13,6 @@ declare var $: any;
 })
 export class SignupComponent implements OnInit {
     signupForm: FormGroup;
-    users: User[];
     usernameTaken: boolean = false;
     emailTaken: boolean = false;
     passwordsMatch: boolean = true;
@@ -23,19 +22,20 @@ export class SignupComponent implements OnInit {
         private router: Router
     ) {}
     ngOnInit() {
-        this.userService.getAllUsers().subscribe(data => {
-            this.users = data;
-        });
         this.signupForm = this.formBuilder.group({
             id: [""],
             username: ["", Validators.required],
             email: ["", [Validators.required, Validators.email]],
             password: ["", [Validators.required,Validators.minLength(8),hasLowercase,hasNumeric,hasUppercase,hasUppercase,hasSepcialCharacter]],
-            rePassword: ["", Validators.required],
+            rePassword: ["", [Validators.required, passwordMatchValidator("password")]],
             phoneNo: ["", Validators.required],
             admin: [false],
             confirmed: [false]
         });
+
+        this.signupForm.controls.password.valueChanges.subscribe(data => {
+            this.signupForm.controls.rePassword.updateValueAndValidity();
+          })
     }
 
     checkUsername(e) {
@@ -76,16 +76,16 @@ export class SignupComponent implements OnInit {
             });
     }
 
-    checkPasswordMatch() {
-        if (
-            this.signupForm.get("password").value ==
-            this.signupForm.get("rePassword").value
-        ) {
-            this.passwordsMatch = true;
-        } else {
-            this.passwordsMatch = false;
-        }
-    }
+    // checkPasswordMatch() {
+    //     if (
+    //         this.signupForm.get("password").value ==
+    //         this.signupForm.get("rePassword").value
+    //     ) {
+    //         this.passwordsMatch = true;
+    //     } else {
+    //         this.passwordsMatch = false;
+    //     }
+    // }
 
     onSubmit() {
         this.userService.registerUser(this.signupForm.value).subscribe(data => {

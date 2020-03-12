@@ -34,6 +34,7 @@ import { NoLoginGuard } from './guards/no-login.guard';
 import { LoginGuard } from './guards/login.guard';
 import { CompareResultComponent } from './user/compare-result/compare-result.component';
 import { ActivateComponent } from './user/activate/activate.component';
+import { ChangePasswordComponent } from './user/change-password/change-password.component';
 
 const routes: Routes = [
     { path: "", redirectTo: "home", pathMatch: "full" },
@@ -66,8 +67,8 @@ const routes: Routes = [
     { path: "compare-result", component: CompareResultComponent, canActivate: [UserAuthGuard] },
     { path: "landing", component: LandingComponent, canActivate:[LoginGuard]},
     { path: "user/activate", component: ActivateComponent, canActivate:[NoLoginGuard]},
-    { path: "result", component: CompareResultComponent}
-
+    { path: "result", component: CompareResultComponent, canActivate: [UserAuthGuard]},
+    { path: "change-password/:username", component: ChangePasswordComponent, canActivate: [UserAuthGuard]}
 ];
 
 @NgModule({

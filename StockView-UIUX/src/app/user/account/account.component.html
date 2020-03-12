@@ -18,7 +18,7 @@
             </div>
         </div>
         <div class="card-footer text-right">
-            <!-- <button type="button" class="btn btn-primary">Change Password</button> -->
+            <button type="button" class="btn btn-primary" [routerLink]="['/change-password',user.username]">Change Password</button>
             <button type="button" class="btn btn-secondary ml-2" routerLink="/account-update">Update Details</button>
         </div>
     </div>

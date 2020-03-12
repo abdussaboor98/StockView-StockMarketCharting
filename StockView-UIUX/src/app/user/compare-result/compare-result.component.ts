@@ -43,22 +43,28 @@ export class CompareResultComponent implements OnInit {
                     data: companyOneData
                 }
                 series[0] = seriesDataMemberOne;
-                this.getFirstDataComplete = true;
-            });
-            this.stockPriceService.getCompanyStockPricesBetween(this.compareData.companies[1].companyCode, this.compareData.companies[1].stockExchange, this.compareData.periods[0].fromDate, this.compareData.periods[0].toDate, this.compareData.periodicity).subscribe(data => {
-                let companyTwoData: any[] = [];
-                data.forEach((stockPrice: StockPriceData) => {
-                    if (categories.includes(stockPrice.dataPoint)) {
-                        companyTwoData.push(stockPrice.dataValue)
+                setTimeout(() => {
+                    this.getFirstDataComplete = true;
+                }, 2000)
+                this.stockPriceService.getCompanyStockPricesBetween(this.compareData.companies[1].companyCode, this.compareData.companies[1].stockExchange, this.compareData.periods[0].fromDate, this.compareData.periods[0].toDate, this.compareData.periodicity).subscribe(data => {
+                    let companyTwoData: any[] = [];
+                    data.forEach((stockPrice: StockPriceData) => {
+                        if (categories.includes(stockPrice.dataPoint)) {
+                            companyTwoData.push(stockPrice.dataValue)
+                        }
+                    })
+                    let seriesDataMemberTwo = {
+                        name: this.compareData.companies[1].companyCode + " (" + this.compareData.companies[1].stockExchange + ")",
+                        data: companyTwoData
                     }
-                })
-                let seriesDataMemberTwo = {
-                    name: this.compareData.companies[1].companyCode + " (" + this.compareData.companies[1].stockExchange + ")",
-                    data: companyTwoData
-                }
-                series[1] = seriesDataMemberTwo;
-                this.getSecondDataComplete = true;
+                    series[1] = seriesDataMemberTwo;
+                    setTimeout(() => {
+                        this.getSecondDataComplete = true;
+                    }, 2000)
+
+                });
             });
+
             this.chartOneOptions = {
                 chart: {
                     type: "column"
@@ -114,7 +120,7 @@ export class CompareResultComponent implements OnInit {
 
             this.stockPriceService.getCompanyStockPricesBetween(this.compareData.companies[0].companyCode, this.compareData.companies[0].stockExchange, this.compareData.periods[1].fromDate, this.compareData.periods[1].toDate, this.compareData.periodicity).subscribe(data => {
                 let companyData: any[] = [];
-                let categories: any[]=[];
+                let categories: any[] = [];
                 data.forEach((stockPrice: StockPriceData) => {
                     categories.push(stockPrice.dataPoint);
                     companyData.push(stockPrice.dataValue);
