@@ -29,7 +29,7 @@ export class SignupComponent implements OnInit {
             email: ["", [Validators.required, Validators.email]],
             password: ["", [Validators.required,Validators.minLength(8),hasLowercase,hasNumeric,hasUppercase,hasUppercase,hasSepcialCharacter]],
             rePassword: ["", [Validators.required, passwordMatchValidator("password")]],
-            phoneNo: ["", Validators.required],
+            phoneNo: ["", [Validators.required, Validators.minLength(10)]],
             admin: [false],
             confirmed: [false]
         });

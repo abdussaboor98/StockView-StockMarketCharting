@@ -34,7 +34,7 @@ class UserServiceRestControllerMockito {
 	
 	@Test
 	public void getAllUsers() throws Exception {
-		User user = new User(111, "Test", "mockito@mockito.com", "mockito", 11111, false, true);
+		User user = new User(12, "test122", "test122@yopmail.com", "ttt", 23232323, false, "ROLE_USER");
 		List<User> users = new ArrayList<User>();
 		users.add(user);
 		Mockito.when(userService.getAllUsers()).thenReturn(users);
@@ -47,7 +47,7 @@ class UserServiceRestControllerMockito {
 	
 	@Test
 	public void getByIdUsers() throws Exception {
-		User user = new User(111, "Test", "mockito@mockito.com", "mockito", 11111, false, true);
+		User user = new User(12, "test122", "test122@yopmail.com", "ttt", 23232323, false, "ROLE_USER");
 		Mockito.when(userService.getUserById(111)).thenReturn(user);
 		
 		RequestBuilder request = MockMvcRequestBuilders.get("/users/111").accept(MediaType.APPLICATION_JSON);

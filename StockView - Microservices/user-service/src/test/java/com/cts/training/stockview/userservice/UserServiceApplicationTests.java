@@ -51,11 +51,11 @@ class UserServiceApplicationTests {
 	void postTest() {
 		String url = "http://localhost:"+port+"/users";
 		headers.setAccept(Arrays.asList(MediaType.APPLICATION_JSON));
-		User user = new User(111, "test", "test@yopmail.com", "aaa", 1111111, false, false);
+		User user = new User(12, "test122", "test122@yopmail.com", "ttt", 23232323, false, "ROLE_USER");
 		HttpEntity<User> entity = new HttpEntity<User>(user,headers);
 		ResponseEntity<User> response = restTemplate.exchange(url,HttpMethod.POST,entity,User.class);
 		String expected="username\":\"test\",\"email\":\"test@yopmail.com\",\"password\":\"aaa\",\"phoneNo\":1111111,\"admin\":false,\"confirmed\":false}";
-		assertTrue(response.getBody().getUsername().equals("test"));
+		assertTrue(response.getBody().getUsername().equals(user.getUsername()));
 		
 	}
 
