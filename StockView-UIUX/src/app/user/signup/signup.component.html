@@ -68,7 +68,7 @@
                                 valid phone number</small></span>
                     </div>
                     <button type="submit" class="btn btn-primary btn-block mt-3"
-                        [disabled]="!signupForm.valid  || !passwordsMatch || usernameTaken || emailTaken">Signup</button>
+                        [disabled]="!signupForm.valid  || !passwordsMatch || usernameTaken || emailTaken || buttonDisable">Signup</button>
                     <span class="row text-muted justify-content-center my-2"><small>Already a user? <a href="#"
                                 data-toggle="modal" data-target="#login-modal">Login</a></small></span>
                 </form>

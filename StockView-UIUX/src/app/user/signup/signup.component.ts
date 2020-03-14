@@ -16,6 +16,7 @@ export class SignupComponent implements OnInit {
     usernameTaken: boolean = false;
     emailTaken: boolean = false;
     passwordsMatch: boolean = true;
+    buttonDisable:boolean = false;
     constructor(
         private formBuilder: FormBuilder,
         private userService: UserService,
@@ -88,14 +89,18 @@ export class SignupComponent implements OnInit {
     // }
 
     onSubmit() {
+        this.buttonDisable = true;
         this.userService.registerUser(this.signupForm.value).subscribe(data => {
             this.signupForm.reset();
             $("#successModal").modal("show");
+            this.buttonDisable = false;
+        }, error => {
+            this.buttonDisable = false;
         });
     }
 
-    gotoHomme() {
-        this.router.navigate(["home"]);
+    gotoHome() {
+        this.router.navigate(["/home"]);
         $("#successModal").modal("hide");
     }
 }
